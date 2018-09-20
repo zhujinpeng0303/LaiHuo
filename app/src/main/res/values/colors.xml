@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="red">#FF0000</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorGreen">#d2ec91</color>
+    <color name="colorGreenBottle">#1dae4e</color>
+    <color name="colorPink">#f77270</color>
+    <color name="colorYellow">#eac457</color>
+    <color name="colorBlue">#1798db</color>
+    <color name="colorOrange">#f4ce62</color>
+    <color name="colorSeriviceText">#3a3a3a</color>
+    <color name="colorBlack">#212121</color>
+    <color name="colorGrey">#cfcfcf</color>
+    <color name="colorTrans">#e06e6e6e</color>
+    <color name="colorGreyBottle">#b2b2b2</color>
+    <color name="colorGray">#747474</color>
+    <color name="colorGrayTint">#bababa</color>
+    <color name="colorBackgroud">#f5f5f5</color>
+    <color name="transparent">#00000000</color>
+    <color name="colorLightGray">#f0f0f0</color>
+    <color name="redDark">#b20800</color>
+    <color name="colorLightGreen">#E4F8EA</color>
+</resources>
