@@ -32,44 +32,280 @@
             <TextView
                 android:id="@+id/tv_home"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:drawablePadding="2dp"
+                android:drawableTop="@mipmap/img_home"
                 android:gravity="center|bottom"
+                android:paddingBottom="@dimen/y20"
+                android:paddingTop="@dimen/y20"
                 android:text="首页"
                 android:textColor="@color/colorBlack"
-                android:textSize="12sp" />
+                android:textSize="@dimen/x30" />
 
             <TextView
-                android:layout_width="100dp"
-                android:layout_height="52dp"
-                android:gravity="bottom|center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center|bottom"
+                android:paddingBottom="@dimen/y20"
                 android:text="功能"
                 android:textColor="@color/colorBlack"
-                android:textSize="12sp" />
+                android:textSize="@dimen/x30" />
 
             <TextView
                 android:id="@+id/tv_mine"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:drawablePadding="2dp"
+                android:drawableTop="@mipmap/img_home"
                 android:gravity="center|bottom"
+                android:paddingBottom="@dimen/y20"
+                android:paddingTop="@dimen/y20"
                 android:text="我的"
                 android:textColor="@color/colorBlack"
-                android:textSize="12sp" />
+                android:textSize="@dimen/x30" />
 
 
         </LinearLayout>
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/add"
-        android:layout_width="100dp"
-        android:layout_height="66dp"
+    <!--弹出的遮罩层-->
+
+
+    <LinearLayout
+        android:id="@+id/ll_popUp_box"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/y150"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_box_head"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y400"
+            android:background="@color/colorGray" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F2ffffff">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_post_yikoujia"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x100"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/iv_post_yikoujia"
+                            android:layout_width="@dimen/x100"
+                            android:layout_height="@dimen/x100"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/y200"
+                            android:background="@mipmap/img_home" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/iv_post_yikoujia"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="@dimen/y50"
+                            android:layout_marginTop="@dimen/y20"
+                            android:text="一口价发布"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/x30" />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_jie_yikoujia"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/iv_jie_yikoujia"
+                            android:layout_width="@dimen/x100"
+                            android:layout_height="@dimen/x100"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/y200"
+                            android:background="@mipmap/img_home" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/iv_jie_yikoujia"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="@dimen/y50"
+                            android:layout_marginTop="@dimen/y20"
+                            android:text="一口价接活"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/x30" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_shangban"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/x100"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/iv_shangban"
+                            android:layout_width="@dimen/x100"
+                            android:layout_height="@dimen/x100"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/y200"
+                            android:background="@mipmap/img_home" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/iv_shangban"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="@dimen/y50"
+                            android:layout_marginTop="@dimen/y20"
+                            android:text="我要上班"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/x30" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_mine_post"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x100"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/iv_mine_post"
+                            android:layout_width="@dimen/x100"
+                            android:layout_height="@dimen/x100"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/y50"
+                            android:background="@mipmap/img_home" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/iv_mine_post"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="@dimen/y200"
+                            android:layout_marginTop="@dimen/y20"
+                            android:text="我的发布"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/x30" />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_mine_jiehou"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/iv_mine_jiehou"
+                            android:layout_width="@dimen/x100"
+                            android:layout_height="@dimen/x100"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/y50"
+                            android:background="@mipmap/img_home" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/iv_mine_jiehou"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="@dimen/y200"
+                            android:layout_marginTop="@dimen/y20"
+                            android:text="我的接活"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/x30" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_mine_invist"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/x100"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/iv_mine_invist"
+                            android:layout_width="@dimen/x100"
+                            android:layout_height="@dimen/x100"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/y50"
+                            android:background="@mipmap/img_home" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/iv_mine_invist"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="@dimen/y200"
+                            android:layout_marginTop="@dimen/y20"
+                            android:text="邀请我的"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/x30" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y2"
+                    android:background="@color/colorGrey"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="@dimen/x180"
+        android:layout_height="@dimen/y180"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="6dp"
-        android:scaleType="centerInside"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_marginBottom="@dimen/y60">
+
+        <ImageView
+            android:id="@+id/img_add"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/x80"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/img_add" />
+    </RelativeLayout>
 
 </FrameLayout>

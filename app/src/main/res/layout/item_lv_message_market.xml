@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/y20"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:focusable="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/x120"
+            android:layout_margin="@dimen/x50"
+            android:background="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x100"
+            android:layout_toRightOf="@id/iv_avatar"
+            android:text="2018-09-23 18:11:45"
+            android:textSize="@dimen/x30" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_avatar"
+            android:layout_marginLeft="@dimen/x50"
+            android:layout_marginRight="@dimen/x50"
+            android:text="奥斯卡阶段阿苏卫南京路撒可抵扣了阿拉索护符埃里克森发货单拉斯客户端flash阿萨德阿萨德"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x35" />
+
+        <com.example.jason_jukes.laihuo.view.nineImage.NineGridlayout
+            android:id="@+id/iv_img_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_content"
+            android:layout_margin="@dimen/x50">
+
+        </com.example.jason_jukes.laihuo.view.nineImage.NineGridlayout>
+
+        <LinearLayout
+            android:id="@+id/ll_img"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/y80"
+            android:layout_below="@id/iv_img_list"
+            android:layout_marginBottom="@dimen/y50"
+            android:layout_marginLeft="@dimen/x50"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_focus_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/ll_img"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_toRightOf="@id/ll_img"
+            android:text="4人"
+            android:textSize="@dimen/x25" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_focus_count"
+            android:layout_below="@id/tv_focus_count"
+            android:text="正在关注"
+            android:textSize="@dimen/x25" />
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/x60"
+            android:layout_alignBottom="@id/ll_img"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x50"
+            android:background="@mipmap/img_home" />
+
+        <TextView
+            android:id="@+id/tv_comment_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/ll_img"
+            android:layout_marginRight="@dimen/x10"
+            android:layout_toLeftOf="@id/iv"
+            android:text="2"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x45" />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,21 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <include layout="@layout/status_bar"/>
+    <include layout="@layout/status_bar" />
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="沙发阿发"
-            android:layout_centerInParent="true"
-            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorYellow"
+            android:orientation="vertical">
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_see_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bg_tv_red_corner"
+                android:paddingBottom="@dimen/x30"
+                android:paddingLeft="@dimen/x50"
+                android:paddingRight="@dimen/x50"
+                android:paddingTop="@dimen/x30"
+                android:text="查 看 详 情"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x30"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/ll_message"
+                    android:layout_width="@dimen/x294"
+                    android:layout_height="@dimen/x636"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:layout_marginTop="@dimen/y150"
+                    android:background="@drawable/bg_grey_corner"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/y120"
+                        android:drawablePadding="@dimen/y100"
+                        android:drawableTop="@mipmap/img_home"
+                        android:text="信息市场"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/x50" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/y40"
+                        android:text="就业求职"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/x40" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/y40"
+                        android:text="生活百态"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/x40" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/y40"
+                        android:text="畅快交流"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/x40" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_find_worker"
+                    android:layout_width="@dimen/x636"
+                    android:layout_height="@dimen/x294"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@id/ll_message"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:layout_marginRight="@dimen/x50"
+                    android:background="@drawable/bg_grey_corner">
+
+                    <ImageView
+                        android:id="@+id/iv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x80"
+                        android:background="@mipmap/img_home" />
+
+                    <TextView
+                        android:id="@+id/tv_zhao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x80"
+                        android:layout_marginTop="@dimen/y90"
+                        android:layout_toRightOf="@id/iv1"
+                        android:text="找工人"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/x50" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_zhao"
+                        android:layout_marginLeft="@dimen/x80"
+                        android:layout_marginTop="@dimen/y20"
+                        android:layout_toRightOf="@id/iv1"
+                        android:text="找人干活很简单"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/x40" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_find_work"
+                    android:layout_width="@dimen/x636"
+                    android:layout_height="@dimen/x294"
+                    android:layout_alignBottom="@id/ll_message"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:layout_marginRight="@dimen/x50"
+                    android:background="@drawable/bg_grey_corner">
+
+
+                    <ImageView
+                        android:id="@+id/iv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x80"
+                        android:background="@mipmap/img_home" />
+
+                    <TextView
+                        android:id="@+id/tv_gan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x80"
+                        android:layout_marginTop="@dimen/y90"
+                        android:layout_toRightOf="@id/iv2"
+                        android:text="找活干"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/x50" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_gan"
+                        android:layout_marginLeft="@dimen/x80"
+                        android:layout_marginTop="@dimen/y20"
+                        android:layout_toRightOf="@id/iv2"
+                        android:text="随时干活都赚钱"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/x40" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x300"
+                android:layout_margin="@dimen/x50"
+                android:background="@drawable/bg_grey_corner" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x500"
+                android:layout_marginLeft="@dimen/x50"
+                android:layout_marginRight="@dimen/x50"
+                android:background="@drawable/bg_grey_corner" />
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x500"
+                android:layout_marginBottom="@dimen/x100"
+                android:layout_marginLeft="@dimen/x50"
+                android:layout_marginRight="@dimen/x50"
+                android:layout_marginTop="@dimen/x50"
+                android:background="@drawable/bg_grey_corner" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

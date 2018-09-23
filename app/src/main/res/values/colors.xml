@@ -15,11 +15,14 @@
     <color name="colorGrey">#cfcfcf</color>
     <color name="colorTrans">#e06e6e6e</color>
     <color name="colorGreyBottle">#b2b2b2</color>
-    <color name="colorGray">#747474</color>
+    <color name="colorGray">#414141</color>
     <color name="colorGrayTint">#bababa</color>
     <color name="colorBackgroud">#f5f5f5</color>
     <color name="transparent">#00000000</color>
     <color name="colorLightGray">#f0f0f0</color>
     <color name="redDark">#b20800</color>
-    <color name="colorLightGreen">#E4F8EA</color>
+    <color name="colorLightGreen">#Ef4f20</color>
+    <color name="DarkBlue">#4C5C6E</color>
+    <color name="DarkYellow">#E5C53C</color>
+
 </resources>
