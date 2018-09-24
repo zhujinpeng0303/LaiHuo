@@ -29,7 +29,7 @@ public class MessageMarketActivity extends BaseActivity {
     @InjectView(R.id.lv)
     ListView lv;
     private MessageMarketLVAdapter adapter;
-    private List<Image> been;
+    private List<String> been;
     private List<String> imgList;
 
     @Override
@@ -50,11 +50,11 @@ public class MessageMarketActivity extends BaseActivity {
     private void initData() {
 
         been = new ArrayList<>();
-        been.add(new Image("http://f.hiphotos.baidu.com/image/pic/item/eaf81a4c510fd9f90a220479282dd42a2834a4ed.jpg", 1080, 2160));
-        been.add(new Image("http://e.hiphotos.baidu.com/image/pic/item/b03533fa828ba61e8480853f4c34970a304e59b7.jpg", 640, 640));
-        been.add(new Image("http://e.hiphotos.baidu.com/image/pic/item/94cad1c8a786c91723e93522c43d70cf3ac757c6.jpg", 640, 640));
-        been.add(new Image("http://f.hiphotos.baidu.com/image/pic/item/eaf81a4c510fd9f90a220479282dd42a2834a4ed.jpg", 640, 640));
-        been.add(new Image("http://a.hiphotos.baidu.com/image/pic/item/574e9258d109b3dee4caf07ac1bf6c81800a4cae.jpg", 640, 640));
+        been.add("http://f.hiphotos.baidu.com/image/pic/item/eaf81a4c510fd9f90a220479282dd42a2834a4ed.jpg");
+        been.add("http://e.hiphotos.baidu.com/image/pic/item/b03533fa828ba61e8480853f4c34970a304e59b7.jpg");
+        been.add("http://e.hiphotos.baidu.com/image/pic/item/94cad1c8a786c91723e93522c43d70cf3ac757c6.jpg");
+        been.add("http://f.hiphotos.baidu.com/image/pic/item/eaf81a4c510fd9f90a220479282dd42a2834a4ed.jpg");
+        been.add("http://a.hiphotos.baidu.com/image/pic/item/574e9258d109b3dee4caf07ac1bf6c81800a4cae.jpg");
         adapter = new MessageMarketLVAdapter(this, been);
         lv.setAdapter(adapter);
         lv.setDividerHeight(0);
@@ -70,8 +70,8 @@ public class MessageMarketActivity extends BaseActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(new Intent(MessageMarketActivity.this,ViewPagerActivity.class)
-                .putStringArrayListExtra("list", (ArrayList<String>) imgList));
+                startActivity(new Intent(MessageMarketActivity.this,MessageDetailActivity.class)
+                .putStringArrayListExtra("list", (ArrayList<String>) been));
             }
         });
 

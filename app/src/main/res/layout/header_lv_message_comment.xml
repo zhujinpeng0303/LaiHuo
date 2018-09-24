@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/y20"
+    android:background="@color/colorBackgroud"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:focusable="false">
 
         <ImageView
@@ -96,5 +97,19 @@
             android:textSize="@dimen/x45" />
 
     </RelativeLayout>
+
+    <TextView
+        android:layout_marginTop="@dimen/y30"
+        android:id="@+id/tv_new_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/y50"
+        android:paddingLeft="@dimen/x50"
+        android:paddingTop="@dimen/y50"
+        android:text="最新评论(2)"
+        android:layout_marginBottom="@dimen/y3"
+        />
+
 
 </LinearLayout>

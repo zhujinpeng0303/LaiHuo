@@ -1,7 +1,11 @@
 package com.example.jason_jukes.laihuo.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +13,28 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.jason_jukes.laihuo.BaseFragment;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.activity.AddressManageActivity;
+import com.example.jason_jukes.laihuo.activity.BindCardActivity;
+import com.example.jason_jukes.laihuo.activity.MineFocusListActivity;
+import com.example.jason_jukes.laihuo.activity.MineScoreActivity;
+import com.example.jason_jukes.laihuo.activity.PhoneCertificationActivity;
+import com.example.jason_jukes.laihuo.tool.PhotoHelper;
+import com.example.jason_jukes.laihuo.view.glide.GlideCircleTransform;
+import com.jph.takephoto.app.TakePhoto;
+import com.jph.takephoto.app.TakePhotoImpl;
+import com.jph.takephoto.model.InvokeParam;
+import com.jph.takephoto.model.TContextWrap;
+import com.jph.takephoto.model.TImage;
+import com.jph.takephoto.model.TResult;
+import com.jph.takephoto.permission.InvokeListener;
+import com.jph.takephoto.permission.PermissionManager;
+import com.jph.takephoto.permission.TakePhotoInvocationHandler;
+
+import java.io.File;
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -24,8 +48,7 @@ import butterknife.OnClick;
  */
 
 
-public class MineFragment extends BaseFragment {
-
+public class MineFragment extends BaseFragment implements InvokeListener, TakePhoto.TakeResultListener {
 
     @InjectView(R.id.iv_back)
     ImageView ivBack;
@@ -57,6 +80,12 @@ public class MineFragment extends BaseFragment {
     TextView tvStatusBarName;
     private View view;
 
+    private PhotoHelper photoHelper;
+    private static final String TAG = "-----------99-------";
+    private TakePhoto takePhoto;
+    private InvokeParam invokeParam;
+    private String pathImg = "";
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +98,7 @@ public class MineFragment extends BaseFragment {
         ButterKnife.inject(this, view);
         ivBack.setVisibility(View.GONE);
         tvStatusBarName.setText("我的");
+        photoHelper = PhotoHelper.of(view, context);
         return view;
     }
 
@@ -83,12 +113,16 @@ public class MineFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.iv_avatar:
                 showToast("头像");
+
+                selectFromPicture(view);
+
                 break;
             case R.id.rl_name:
                 break;
             case R.id.tv_shangban:
                 break;
             case R.id.rl_guanzhu:
+                startIntent(MineFocusListActivity.class);
                 break;
             case R.id.rl_qianbao:
                 break;
@@ -103,16 +137,22 @@ public class MineFragment extends BaseFragment {
             case R.id.rl_mine_money:
                 break;
             case R.id.rl_mine_score:
+                startIntent(MineScoreActivity.class);
                 break;
             case R.id.rl_mine_code:
                 break;
             case R.id.rl_mine_card:
+
+                startIntent(BindCardActivity.class);
+
                 break;
             case R.id.rl_mine_phone:
+                startIntent(PhoneCertificationActivity.class);
                 break;
             case R.id.rl_mine_zili:
                 break;
             case R.id.rl_mine_address:
+                startIntent(AddressManageActivity.class);
                 break;
             case R.id.rl_yijian:
                 break;
@@ -122,4 +162,102 @@ public class MineFragment extends BaseFragment {
                 break;
         }
     }
+
+    public void selectFromPicture(View v) {
+        final View view = v;
+        final String[] items = new String[]{"拍照", "相册"};
+        new AlertDialog.Builder(context).setTitle("选择").setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        // 调用系统的拍照功能
+                        photoHelper.onCamera(view, getTakePhoto(), 800, 800);
+                        break;
+                    case 1:
+                        //调用系统图库
+                        photoHelper.onPicture(view, getTakePhoto(), 800, 800);
+                        break;
+                }
+            }
+        }).show();
+    }
+
+    private void showImg(final ArrayList<TImage> images) {
+        pathImg = images.get(images.size() - 1).getCompressPath();
+        Log.e("path111111", pathImg);
+        File file = new File(pathImg);
+        Log.e("file111111", file + "");
+        Glide.with(context).load(file).transform(new GlideCircleTransform(context)).placeholder(R.mipmap.img_home).into(ivAvatar);
+
+        if (file.exists()) {
+//            if (IsNetWork.isNetWork(this)) {
+//                showProgressDialog();
+//                UpdatePhoto(file);   //上传头像
+//            } else {
+//                showToast("请检查网络设置");
+//            }
+
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        getTakePhoto().onSaveInstanceState(outState);
+        super.onSaveInstanceState(outState);
+    }
+
+    /**
+     * 获取TakePhoto实例
+     *
+     * @return
+     */
+
+    public TakePhoto getTakePhoto() {
+        if (takePhoto == null) {
+            takePhoto = (TakePhoto) TakePhotoInvocationHandler.of(this).bind(new TakePhotoImpl(getActivity(), this));
+        }
+        return takePhoto;
+    }
+
+    /*调用完系统相机和相册后的结果*/
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        getTakePhoto().onActivityResult(requestCode, resultCode, data);
+        Log.e("data111111", resultCode + "");
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionManager.TPermissionType type = PermissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionManager.handlePermissionsResult(getActivity(), type, invokeParam, this);
+    }
+
+    @Override
+    public void takeSuccess(TResult result) {
+        showImg(result.getImages());
+    }
+
+    @Override
+    public void takeFail(TResult result, String msg) {
+        Log.i(TAG, "takeFail:" + msg);
+    }
+
+    @Override
+    public void takeCancel() {
+        Log.i(TAG, getResources().getString(R.string.msg_operation_canceled));
+    }
+
+    @Override
+    public PermissionManager.TPermissionType invoke(InvokeParam invokeParam) {
+        PermissionManager.TPermissionType type = PermissionManager.checkPermission(TContextWrap.of(this), invokeParam.getMethod());
+        if (PermissionManager.TPermissionType.WAIT.equals(type)) {
+            this.invokeParam = invokeParam;
+        }
+        return type;
+    }
+
+
 }

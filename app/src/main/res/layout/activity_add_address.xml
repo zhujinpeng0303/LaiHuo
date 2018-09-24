@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/status_bar"/>
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y120"
+        android:layout_margin="@dimen/x50"
+        android:background="@drawable/bg_et_grey_corner"
+        android:gravity="center_vertical"
+        android:hint="请输入联系人姓名"
+        android:maxLength="20"
+        android:paddingLeft="@dimen/x20"
+        android:textSize="@dimen/x35">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/et_phone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y120"
+        android:layout_marginBottom="@dimen/x50"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginRight="@dimen/x50"
+        android:background="@drawable/bg_et_grey_corner"
+        android:gravity="center_vertical"
+        android:hint="请输入联系人电话"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:paddingLeft="@dimen/x20"
+        android:textSize="@dimen/x35">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/tv_service_place"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y120"
+        android:layout_marginBottom="@dimen/x50"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginRight="@dimen/x50"
+        android:background="@drawable/bg_et_grey_corner"
+        android:gravity="center_vertical"
+        android:hint="请选择服务区域"
+        android:paddingLeft="@dimen/x20"
+        android:textSize="@dimen/x35">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/et_detail_address"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y240"
+        android:layout_marginBottom="@dimen/x50"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginRight="@dimen/x50"
+        android:background="@drawable/bg_et_grey_corner"
+        android:gravity="top"
+        android:hint="请输入详细地址"
+        android:padding="@dimen/x20"
+        android:textSize="@dimen/x35">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/tv_commit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginRight="@dimen/x50"
+        android:background="@drawable/bg_yellow_corner"
+        android:gravity="center"
+        android:paddingBottom="@dimen/x40"
+        android:paddingTop="@dimen/x40"
+        android:text="提交"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/x40" />
+
+</LinearLayout>

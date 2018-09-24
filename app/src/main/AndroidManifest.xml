@@ -31,6 +31,18 @@
         <activity
             android:name=".activity.ViewPagerActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MessageDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SendCommentActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.MineFocusListActivity" />
+        <activity android:name=".activity.BindCardActivity" />
+        <activity android:name=".activity.AddAddressActivity" />
+        <activity android:name=".activity.AddressManageActivity" />
+        <activity android:name=".activity.PhoneCertificationActivity" />
+        <activity android:name=".activity.MineScoreActivity" />
 
     </application>
 

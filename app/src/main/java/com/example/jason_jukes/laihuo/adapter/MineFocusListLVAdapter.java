@@ -15,15 +15,15 @@ import com.example.jason_jukes.laihuo.view.nineImage.NineGridlayout;
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/9/23 0023.
+ * Created by Administrator on 2018/9/24 0024.
  */
 
-public class MessageMarketLVAdapter extends BaseAdapter {
+public class MineFocusListLVAdapter extends BaseAdapter {
 
     private Context context;
     private List<String> been;
 
-    public MessageMarketLVAdapter(Context context, List<String> been) {
+    public MineFocusListLVAdapter(Context context, List<String> been) {
         this.context = context;
         this.been = been;
     }
@@ -45,16 +45,16 @@ public class MessageMarketLVAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        MyViewHolder viewHolder = null;
+        MineFocusListLVAdapter.MyViewHolder viewHolder = null;
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.item_lv_message_market, viewGroup, false);
-            viewHolder = new MyViewHolder(view);
+            view = LayoutInflater.from(context).inflate(R.layout.item_focus_list, viewGroup, false);
+            viewHolder = new MineFocusListLVAdapter.MyViewHolder(view);
             view.setTag(viewHolder);
         } else {
-            viewHolder = (MyViewHolder) view.getTag();
+            viewHolder = (MineFocusListLVAdapter.MyViewHolder) view.getTag();
         }
 
-        viewHolder.nineGridlayout.setImagesData(been);
+        viewHolder.name.setText(been.get(i));
 
         return view;
     }
@@ -62,23 +62,19 @@ public class MessageMarketLVAdapter extends BaseAdapter {
 
     class MyViewHolder {
 
-
-        TextView date, content, focus_count, comment_count;
-        ImageView avatar;
-        LinearLayout ll;
-        NineGridlayout nineGridlayout;
+        TextView name, count;
+        ImageView avatar, card, phone;
 
         public MyViewHolder(View view) {
 
-            date = view.findViewById(R.id.tv_date);
-            content = view.findViewById(R.id.tv_content);
-            focus_count = view.findViewById(R.id.tv_focus_count);
-            comment_count = view.findViewById(R.id.tv_comment_count);
+            name = view.findViewById(R.id.tv_name);
+            count = view.findViewById(R.id.tv_star_count);
             avatar = view.findViewById(R.id.iv_avatar);
-            ll = view.findViewById(R.id.ll_img);
-            nineGridlayout = view.findViewById(R.id.iv_img_list);
+            card = view.findViewById(R.id.iv_card);
+            phone = view.findViewById(R.id.iv_phone);
 
         }
     }
+
 
 }
