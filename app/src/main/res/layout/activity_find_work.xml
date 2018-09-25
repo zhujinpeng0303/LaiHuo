@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroud"
+    android:orientation="vertical">
+
+    <include layout="@layout/status_bar" />
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150">
+
+        <LinearLayout
+            android:id="@+id/ll_fenlei"
+            android:layout_width="@dimen/x500"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_fenlei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x50"
+                android:drawableLeft="@mipmap/img_home"
+                android:gravity="center"
+                android:text="当前:"
+                android:textColor="@color/colorGray"
+                android:textSize="@dimen/x35" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_toRightOf="@id/tv_fenlei"
+                android:text="全部分类"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/x35" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_work_status"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="@dimen/x2"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/y30"
+                android:layout_marginTop="@dimen/y30"
+                android:background="@color/colorGrey"
+
+                />
+
+            <TextView
+                android:id="@+id/tv_work_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginRight="@dimen/x50"
+                android:drawableLeft="@mipmap/img_home"
+                android:gravity="center"
+                android:text="我要上班" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/y3"
+        android:scrollbars="none">
+
+    </ListView>
+
+
+</LinearLayout>

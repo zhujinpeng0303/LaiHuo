@@ -70,13 +70,13 @@ public class MessageMarketLVAdapter extends BaseAdapter {
 
         public MyViewHolder(View view) {
 
-            date = view.findViewById(R.id.tv_date);
-            content = view.findViewById(R.id.tv_content);
-            focus_count = view.findViewById(R.id.tv_focus_count);
-            comment_count = view.findViewById(R.id.tv_comment_count);
-            avatar = view.findViewById(R.id.iv_avatar);
-            ll = view.findViewById(R.id.ll_img);
-            nineGridlayout = view.findViewById(R.id.iv_img_list);
+            date = (TextView) view.findViewById(R.id.tv_date);
+            content = (TextView) view.findViewById(R.id.tv_content);
+            focus_count = (TextView) view.findViewById(R.id.tv_focus_count);
+            comment_count = (TextView) view.findViewById(R.id.tv_comment_count);
+            avatar = (ImageView) view.findViewById(R.id.iv_avatar);
+            ll = (LinearLayout) view.findViewById(R.id.ll_img);
+            nineGridlayout = (NineGridlayout) view.findViewById(R.id.iv_img_list);
 
         }
     }

@@ -1,11 +1,14 @@
 package com.example.jason_jukes.laihuo.activity.mine;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.BaseActivity;
@@ -41,6 +44,8 @@ public class FeedbackActivity extends BaseActivity {
     private List<String> been;
     private FeedbackLVAdapter adapter;
 
+    private String content = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,16 +58,40 @@ public class FeedbackActivity extends BaseActivity {
 
     private void initView() {
 
-        tvStatusBarName.setText("平台建议");
+        //分type 加载不同的接口
+        if (getIntent().getStringExtra("type").equals("yijian")) {
+            tvStatusBarName.setText("平台建议");
+        } else {
+            tvStatusBarName.setText("平台投诉");
+        }
 
         headerView = LayoutInflater.from(context).inflate(R.layout.header_feedback_lv, null);
         footerView = LayoutInflater.from(context).inflate(R.layout.footer_feedback_lv, null);
-        et_feedback_content = footerView.findViewById(R.id.et_feedback);
-        et_phone = footerView.findViewById(R.id.et_phone);
-        submit = footerView.findViewById(R.id.tv_commit);
+        et_feedback_content = (EditText) footerView.findViewById(R.id.et_feedback);
+        et_phone = (EditText) footerView.findViewById(R.id.et_phone);
+        submit = (TextView) footerView.findViewById(R.id.tv_commit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (TextUtils.isEmpty(content)){
+                    showToast("请选择投诉原因");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(getText(et_feedback_content)) || getText(et_feedback_content).length() < 8) {
+                    showToast("反馈内容不能小于8个字,记得说的详细些");
+                    return;
+                }
+
+                if (getIntent().getStringExtra("type").equals("jianyi")) {
+                    showToast("提交建议");
+                    showToast(content);
+                } else {
+                    showToast("提交投诉");
+                    showToast(content);
+
+                }
 
             }
         });
@@ -82,7 +111,16 @@ public class FeedbackActivity extends BaseActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                adapter.setPos(i);
+
+                RadioButton mRB = (RadioButton) view.findViewById(R.id.rb);
+                //每次选择一个item时都要清除所有的状态，防止出现多个被选中
+                adapter.clearStates(i - 1);
+                mRB.setChecked(adapter.getStates(i - 1));
+                //刷新数据，调用getView刷新ListView
+                adapter.notifyDataSetChanged();
+
+                content = been.get(i - 1);
+
             }
         });
 
@@ -95,5 +133,6 @@ public class FeedbackActivity extends BaseActivity {
 
     @OnClick(R.id.rl_back)
     public void onViewClicked() {
+        finish();
     }
 }

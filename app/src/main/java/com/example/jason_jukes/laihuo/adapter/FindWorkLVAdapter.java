@@ -6,24 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.R;
-import com.example.jason_jukes.laihuo.view.nineImage.NineGridlayout;
 
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/9/24 0024.
+ * Created by Administrator on 2018/9/25 0025.
  */
 
-public class MineFocusListLVAdapter extends BaseAdapter {
+public class FindWorkLVAdapter extends BaseAdapter {
 
     private Context context;
     private List<String> been;
 
-    public MineFocusListLVAdapter(Context context, List<String> been) {
+    public FindWorkLVAdapter(Context context, List<String> been) {
         this.context = context;
         this.been = been;
     }
@@ -45,13 +43,13 @@ public class MineFocusListLVAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        MineFocusListLVAdapter.MyViewHolder viewHolder = null;
+        FindWorkLVAdapter.MyViewHolder viewHolder = null;
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.item_focus_list, viewGroup, false);
-            viewHolder = new MineFocusListLVAdapter.MyViewHolder(view);
+            view = LayoutInflater.from(context).inflate(R.layout.item_lv_find_work, viewGroup, false);
+            viewHolder = new FindWorkLVAdapter.MyViewHolder(view);
             view.setTag(viewHolder);
         } else {
-            viewHolder = (MineFocusListLVAdapter.MyViewHolder) view.getTag();
+            viewHolder = (FindWorkLVAdapter.MyViewHolder) view.getTag();
         }
 
         viewHolder.name.setText(been.get(i));
@@ -62,16 +60,19 @@ public class MineFocusListLVAdapter extends BaseAdapter {
 
     class MyViewHolder {
 
-        TextView name, count;
-        ImageView avatar, card, phone;
+
+        TextView date, content, name, work_status, jiage_status, address;
+        ImageView img;
 
         public MyViewHolder(View view) {
 
+            date = (TextView) view.findViewById(R.id.tv_date);
             name = (TextView) view.findViewById(R.id.tv_name);
-            count = (TextView) view.findViewById(R.id.tv_star_count);
-            avatar = (ImageView) view.findViewById(R.id.iv_avatar);
-            card = (ImageView) view.findViewById(R.id.iv_card);
-            phone = (ImageView) view.findViewById(R.id.iv_phone);
+            work_status = (TextView) view.findViewById(R.id.tv_status);
+            jiage_status = (TextView) view.findViewById(R.id.tv_jiage_status);
+            address = (TextView) view.findViewById(R.id.tv_address);
+            content = (TextView) view.findViewById(R.id.tv_content);
+            img = (ImageView) view.findViewById(R.id.iv_img);
 
         }
     }

@@ -57,14 +57,14 @@ public class MessageDetailActivity extends BaseActivity {
         tvStatusBarName.setText("信息市场");
 
         headerView = LayoutInflater.from(context).inflate(R.layout.header_lv_message_comment, null);
-        date = headerView.findViewById(R.id.tv_date);
-        content = headerView.findViewById(R.id.tv_content);
-        focus_count = headerView.findViewById(R.id.tv_focus_count);
-        comment_count = headerView.findViewById(R.id.tv_comment_count);
-        avatar = headerView.findViewById(R.id.iv_avatar);
-        ll = headerView.findViewById(R.id.ll_img);
-        nineGridlayout = headerView.findViewById(R.id.iv_img_list);
-        new_comment = headerView.findViewById(R.id.tv_new_comment);
+        date = (TextView) headerView.findViewById(R.id.tv_date);
+        content = (TextView) headerView.findViewById(R.id.tv_content);
+        focus_count = (TextView) headerView.findViewById(R.id.tv_focus_count);
+        comment_count = (TextView) headerView.findViewById(R.id.tv_comment_count);
+        avatar = (ImageView) headerView.findViewById(R.id.iv_avatar);
+        ll = (LinearLayout) headerView.findViewById(R.id.ll_img);
+        nineGridlayout = (NineGridlayout) headerView.findViewById(R.id.iv_img_list);
+        new_comment = (TextView) headerView.findViewById(R.id.tv_new_comment);
 
         lv.addHeaderView(headerView);
 

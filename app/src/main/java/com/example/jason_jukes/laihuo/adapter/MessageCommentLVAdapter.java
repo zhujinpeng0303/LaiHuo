@@ -67,9 +67,9 @@ public class MessageCommentLVAdapter extends BaseAdapter {
 
         public MyViewHolder(View view) {
 
-            date = view.findViewById(R.id.tv_date);
-            content = view.findViewById(R.id.tv_content);
-            avatar = view.findViewById(R.id.iv_avatar);
+            date = (TextView) view.findViewById(R.id.tv_date);
+            content = (TextView) view.findViewById(R.id.tv_content);
+            avatar = (ImageView) view.findViewById(R.id.iv_avatar);
 
         }
     }

@@ -167,9 +167,12 @@ public class MineFragment extends BaseFragment implements InvokeListener, TakePh
                 startIntent(AddressManageActivity.class);
                 break;
             case R.id.rl_yijian:
-                startIntent(FeedbackActivity.class);
+                startActivity(new Intent(context, FeedbackActivity.class)
+                        .putExtra("type", "yijian"));
                 break;
             case R.id.rl_tousu:
+                startActivity(new Intent(context, FeedbackActivity.class)
+                        .putExtra("type", "tousu"));
                 break;
             case R.id.tv_exit:
                 break;

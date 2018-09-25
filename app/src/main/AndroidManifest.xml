@@ -60,6 +60,7 @@
         <activity android:name=".activity.mine.MineWalletActivity" />
         <activity android:name=".activity.mine.MineQualificationActivity" />
         <activity android:name=".activity.mine.FeedbackActivity" />
+        <activity android:name=".activity.home.FindWorkActivity" />
 
     </application>
 

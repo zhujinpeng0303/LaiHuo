@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 
 import com.example.jason_jukes.laihuo.BaseFragment;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.activity.home.FindWorkActivity;
 import com.example.jason_jukes.laihuo.activity.home.MessageMarketActivity;
 
 import butterknife.ButterKnife;
@@ -55,7 +56,6 @@ public class HomeFragment extends BaseFragment {
     }
 
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -77,6 +77,7 @@ public class HomeFragment extends BaseFragment {
                 break;
             case R.id.rl_find_work:
                 showToast("找活干");
+                startIntent(FindWorkActivity.class);
                 break;
         }
     }

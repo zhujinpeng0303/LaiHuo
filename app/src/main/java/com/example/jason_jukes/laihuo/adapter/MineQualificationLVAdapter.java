@@ -111,9 +111,9 @@ public class MineQualificationLVAdapter extends BaseAdapter {
         NineGridlayout nineGridlayout;
 
         public MyViewHolder(View view) {
-            del = view.findViewById(R.id.tv_del);
-            content = view.findViewById(R.id.tv_content);
-            nineGridlayout = view.findViewById(R.id.iv_img_list);
+            del = (TextView) view.findViewById(R.id.tv_del);
+            content = (TextView) view.findViewById(R.id.tv_content);
+            nineGridlayout = (NineGridlayout) view.findViewById(R.id.iv_img_list);
 
         }
     }

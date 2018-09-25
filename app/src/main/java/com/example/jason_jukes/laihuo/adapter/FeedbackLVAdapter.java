@@ -90,23 +90,41 @@ public class FeedbackLVAdapter extends BaseAdapter {
 //            viewHolder.rb.setChecked(false);
 //        }
 
-//        boolean res=false;
-//        if(getStates(position)==null||
-//                getStates(position)==false)//判断当前位置的radiobutton点击状态
-//        {
-//            res=false;
-//            setStates(position, false);
-//
-//        }else{
-//            res=true;
-//        }
+        boolean res = false;
+        if (getStates(i) == null || getStates(i) == false)//判断当前位置的radiobutton点击状态
+        {
+            res = false;
+            setStates(i, false);
+
+        } else {
+            res = true;
+        }
+
+        viewHolder.rb.setChecked(res);
 
         return view;
     }
 
+    //用于在activity中重置所有的radiobutton的状态
+    public void clearStates(int position) {
+        // 重置，确保最多只有一项被选中
+        for (String key : states.keySet()) {
+            states.put(key, false);
+        }
+        states.put(String.valueOf(position), true);
+    }
+
+    //用于获取状态值
+    public Boolean getStates(int position) {
+        return states.get(String.valueOf(position));
+    }
+
+    //设置状态值
+    public void setStates(int position, boolean isChecked) {
+        states.put(String.valueOf(position), false);
+    }
 
     class MyViewHolder {
-
 
         TextView content;
         RadioButton rb;
@@ -114,8 +132,8 @@ public class FeedbackLVAdapter extends BaseAdapter {
 
         public MyViewHolder(View view) {
 
-            content = view.findViewById(R.id.tv_content);
-            rb = view.findViewById(R.id.rb);
+            content = (TextView) view.findViewById(R.id.tv_content);
+            rb = (RadioButton) view.findViewById(R.id.rb);
 
         }
     }
