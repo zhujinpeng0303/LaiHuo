@@ -24,5 +24,8 @@
     <color name="colorLightGreen">#Ef4f20</color>
     <color name="DarkBlue">#4C5C6E</color>
     <color name="DarkYellow">#E5C53C</color>
+    <color name="LightYellow">#FFF7EA</color>
+    <color name="Orange">#FF7618</color>
+    <color name="DarkOrange">#FF5D00</color>
 
 </resources>

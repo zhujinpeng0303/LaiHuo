@@ -1,7 +1,7 @@
-package com.example.jason_jukes.laihuo.activity;
+package com.example.jason_jukes.laihuo.activity.mine;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.tool.IdCardUtil;
+import com.example.jason_jukes.laihuo.tool.LimitTextWatcher;
 import com.example.jason_jukes.laihuo.tool.StringUtil;
 
 import butterknife.ButterKnife;
@@ -19,31 +21,37 @@ import butterknife.OnClick;
  * Created by Administrator on 2018/9/24 0024.
  */
 
-public class PhoneCertificationActivity extends BaseActivity {
+public class BindCardActivity extends BaseActivity {
 
     @InjectView(R.id.tv_status_bar_name)
     TextView tvStatusBarName;
+    @InjectView(R.id.et_card_num)
+    EditText etCardNum;
+    @InjectView(R.id.et_real_name)
+    EditText etRealName;
+    @InjectView(R.id.et_id_num)
+    EditText etIdNum;
     @InjectView(R.id.et_phone)
     EditText etPhone;
     @InjectView(R.id.et_code)
     EditText etCode;
     @InjectView(R.id.tv_get_code)
     TextView tvGetCode;
-
-    private boolean flag = true;
     private int time = 60;
+    private boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_phone_certification);
+        setContentView(R.layout.activity_bind_card);
         ButterKnife.inject(this);
         initView();
     }
 
     private void initView() {
 
-        tvStatusBarName.setText("手机认证");
+        tvStatusBarName.setText("绑卡开户");
+        etRealName.addTextChangedListener(new LimitTextWatcher(getText(etRealName),etRealName));
 
     }
 
@@ -55,7 +63,7 @@ public class PhoneCertificationActivity extends BaseActivity {
                 break;
             case R.id.tv_get_code:
 
-                if (!StringUtil.isMobileNo(getText(etPhone))){
+                if (!StringUtil.isMobileNo(getText(etPhone))) {
                     showToast("手机号格式不正确");
                     return;
                 }
@@ -65,17 +73,38 @@ public class PhoneCertificationActivity extends BaseActivity {
                 break;
             case R.id.tv_commit:
 
-                if (!StringUtil.isMobileNo(getText(etPhone))){
+                if (TextUtils.isEmpty(getText(etCardNum))) {
+                    showToast("请输入银行卡号");
+                    return;
+                }
+
+                if (!StringUtil.checkBankCard(getText(etCardNum))) {
+                    showToast("银行卡号格式不正确");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(getText(etRealName))) {
+                    showToast("请输入真实姓名");
+                    return;
+                }
+
+                if (new IdCardUtil(getText(etIdNum)).isCorrect() != 0) {
+                    showToast("身份证号格式不正确");
+                    return;
+                }
+
+                if (!StringUtil.isMobileNo(getText(etPhone))) {
                     showToast("手机号格式不正确");
                     return;
                 }
 
-                if (TextUtils.isEmpty(getText(etCode))){
+
+                if (TextUtils.isEmpty(getText(etCode))) {
                     showToast("请输入短信验证码");
                     return;
                 }
 
-                showToast("确认");
+                showToast("提交");
 
                 break;
         }
@@ -125,6 +154,5 @@ public class PhoneCertificationActivity extends BaseActivity {
         }).start();
 
     }
-
 
 }

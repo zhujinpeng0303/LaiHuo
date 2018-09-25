@@ -3,36 +3,208 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackgroud"
     android:orientation="vertical">
 
     <include layout="@layout/status_bar" />
 
-
-    <RelativeLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/LightYellow"
+        android:gravity="center"
+        android:padding="@dimen/x30"
+        android:text="您的评分信息会被其他用户看到,提高您的评分会提高您的接单率哦"
+        android:textColor="@color/Orange"
+        android:textSize="@dimen/x30" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:layout_marginTop="@dimen/y30"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="@dimen/x3"
+            android:layout_height="@dimen/y40"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x50"
+            android:background="@color/DarkOrange" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="数量"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x20"
+            android:text="我的评分"
+            android:textSize="@dimen/x35" />
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:layout_marginTop="@dimen/y5"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x50"
+            android:text="总评分"
             android:textSize="@dimen/x40" />
 
         <com.example.jason_jukes.laihuo.view.RatingBar
-            android:id="@+id/ratingBar"
+            android:id="@+id/ratingBar_all"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/y100"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:isIndicator="false"
             app:starCount="5"
-            app:starImageSize="@dimen/x80"
+            app:starEmpty="@mipmap/rating_small_empty"
+            app:starFill="@mipmap/rating_small_full"
+            app:starHalf="@mipmap/rating_small_half"
+            app:starImageSize="@dimen/x60"
             app:starPadding="@dimen/x20"
             app:starStep="0.5"
-            app:stepSize="Full"
+            app:stepSize="Full" />
+
+        <TextView
+            android:id="@+id/tv_score_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x50"
+            android:text="0 分"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x40" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:layout_marginTop="@dimen/y5"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x50"
+            android:text="及时到场"
+            android:textSize="@dimen/x40" />
+
+        <com.example.jason_jukes.laihuo.view.RatingBar
+            android:id="@+id/ratingBar_jishi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:isIndicator="false"
+            app:starCount="5"
             app:starEmpty="@mipmap/rating_small_empty"
-            app:starHalf="@mipmap/rating_small_half"
             app:starFill="@mipmap/rating_small_full"
-            />
+            app:starHalf="@mipmap/rating_small_half"
+            app:starImageSize="@dimen/x60"
+            app:starPadding="@dimen/x20"
+            app:starStep="0.5"
+            app:stepSize="Full" />
+
+        <TextView
+            android:id="@+id/tv_score_jishi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x50"
+            android:text="0 分"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x40" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:layout_marginTop="@dimen/y5"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x50"
+            android:text="服务质量"
+            android:textSize="@dimen/x40" />
+
+        <com.example.jason_jukes.laihuo.view.RatingBar
+            android:id="@+id/ratingBar_zhiliang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:isIndicator="false"
+            app:starCount="5"
+            app:starEmpty="@mipmap/rating_small_empty"
+            app:starFill="@mipmap/rating_small_full"
+            app:starHalf="@mipmap/rating_small_half"
+            app:starImageSize="@dimen/x60"
+            app:starPadding="@dimen/x20"
+            app:starStep="0.5"
+            app:stepSize="Full" />
+
+        <TextView
+            android:id="@+id/tv_score_zhiliang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x50"
+            android:text="0 分"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x40" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:layout_marginTop="@dimen/y5"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x50"
+            android:text="服务态度"
+            android:textSize="@dimen/x40" />
+
+        <com.example.jason_jukes.laihuo.view.RatingBar
+            android:id="@+id/ratingBar_attitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:isIndicator="false"
+            app:starCount="5"
+            app:starEmpty="@mipmap/rating_small_empty"
+            app:starFill="@mipmap/rating_small_full"
+            app:starHalf="@mipmap/rating_small_half"
+            app:starImageSize="@dimen/x60"
+            app:starPadding="@dimen/x20"
+            app:starStep="0.5"
+            app:stepSize="Full" />
+
+        <TextView
+            android:id="@+id/tv_score_attitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x50"
+            android:text="0 分"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x40" />
     </RelativeLayout>
 
 

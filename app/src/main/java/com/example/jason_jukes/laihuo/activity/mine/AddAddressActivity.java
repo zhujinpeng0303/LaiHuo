@@ -1,4 +1,4 @@
-package com.example.jason_jukes.laihuo.activity;
+package com.example.jason_jukes.laihuo.activity.mine;
 
 import android.os.Bundle;
 import android.text.TextUtils;

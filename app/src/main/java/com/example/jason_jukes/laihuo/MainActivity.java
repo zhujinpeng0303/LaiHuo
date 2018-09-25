@@ -14,6 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.jason_jukes.laihuo.activity.mine.MineInvistWorkActivity;
+import com.example.jason_jukes.laihuo.activity.mine.MinePartWorkActivity;
+import com.example.jason_jukes.laihuo.activity.mine.MinePostWorkActivity;
 import com.example.jason_jukes.laihuo.fragment.HomeFragment;
 import com.example.jason_jukes.laihuo.fragment.MineFragment;
 
@@ -23,7 +26,6 @@ import butterknife.OnClick;
 
 
 public class MainActivity extends BaseActivity {
-
     @InjectView(R.id.tv_home)
     TextView tvHome;
     @InjectView(R.id.tv_mine)
@@ -75,7 +77,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.tv_home, R.id.tv_mine, R.id.img_add, R.id.rl_post_yikoujia, R.id.rl_jie_yikoujia, R.id.rl_shangban, R.id.rl_mine_post, R.id.rl_mine_jiehou, R.id.rl_mine_invist})
+    @OnClick({R.id.tv_home, R.id.tv_feature, R.id.tv_mine, R.id.img_add, R.id.rl_post_yikoujia, R.id.rl_jie_yikoujia, R.id.rl_shangban, R.id.rl_mine_post, R.id.rl_mine_jiehou, R.id.rl_mine_invist})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_home:
@@ -84,7 +86,8 @@ public class MainActivity extends BaseActivity {
             case R.id.tv_mine:
                 showFragment(1);
                 break;
-            case R.id.img_add:
+            case R.id.tv_feature:
+
                 showToast("菜单");
                 Animation rotateAnimation = null;
                 if (flag) {
@@ -98,6 +101,7 @@ public class MainActivity extends BaseActivity {
                 rotateAnimation.setDuration(500);
                 imgAdd.startAnimation(rotateAnimation);
                 flag = !flag;
+
                 break;
             case R.id.rl_post_yikoujia:
                 break;
@@ -106,10 +110,13 @@ public class MainActivity extends BaseActivity {
             case R.id.rl_shangban:
                 break;
             case R.id.rl_mine_post:
+                startIntent(MinePostWorkActivity.class);
                 break;
             case R.id.rl_mine_jiehou:
+                startIntent(MinePartWorkActivity.class);
                 break;
             case R.id.rl_mine_invist:
+                startIntent(MineInvistWorkActivity.class);
                 break;
 
         }
@@ -117,6 +124,13 @@ public class MainActivity extends BaseActivity {
 
     //遮罩开启
     private void showBox() {
+        rlJieYikoujia.setClickable(true);
+        rlMineInvist.setClickable(true);
+        rlMineJiehou.setClickable(true);
+        rlMinePost.setClickable(true);
+        rlPostYikoujia.setClickable(true);
+        rlShangban.setClickable(true);
+
         Animation alphaAnimation = new AlphaAnimation(0, 1);
         alphaAnimation.setDuration(500);
         alphaAnimation.setFillAfter(true);
@@ -171,6 +185,14 @@ public class MainActivity extends BaseActivity {
 
     //遮罩关闭
     private void hideBox() {
+        llPopUpBox.setVisibility(View.GONE);
+        llPopUpBox.setClickable(false);
+        rlJieYikoujia.setClickable(false);
+        rlMineInvist.setClickable(false);
+        rlMineJiehou.setClickable(false);
+        rlMinePost.setClickable(false);
+        rlPostYikoujia.setClickable(false);
+        rlShangban.setClickable(false);
         Animation alphaAnimation = new AlphaAnimation(1, 0);
         alphaAnimation.setDuration(500);
         alphaAnimation.setFillAfter(true);
@@ -219,8 +241,6 @@ public class MainActivity extends BaseActivity {
         rlMineInvist.startAnimation(tra6);
 
 
-        llPopUpBox.setVisibility(View.GONE);
-        llPopUpBox.setClickable(false);
     }
 
     private void showFragment(int index) {
@@ -263,5 +283,6 @@ public class MainActivity extends BaseActivity {
         }
 
     }
+
 
 }

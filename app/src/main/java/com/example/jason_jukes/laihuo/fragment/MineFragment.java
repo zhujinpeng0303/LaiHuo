@@ -16,11 +16,17 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.jason_jukes.laihuo.BaseFragment;
 import com.example.jason_jukes.laihuo.R;
-import com.example.jason_jukes.laihuo.activity.AddressManageActivity;
-import com.example.jason_jukes.laihuo.activity.BindCardActivity;
-import com.example.jason_jukes.laihuo.activity.MineFocusListActivity;
-import com.example.jason_jukes.laihuo.activity.MineScoreActivity;
-import com.example.jason_jukes.laihuo.activity.PhoneCertificationActivity;
+import com.example.jason_jukes.laihuo.activity.mine.AddressManageActivity;
+import com.example.jason_jukes.laihuo.activity.mine.BindCardActivity;
+import com.example.jason_jukes.laihuo.activity.mine.FeedbackActivity;
+import com.example.jason_jukes.laihuo.activity.mine.MineFocusListActivity;
+import com.example.jason_jukes.laihuo.activity.mine.MineInvistWorkActivity;
+import com.example.jason_jukes.laihuo.activity.mine.MinePartWorkActivity;
+import com.example.jason_jukes.laihuo.activity.mine.MinePostWorkActivity;
+import com.example.jason_jukes.laihuo.activity.mine.MineQualificationActivity;
+import com.example.jason_jukes.laihuo.activity.mine.MineScoreActivity;
+import com.example.jason_jukes.laihuo.activity.mine.MineWalletActivity;
+import com.example.jason_jukes.laihuo.activity.mine.PhoneCertificationActivity;
 import com.example.jason_jukes.laihuo.tool.PhotoHelper;
 import com.example.jason_jukes.laihuo.view.glide.GlideCircleTransform;
 import com.jph.takephoto.app.TakePhoto;
@@ -125,16 +131,21 @@ public class MineFragment extends BaseFragment implements InvokeListener, TakePh
                 startIntent(MineFocusListActivity.class);
                 break;
             case R.id.rl_qianbao:
+
                 break;
             case R.id.rl_fans:
                 break;
             case R.id.rl_mine_post_work:
+                startIntent(MinePostWorkActivity.class);
                 break;
             case R.id.rl_mine_join_work:
+                startIntent(MinePartWorkActivity.class);
                 break;
             case R.id.rl_mine_invist_work:
+                startIntent(MineInvistWorkActivity.class);
                 break;
             case R.id.rl_mine_money:
+                startIntent(MineWalletActivity.class);
                 break;
             case R.id.rl_mine_score:
                 startIntent(MineScoreActivity.class);
@@ -150,11 +161,13 @@ public class MineFragment extends BaseFragment implements InvokeListener, TakePh
                 startIntent(PhoneCertificationActivity.class);
                 break;
             case R.id.rl_mine_zili:
+                startIntent(MineQualificationActivity.class);
                 break;
             case R.id.rl_mine_address:
                 startIntent(AddressManageActivity.class);
                 break;
             case R.id.rl_yijian:
+                startIntent(FeedbackActivity.class);
                 break;
             case R.id.rl_tousu:
                 break;

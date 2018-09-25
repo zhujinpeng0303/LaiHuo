@@ -1,4 +1,4 @@
-package com.example.jason_jukes.laihuo.activity;
+package com.example.jason_jukes.laihuo.activity.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.adapter.MessageMarketLVAdapter;
-import com.example.jason_jukes.laihuo.view.nineImage.Image;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,15 +69,14 @@ public class MessageMarketActivity extends BaseActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(new Intent(MessageMarketActivity.this,MessageDetailActivity.class)
-                .putStringArrayListExtra("list", (ArrayList<String>) been));
+                startActivity(new Intent(MessageMarketActivity.this, MessageDetailActivity.class)
+                        .putStringArrayListExtra("list", (ArrayList<String>) been));
             }
         });
 
     }
 
-
-    @OnClick(R.id.iv_back)
+    @OnClick(R.id.rl_back)
     public void onViewClicked() {
         finish();
     }

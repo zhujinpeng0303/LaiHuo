@@ -1,4 +1,4 @@
-package com.example.jason_jukes.laihuo.activity;
+package com.example.jason_jukes.laihuo.activity.mine;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.activity.mine.AddAddressActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

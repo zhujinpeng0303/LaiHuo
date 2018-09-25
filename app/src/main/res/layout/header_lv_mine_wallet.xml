@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y450"
+        android:background="@color/colorYellow"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y100"
+            android:text="当前余额"
+            android:textSize="@dimen/x30" />
+
+        <TextView
+            android:id="@+id/tv_yue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y10"
+            android:text="¥ 0"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x60"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_tuxian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y50"
+            android:background="@drawable/bg_black_stroke_big_corner"
+            android:paddingBottom="@dimen/x20"
+            android:paddingLeft="@dimen/x50"
+            android:paddingRight="@dimen/x50"
+            android:paddingTop="@dimen/x20"
+            android:text="余额提现"
+            android:textColor="@color/colorGray" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100">
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="金额变动"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/x30" />
+
+        <View
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/y3"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x50"
+            android:layout_toLeftOf="@id/tv"
+            android:background="@color/colorBackgroud" />
+
+        <View
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/y3"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x50"
+            android:layout_toRightOf="@id/tv"
+            android:background="@color/colorBackgroud" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

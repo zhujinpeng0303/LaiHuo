@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorLightGray">
+
+        <TextView
+            android:id="@+id/tv_yuanyin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/x30"
+            android:layout_marginLeft="@dimen/x50"
+            android:layout_marginRight="@dimen/x50"
+            android:layout_marginTop="@dimen/x30"
+            android:text="投诉原因" />
+
+        <View
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/y2"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/tv_yuanyin"
+            android:background="@color/colorGrey" />
+
+        <View
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/y2"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_yuanyin"
+            android:background="@color/colorGrey" />
+
+    </RelativeLayout>
+
+</LinearLayout>

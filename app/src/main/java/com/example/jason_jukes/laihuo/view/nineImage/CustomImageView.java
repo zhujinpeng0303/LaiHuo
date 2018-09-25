@@ -11,7 +11,10 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.example.jason_jukes.laihuo.view.glide.GlideCircleTransform;
 import com.example.jason_jukes.laihuo.view.glide.GlideRoundTransform;
+import com.example.jason_jukes.laihuo.view.picasso.PicassoRoundTransform;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -62,7 +65,7 @@ public class CustomImageView extends ImageView {
 
     @Override
     public void onDetachedFromWindow() {
-        Picasso.with(getContext()).cancelRequest(this);
+//        Glide.with(getContext()).pauseRequests();
         isAttachedToWindow = false;
         setImageBitmap(null);
         super.onDetachedFromWindow();
@@ -72,8 +75,8 @@ public class CustomImageView extends ImageView {
         if (!TextUtils.isEmpty(url)) {
             this.url = url;
             if (isAttachedToWindow) {
-//                Glide.with(getContext()).load(url).transform(new GlideRoundTransform(getContext())).into(this);
-                Picasso.with(getContext()).load(url).placeholder(new ColorDrawable(Color.parseColor("#f5f5f5"))).into(this);
+                Glide.with(getContext()).load(url).transform(new CenterCrop(getContext()),new GlideRoundTransform(getContext(),6)).placeholder(new ColorDrawable(Color.parseColor("#f5f5f5"))).into(this);
+//                Picasso.with(getContext()).load(url).transform(new PicassoRoundTransform()).placeholder(new ColorDrawable(Color.parseColor("#f5f5f5"))).into(this);
             }
         }
     }

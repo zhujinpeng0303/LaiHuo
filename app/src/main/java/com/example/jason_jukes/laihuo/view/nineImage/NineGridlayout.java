@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * creator  Lukey on 2016/6/14
  */
-public  class NineGridlayout extends ViewGroup {
+public class NineGridlayout extends ViewGroup {
 
     /**
      * 图片之间的间隔
@@ -32,7 +32,8 @@ public  class NineGridlayout extends ViewGroup {
     public NineGridlayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         ScreenTools screenTools = ScreenTools.instance(getContext());
-        totalWidth = screenTools.getScreenWidth() - screenTools.dip2px(80);
+        totalWidth = screenTools.getScreenWidth();
+//        totalWidth = screenTools.getScreenWidth() - screenTools.dip2px(80);
     }
 
     @Override
@@ -48,7 +49,7 @@ public  class NineGridlayout extends ViewGroup {
     private void layoutChildrenView() {
         int childrenCount = listData.size();
 
-        int singleWidth = (totalWidth - gap * (3 - 1)) / 3;
+        int singleWidth = (totalWidth - gap * (3 + 1)) / 3;
         int singleHeight = singleWidth;
 
         //根据子view数量确定高度
@@ -124,7 +125,6 @@ public  class NineGridlayout extends ViewGroup {
         layoutChildrenView();
     }
 
-
     /**
      * 根据图片个数确定行列数量
      * 对应关系如下
@@ -166,7 +166,7 @@ public  class NineGridlayout extends ViewGroup {
 //
 //            }
 //        });
-        iv.setBackgroundColor(Color.parseColor("#f5f5f5"));
+//        iv.setBackgroundColor(Color.parseColor("#f5f5f5"));
         return iv;
     }
 

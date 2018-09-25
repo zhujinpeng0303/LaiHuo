@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_top_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/LightYellow"
+        android:gravity="center"
+        android:padding="@dimen/x30"
+        android:text="您的评分信息会被其他用户看到,提高您的评分会提高您的接单率哦"
+        android:textColor="@color/Orange"
+        android:textSize="@dimen/x30" />
+
+</LinearLayout>

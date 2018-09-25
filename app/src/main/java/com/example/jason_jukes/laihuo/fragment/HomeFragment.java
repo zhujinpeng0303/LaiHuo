@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 
 import com.example.jason_jukes.laihuo.BaseFragment;
 import com.example.jason_jukes.laihuo.R;
-import com.example.jason_jukes.laihuo.activity.MessageMarketActivity;
+import com.example.jason_jukes.laihuo.activity.home.MessageMarketActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
