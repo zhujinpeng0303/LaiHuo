@@ -2,10 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackgroud"
     android:orientation="vertical">
 
-
-    <include layout="@layout/status_bar" />
+    <include
+        android:id="@+id/bar"
+        layout="@layout/status_bar" />
 
     <TextView
         android:id="@+id/tv_add_address"
@@ -30,5 +32,16 @@
         android:layout_height="@dimen/y2"
         android:layout_above="@id/tv_add_address"
         android:background="@color/colorGrey" />
+
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/v"
+        android:layout_below="@id/bar"
+        android:scrollbars="none">
+
+    </ListView>
+
 
 </RelativeLayout>

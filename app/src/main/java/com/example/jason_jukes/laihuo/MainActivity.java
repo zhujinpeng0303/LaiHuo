@@ -32,8 +32,6 @@ public class MainActivity extends BaseActivity {
     TextView tvMine;
     @InjectView(R.id.img_add)
     ImageView imgAdd;
-    @InjectView(R.id.iv_box_head)
-    ImageView ivBoxHead;
     @InjectView(R.id.rl_post_yikoujia)
     RelativeLayout rlPostYikoujia;
     @InjectView(R.id.rl_jie_yikoujia)
@@ -61,7 +59,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-
         initFragment();
     }
 
@@ -77,7 +74,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.tv_home, R.id.tv_feature, R.id.tv_mine, R.id.img_add, R.id.rl_post_yikoujia, R.id.rl_jie_yikoujia, R.id.rl_shangban, R.id.rl_mine_post, R.id.rl_mine_jiehou, R.id.rl_mine_invist})
+    @OnClick({R.id.tv_home, R.id.tv_feature, R.id.img_add, R.id.tv_mine, R.id.rl_post_yikoujia, R.id.rl_jie_yikoujia, R.id.rl_shangban, R.id.rl_mine_post, R.id.rl_mine_jiehou, R.id.rl_mine_invist})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_home:
@@ -100,6 +97,22 @@ public class MainActivity extends BaseActivity {
                 rotateAnimation.setFillAfter(true);
                 rotateAnimation.setDuration(500);
                 imgAdd.startAnimation(rotateAnimation);
+                flag = !flag;
+
+                break;
+            case R.id.img_add:
+                Animation rotateAnimation1 = null;
+                if (flag) {
+                    rotateAnimation1 = new RotateAnimation(0, -315, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                    showBox();
+                } else  {
+                    rotateAnimation1 = new RotateAnimation(-315, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                    hideBox();
+                }
+
+                rotateAnimation1.setFillAfter(true);
+                rotateAnimation1.setDuration(500);
+                imgAdd.startAnimation(rotateAnimation1);
                 flag = !flag;
 
                 break;
@@ -283,6 +296,5 @@ public class MainActivity extends BaseActivity {
         }
 
     }
-
 
 }

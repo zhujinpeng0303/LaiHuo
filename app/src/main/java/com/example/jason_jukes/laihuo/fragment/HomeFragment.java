@@ -8,10 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
 import com.example.jason_jukes.laihuo.BaseFragment;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.activity.home.ChooseClassifyActivity;
 import com.example.jason_jukes.laihuo.activity.home.FindWorkActivity;
 import com.example.jason_jukes.laihuo.activity.home.MessageMarketActivity;
+import com.example.jason_jukes.laihuo.tool.Contants;
+import com.example.jason_jukes.laihuo.tool.IsNetWork;
+import com.example.jason_jukes.laihuo.view.glide.GlideRoundTransform;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -33,6 +38,10 @@ public class HomeFragment extends BaseFragment {
     RelativeLayout rlFindWork;
     @InjectView(R.id.rl_back)
     RelativeLayout rlBack;
+    @InjectView(R.id.iv_top)
+    ImageView ivTop;
+    @InjectView(R.id.iv_middle)
+    ImageView ivMiddle;
     private View view;
 
     @Override
@@ -47,12 +56,27 @@ public class HomeFragment extends BaseFragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.inject(this, view);
         initView(view);
+        initData();
         return view;
 
     }
 
     private void initView(View view) {
         rlBack.setVisibility(View.GONE);
+        Glide.with(context).load(Contants.HOME_TOP_PIC).into(ivTop);
+        Glide.with(context).load(Contants.HOME_MIDDLE_PIC).transform(new GlideRoundTransform(context,10)).into(ivMiddle);
+    }
+
+    private void initData() {
+
+        if (IsNetWork.isNetWork(context)) {
+//            showPro();
+//            getPic();
+        } else {
+            showToast("请检查网络设置");
+
+        }
+
     }
 
 
@@ -62,11 +86,14 @@ public class HomeFragment extends BaseFragment {
         ButterKnife.reset(this);
     }
 
-    @OnClick({R.id.tv_see_detail, R.id.ll_message, R.id.rl_find_worker, R.id.rl_find_work})
+    @OnClick({R.id.iv_top, R.id.iv_middle,R.id.ll_message, R.id.rl_find_worker, R.id.rl_find_work})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tv_see_detail:
-                showToast("查看详情");
+            case R.id.iv_top:
+                showToast("詳情");
+                break;
+            case R.id.iv_middle:
+                showToast("開發");
                 break;
             case R.id.ll_message:
                 showToast("信息市场");
@@ -74,6 +101,7 @@ public class HomeFragment extends BaseFragment {
                 break;
             case R.id.rl_find_worker:
                 showToast("找工人");
+                startIntent(ChooseClassifyActivity.class);
                 break;
             case R.id.rl_find_work:
                 showToast("找活干");
@@ -81,4 +109,5 @@ public class HomeFragment extends BaseFragment {
                 break;
         }
     }
+
 }

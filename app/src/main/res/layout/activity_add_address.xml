@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/status_bar"/>
+    <include layout="@layout/status_bar" />
 
     <EditText
         android:id="@+id/et_name"
@@ -62,6 +62,7 @@
         android:background="@drawable/bg_et_grey_corner"
         android:gravity="top"
         android:hint="请输入详细地址"
+        android:maxLength="40"
         android:padding="@dimen/x20"
         android:textSize="@dimen/x35">
 
@@ -78,6 +79,21 @@
         android:paddingBottom="@dimen/x40"
         android:paddingTop="@dimen/x40"
         android:text="提交"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/x40" />
+
+    <TextView
+        android:id="@+id/tv_del"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginRight="@dimen/x50"
+        android:background="@drawable/bg_light_grey_corner"
+        android:gravity="center"
+        android:paddingBottom="@dimen/x40"
+        android:paddingTop="@dimen/x40"
+        android:text="删除"
+        android:layout_marginTop="@dimen/y50"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/x40" />
 

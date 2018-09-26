@@ -12,243 +12,6 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/y150" />
 
-    <!--弹出的遮罩层-->
-
-
-    <LinearLayout
-        android:id="@+id/ll_popUp_box"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/y150"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <ImageView
-            android:id="@+id/iv_box_head"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y400"
-            android:background="@color/colorGray" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#F2ffffff">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:id="@+id/rl_post_yikoujia"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x100"
-                        android:layout_weight="1">
-
-                        <ImageView
-                            android:id="@+id/iv_post_yikoujia"
-                            android:layout_width="@dimen/x100"
-                            android:layout_height="@dimen/x100"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/y200"
-                            android:background="@mipmap/img_home" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/iv_post_yikoujia"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginBottom="@dimen/y50"
-                            android:layout_marginTop="@dimen/y20"
-                            android:text="一口价发布"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/x30" />
-
-                    </RelativeLayout>
-
-
-                    <RelativeLayout
-                        android:id="@+id/rl_jie_yikoujia"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <ImageView
-                            android:id="@+id/iv_jie_yikoujia"
-                            android:layout_width="@dimen/x100"
-                            android:layout_height="@dimen/x100"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/y200"
-                            android:background="@mipmap/img_home" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/iv_jie_yikoujia"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginBottom="@dimen/y50"
-                            android:layout_marginTop="@dimen/y20"
-                            android:text="一口价接活"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/x30" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/rl_shangban"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/x100"
-                        android:layout_weight="1">
-
-                        <ImageView
-                            android:id="@+id/iv_shangban"
-                            android:layout_width="@dimen/x100"
-                            android:layout_height="@dimen/x100"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/y200"
-                            android:background="@mipmap/img_home" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/iv_shangban"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginBottom="@dimen/y50"
-                            android:layout_marginTop="@dimen/y20"
-                            android:text="我要上班"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/x30" />
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:id="@+id/rl_mine_post"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x100"
-                        android:layout_weight="1">
-
-                        <ImageView
-                            android:id="@+id/iv_mine_post"
-                            android:layout_width="@dimen/x100"
-                            android:layout_height="@dimen/x100"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/y50"
-                            android:background="@mipmap/img_home" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/iv_mine_post"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginBottom="@dimen/y200"
-                            android:layout_marginTop="@dimen/y20"
-                            android:text="我的发布"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/x30" />
-
-                    </RelativeLayout>
-
-
-                    <RelativeLayout
-                        android:id="@+id/rl_mine_jiehou"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <ImageView
-                            android:id="@+id/iv_mine_jiehou"
-                            android:layout_width="@dimen/x100"
-                            android:layout_height="@dimen/x100"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/y50"
-                            android:background="@mipmap/img_home" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/iv_mine_jiehou"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginBottom="@dimen/y200"
-                            android:layout_marginTop="@dimen/y20"
-                            android:text="我的接活"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/x30" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/rl_mine_invist"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/x100"
-                        android:layout_weight="1">
-
-                        <ImageView
-                            android:id="@+id/iv_mine_invist"
-                            android:layout_width="@dimen/x100"
-                            android:layout_height="@dimen/x100"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/y50"
-                            android:background="@mipmap/img_home" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/iv_mine_invist"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginBottom="@dimen/y200"
-                            android:layout_marginTop="@dimen/y20"
-                            android:text="邀请我的"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/x30" />
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/y2"
-                    android:background="@color/colorGrey"
-                    />
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-    </LinearLayout>
-
-
-    <RelativeLayout
-        android:layout_width="@dimen/x180"
-        android:layout_height="@dimen/y180"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="@dimen/y60">
-
-        <ImageView
-            android:id="@+id/img_add"
-            android:layout_width="@dimen/x80"
-            android:layout_height="@dimen/x80"
-            android:layout_centerInParent="true"
-            android:background="@mipmap/img_add" />
-    </RelativeLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y150"
@@ -282,9 +45,9 @@
 
             <TextView
                 android:id="@+id/tv_feature"
-                android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center|bottom"
                 android:paddingBottom="@dimen/y20"
                 android:text="功能"
@@ -307,6 +70,215 @@
 
 
         </LinearLayout>
+    </RelativeLayout>
+
+
+    <!--弹出的遮罩层-->
+    <LinearLayout
+        android:id="@+id/ll_popUp_box"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/y150"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y400"
+            android:background="@color/colorYellow">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/x100"
+                android:background="@mipmap/img_box_word" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F2FEFCF6">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y500"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_post_yikoujia"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/x294"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="@dimen/x100"
+                        android:layout_weight="1"
+                        android:background="@mipmap/img_box_find_worker">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="@dimen/y30"
+                            android:layout_marginTop="@dimen/y20"
+                            android:text="找工人"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/x30" />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_jie_yikoujia"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/x294"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="1"
+                        android:background="@mipmap/img_box_find_work">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="@dimen/y30"
+                            android:layout_marginTop="@dimen/y20"
+                            android:text="找活干"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/x30" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_shangban"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/x294"
+                        android:layout_gravity="bottom"
+                        android:layout_marginRight="@dimen/x100"
+                        android:layout_weight="1"
+                        android:background="@mipmap/img_box_no_working">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="@dimen/y30"
+                            android:layout_marginTop="@dimen/y20"
+                            android:text="我要上班"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/x30" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y500"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_mine_post"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/x294"
+                        android:layout_gravity="top"
+                        android:layout_marginBottom="@dimen/y100"
+                        android:layout_marginLeft="@dimen/x100"
+                        android:layout_weight="1"
+                        android:background="@mipmap/img_box_mine_post">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="@dimen/x30"
+                            android:text="我的发布"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/x30" />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_mine_jiehou"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/x294"
+                        android:layout_gravity="top"
+                        android:layout_weight="1"
+                        android:background="@mipmap/img_box_mine_jie">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="@dimen/y30"
+                            android:text="我的接活"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/x30" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_mine_invist"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/x294"
+                        android:layout_gravity="top"
+                        android:layout_marginRight="@dimen/x100"
+                        android:layout_weight="1"
+                        android:background="@mipmap/img_box_mine_invist">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="@dimen/y30"
+                            android:text="邀请我的"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/x30" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y2"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/y300"
+                android:background="@color/colorGrey" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:background="@drawable/bg_yellow_circle"
+        android:layout_width="@dimen/x180"
+        android:layout_height="@dimen/y180"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="@dimen/y60">
+
+        <ImageView
+            android:id="@+id/img_add"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/x80"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/img_add" />
     </RelativeLayout>
 
 </FrameLayout>

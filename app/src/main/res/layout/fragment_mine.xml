@@ -20,7 +20,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorYellow"
+                android:background="@drawable/bg_mine_yellow"
                 android:orientation="vertical">
 
                 <ImageView
@@ -58,7 +58,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x20"
-                            android:background="@mipmap/img_home" />
+                            android:background="@mipmap/img_mine_edit" />
 
                     </LinearLayout>
                 </RelativeLayout>
@@ -74,20 +74,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_dark_yellow_corner"
-                        android:drawableLeft="@mipmap/img_home"
+                        android:drawableLeft="@mipmap/img_mine_card_status"
                         android:gravity="center"
                         android:padding="@dimen/x10"
-                        android:text="未认证" />
+                        android:text="未认证"
+                        android:textSize="@dimen/x30" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x20"
                         android:background="@drawable/bg_dark_yellow_corner"
-                        android:drawableLeft="@mipmap/img_home"
+                        android:drawableLeft="@mipmap/img_mine_phone_status"
                         android:gravity="center"
                         android:padding="@dimen/x10"
-                        android:text="未认证" />
+                        android:text="未认证"
+                        android:textSize="@dimen/x30" />
 
 
                 </LinearLayout>
@@ -99,20 +101,21 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/y50"
                     android:background="@drawable/bg_dark_blue_corner"
-                    android:drawableLeft="@mipmap/img_home"
+                    android:drawableLeft="@mipmap/img_mine_work_status_no"
                     android:drawablePadding="@dimen/x10"
+                    android:gravity="center"
                     android:paddingBottom="@dimen/x30"
                     android:paddingLeft="@dimen/x50"
                     android:paddingRight="@dimen/x50"
                     android:paddingTop="@dimen/x30"
                     android:text="我要上班"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/x40" />
+                    android:textSize="@dimen/x35" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/y100"
+                    android:layout_marginBottom="@dimen/y120"
                     android:layout_marginTop="@dimen/y20"
                     android:orientation="horizontal">
 
@@ -220,7 +223,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x50"
                 android:layout_marginRight="@dimen/x50"
-                android:layout_marginTop="-20dp"
+                android:layout_marginTop="-30dp"
                 android:background="@drawable/bg_white_corner"
                 android:orientation="vertical">
 
@@ -241,9 +244,10 @@
                             android:id="@+id/iv_mine_post_work"
                             android:layout_width="@dimen/x120"
                             android:layout_height="@dimen/x120"
+                            android:layout_alignParentTop="true"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/y60"
-                            android:background="@mipmap/img_home" />
+                            android:layout_marginTop="20dp"
+                            android:background="@mipmap/img_mine_post_work" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -277,7 +281,7 @@
                             android:layout_height="@dimen/x120"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/y60"
-                            android:background="@mipmap/img_home" />
+                            android:background="@mipmap/img_mine_part_work" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -311,7 +315,7 @@
                             android:layout_height="@dimen/x120"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/y60"
-                            android:background="@mipmap/img_home" />
+                            android:background="@mipmap/img_mine_invist_work" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -354,7 +358,7 @@
                             android:layout_height="@dimen/x120"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/y80"
-                            android:background="@mipmap/img_home" />
+                            android:background="@mipmap/img_mine_wallet" />
 
                         <TextView
                             android:id="@+id/tv_wallet"
@@ -398,7 +402,7 @@
                             android:layout_height="@dimen/x120"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/y80"
-                            android:background="@mipmap/img_home" />
+                            android:background="@mipmap/img_mine_score" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -432,7 +436,7 @@
                             android:layout_height="@dimen/x120"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/y80"
-                            android:background="@mipmap/img_home" />
+                            android:background="@mipmap/img_mine_code" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -480,7 +484,7 @@
                             android:layout_height="@dimen/x120"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/y60"
-                            android:background="@mipmap/img_home" />
+                            android:background="@mipmap/img_mine_bind_card" />
 
                         <TextView
                             android:id="@+id/tv_card"
@@ -524,7 +528,7 @@
                             android:layout_height="@dimen/x120"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/y60"
-                            android:background="@mipmap/img_home" />
+                            android:background="@mipmap/img_mine_phone_au" />
 
                         <TextView
                             android:id="@+id/tv_phone"
@@ -568,7 +572,7 @@
                             android:layout_height="@dimen/x120"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/y60"
-                            android:background="@mipmap/img_home" />
+                            android:background="@mipmap/img_mine_zili" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -611,7 +615,7 @@
                             android:layout_height="@dimen/x120"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/y80"
-                            android:background="@mipmap/img_home" />
+                            android:background="@mipmap/img_mine_address" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -626,6 +630,12 @@
 
                     </RelativeLayout>
 
+                    <View
+                        android:layout_width="@dimen/x3"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/y20"
+                        android:background="@color/colorBackgroud" />
+
                     <RelativeLayout
                         android:id="@+id/rl_yijian"
                         android:layout_width="0dp"
@@ -639,7 +649,7 @@
                             android:layout_height="@dimen/x120"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/y80"
-                            android:background="@mipmap/img_home" />
+                            android:background="@mipmap/img_mine_yijian" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -653,6 +663,12 @@
                             android:textSize="@dimen/x40" />
 
                     </RelativeLayout>
+
+                    <View
+                        android:layout_width="@dimen/x3"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/y20"
+                        android:background="@color/colorBackgroud" />
 
                     <RelativeLayout
                         android:id="@+id/rl_tousu"
