@@ -10,11 +10,11 @@
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/y150" />
+        android:layout_marginBottom="@dimen/y160" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y150"
+        android:layout_height="@dimen/y160"
         android:layout_gravity="bottom">
 
         <View
@@ -34,8 +34,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:drawablePadding="2dp"
-                android:drawableTop="@mipmap/img_home"
+                android:drawableTop="@drawable/img_home_status"
                 android:gravity="center|bottom"
                 android:paddingBottom="@dimen/y20"
                 android:paddingTop="@dimen/y20"
@@ -59,8 +58,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:drawablePadding="2dp"
-                android:drawableTop="@mipmap/img_home"
+                android:drawableTop="@drawable/img_mine_status"
                 android:gravity="center|bottom"
                 android:paddingBottom="@dimen/y20"
                 android:paddingTop="@dimen/y20"
@@ -78,7 +76,7 @@
         android:id="@+id/ll_popUp_box"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/y150"
+        android:layout_marginTop="@dimen/y160"
         android:orientation="vertical"
         android:visibility="gone">
 
@@ -267,11 +265,11 @@
 
 
     <RelativeLayout
-        android:background="@drawable/bg_yellow_circle"
         android:layout_width="@dimen/x180"
         android:layout_height="@dimen/y180"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="@dimen/y60">
+        android:layout_marginBottom="@dimen/y60"
+        android:background="@drawable/bg_yellow_circle">
 
         <ImageView
             android:id="@+id/img_add"

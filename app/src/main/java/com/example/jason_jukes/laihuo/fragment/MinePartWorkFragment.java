@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.BaseFragment;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.adapter.FindWorkLVAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -29,6 +33,9 @@ public class MinePartWorkFragment extends BaseFragment {
     @InjectView(R.id.lv)
     ListView lv;
     private View view;
+
+    private List<String> been = new ArrayList<>();
+    private FindWorkLVAdapter adapter;
 
     public static Fragment createFragment(String url, String sign) {
         Fragment fragment = new MinePartWorkFragment();
@@ -58,6 +65,16 @@ public class MinePartWorkFragment extends BaseFragment {
     private void initView() {
         Bundle bundle = getArguments();
         tv.setText(bundle.getString("sign"));
+
+        been = new ArrayList<>();
+        been.add("道理-瓦匠");
+        been.add("道外-砖工");
+        been.add("南岗-砌砖");
+        been.add("群力-装卸工");
+        been.add("平房-力工");
+
+        adapter = new FindWorkLVAdapter(context, been);
+        lv.setAdapter(adapter);
 
     }
 

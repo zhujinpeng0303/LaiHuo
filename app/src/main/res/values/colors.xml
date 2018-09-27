@@ -6,7 +6,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorGreen">#d2ec91</color>
-    <color name="colorGreenBottle">#1dae4e</color>
+    <color name="colorGreenBottle">#1ABE6B</color>
     <color name="colorPink">#f77270</color>
     <color name="colorBlue">#1798db</color>
     <color name="colorYellow">#FEDB43</color>
@@ -25,7 +25,9 @@
     <color name="DarkBlue">#4C5C6E</color>
     <color name="DarkYellow">#E5C53C</color>
     <color name="LightYellow">#FFF7EA</color>
-    <color name="Orange">#FF7618</color>
-    <color name="DarkOrange">#FF5D00</color>
+    <color name="Orange">#FF9901</color>
+    <color name="DarkOrange">#FF6700</color>
+    <color name="Blue">#57B382</color>
+    <color name="DarkPurple">#393345</color>
 
 </resources>

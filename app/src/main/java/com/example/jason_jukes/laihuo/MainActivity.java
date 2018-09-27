@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.jason_jukes.laihuo.activity.home.FindWorkActivity;
+import com.example.jason_jukes.laihuo.activity.home.findWorker.ChooseClassifyActivity;
 import com.example.jason_jukes.laihuo.activity.mine.MineInvistWorkActivity;
 import com.example.jason_jukes.laihuo.activity.mine.MinePartWorkActivity;
 import com.example.jason_jukes.laihuo.activity.mine.MinePostWorkActivity;
@@ -70,7 +72,7 @@ public class MainActivity extends BaseActivity {
         mFragmentManager = getSupportFragmentManager();
 
         showFragment(0);
-
+        tvHome.setSelected(true);
     }
 
 
@@ -79,9 +81,13 @@ public class MainActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.tv_home:
                 showFragment(0);
+                tvHome.setSelected(true);
+                tvMine.setSelected(false);
                 break;
             case R.id.tv_mine:
                 showFragment(1);
+                tvMine.setSelected(true);
+                tvHome.setSelected(false);
                 break;
             case R.id.tv_feature:
 
@@ -105,7 +111,7 @@ public class MainActivity extends BaseActivity {
                 if (flag) {
                     rotateAnimation1 = new RotateAnimation(0, -315, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                     showBox();
-                } else  {
+                } else {
                     rotateAnimation1 = new RotateAnimation(-315, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                     hideBox();
                 }
@@ -117,10 +123,13 @@ public class MainActivity extends BaseActivity {
 
                 break;
             case R.id.rl_post_yikoujia:
+                startIntent(ChooseClassifyActivity.class);
                 break;
             case R.id.rl_jie_yikoujia:
+                startIntent(FindWorkActivity.class);
                 break;
             case R.id.rl_shangban:
+
                 break;
             case R.id.rl_mine_post:
                 startIntent(MinePostWorkActivity.class);

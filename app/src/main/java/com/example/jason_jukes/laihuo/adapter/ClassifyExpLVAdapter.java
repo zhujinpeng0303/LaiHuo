@@ -1,6 +1,7 @@
 package com.example.jason_jukes.laihuo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.activity.home.findWorker.WorkDescActivity;
 import com.example.jason_jukes.laihuo.view.MyGridView;
 
 import java.util.List;
@@ -97,6 +99,8 @@ public class ClassifyExpLVAdapter extends BaseExpandableListAdapter {
             public void onItemClick(AdapterView<?> adapterView, View view, int i2, long l) {
 
                 Toast.makeText(context, items.get(i).get(i2), Toast.LENGTH_SHORT).show();
+
+                context.startActivity(new Intent(context, WorkDescActivity.class));
 
             }
         });

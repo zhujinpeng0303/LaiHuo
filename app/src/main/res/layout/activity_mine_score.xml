@@ -69,7 +69,7 @@
             app:starHalf="@mipmap/rating_small_half"
             app:starImageSize="@dimen/x60"
             app:starPadding="@dimen/x20"
-            app:starStep="0.5"
+            app:starStep="1"
             app:stepSize="Full" />
 
         <TextView
@@ -110,7 +110,7 @@
             app:starHalf="@mipmap/rating_small_half"
             app:starImageSize="@dimen/x60"
             app:starPadding="@dimen/x20"
-            app:starStep="0.5"
+            app:starStep="1"
             app:stepSize="Full" />
 
         <TextView
@@ -151,7 +151,7 @@
             app:starHalf="@mipmap/rating_small_half"
             app:starImageSize="@dimen/x60"
             app:starPadding="@dimen/x20"
-            app:starStep="0.5"
+            app:starStep="1"
             app:stepSize="Full" />
 
         <TextView
@@ -192,7 +192,7 @@
             app:starHalf="@mipmap/rating_small_half"
             app:starImageSize="@dimen/x60"
             app:starPadding="@dimen/x20"
-            app:starStep="0.5"
+            app:starStep="1"
             app:stepSize="Full" />
 
         <TextView

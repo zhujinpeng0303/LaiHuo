@@ -61,7 +61,11 @@
         <activity android:name=".activity.mine.MineQualificationActivity" />
         <activity android:name=".activity.mine.FeedbackActivity" />
         <activity android:name=".activity.home.FindWorkActivity" />
-        <activity android:name=".activity.home.ChooseClassifyActivity" />
+        <activity android:name=".activity.home.findWorker.ChooseClassifyActivity" />
+        <activity android:name=".activity.home.findWorker.WorkDescActivity" />
+        <activity android:name=".activity.home.findWorker.WorkAddressActivity" />
+        <activity android:name=".activity.home.findWorker.SurePostActivity" />
+        <activity android:name=".activity.CountActivity" />
 
     </application>
 
