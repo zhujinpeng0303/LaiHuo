@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.R;
@@ -13,18 +12,15 @@ import com.example.jason_jukes.laihuo.R;
 import java.util.List;
 
 /**
- * 作者：Jason_Jukes on 2018/9/25 0025 11:53
- * <p>
- * When I wrote this, only God and I understood what I was doing
- * Now, only God knows
+ * Created by Administrator on 2018/9/28 0028.
  */
 
-public class MineWalletLVAdapter extends BaseAdapter {
+public class MineWithdrawLVAdapter extends BaseAdapter {
 
     private Context context;
     private List<String> been;
 
-    public MineWalletLVAdapter(Context context, List<String> been) {
+    public MineWithdrawLVAdapter(Context context, List<String> been) {
         this.context = context;
         this.been = been;
     }
@@ -46,25 +42,17 @@ public class MineWalletLVAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        MineWalletLVAdapter.MyViewHolder viewHolder = null;
+        MineWithdrawLVAdapter.MyViewHolder viewHolder = null;
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.item_mine_wallet, viewGroup, false);
-            viewHolder = new MineWalletLVAdapter.MyViewHolder(view);
+            view = LayoutInflater.from(context).inflate(R.layout.item_withdraw_lv, viewGroup, false);
+            viewHolder = new MineWithdrawLVAdapter.MyViewHolder(view);
             view.setTag(viewHolder);
         } else {
-            viewHolder = (MineWalletLVAdapter.MyViewHolder) view.getTag();
+            viewHolder = (MineWithdrawLVAdapter.MyViewHolder) view.getTag();
         }
 
-        viewHolder.name.setText(been.get(i));
-        if (been.get(i).equals("0")){
-            viewHolder.money.setText("+ 1000");
-            viewHolder.money.setTextColor(context.getResources().getColor(R.color.Blue));
-        }else {
+        viewHolder.money.setText(been.get(i));
 
-            viewHolder.money.setText("- 500");
-            viewHolder.money.setTextColor(context.getResources().getColor(R.color.Orange));
-
-        }
 
         return view;
     }
@@ -72,7 +60,7 @@ public class MineWalletLVAdapter extends BaseAdapter {
 
     class MyViewHolder {
 
-        TextView name,time,money;
+        TextView name, time, money;
 
         public MyViewHolder(View view) {
 

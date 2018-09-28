@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroud"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/status_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y50"
+            android:text="点这里,为本次服务评分"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/x40" />
+
+        <com.example.jason_jukes.laihuo.view.RatingBar
+            android:id="@+id/ratingBar_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y50"
+            android:isIndicator="false"
+            app:clickable="true"
+            app:starCount="5"
+            app:starEmpty="@mipmap/rating_small_empty"
+            app:starFill="@mipmap/rating_small_full"
+            app:starHalf="@mipmap/rating_small_half"
+            app:starImageSize="@dimen/x100"
+            app:starPadding="@dimen/x20"
+            app:starStep="1"
+            app:stepSize="Full" />
+
+        <TextView
+            android:id="@+id/tv_score_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/y50"
+            android:layout_marginTop="@dimen/y50"
+            android:text="4分 比较满意,服务周到"
+            android:textColor="@color/Orange"
+            android:textSize="@dimen/x40" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:layout_marginTop="@dimen/y30"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="@dimen/x3"
+            android:layout_height="@dimen/y40"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x50"
+            android:background="@color/DarkOrange" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x20"
+            android:text="其他评分"
+            android:textSize="@dimen/x35" />
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:layout_marginTop="@dimen/y5"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x50"
+            android:text="及时到场"
+            android:textSize="@dimen/x40" />
+
+        <com.example.jason_jukes.laihuo.view.RatingBar
+            android:id="@+id/ratingBar_jishi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:isIndicator="false"
+            app:clickable="true"
+            app:starCount="5"
+            app:starEmpty="@mipmap/rating_small_empty"
+            app:starFill="@mipmap/rating_small_full"
+            app:starHalf="@mipmap/rating_small_half"
+            app:starImageSize="@dimen/x60"
+            app:starPadding="@dimen/x20"
+            app:starStep="1"
+            app:stepSize="Full" />
+
+        <TextView
+            android:id="@+id/tv_score_jishi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x50"
+            android:text="0 分"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x40" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:layout_marginTop="@dimen/y5"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x50"
+            android:text="服务质量"
+            android:textSize="@dimen/x40" />
+
+        <com.example.jason_jukes.laihuo.view.RatingBar
+            android:id="@+id/ratingBar_zhiliang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:isIndicator="false"
+            app:clickable="true"
+            app:starCount="5"
+            app:starEmpty="@mipmap/rating_small_empty"
+            app:starFill="@mipmap/rating_small_full"
+            app:starHalf="@mipmap/rating_small_half"
+            app:starImageSize="@dimen/x60"
+            app:starPadding="@dimen/x20"
+            app:starStep="1"
+            app:stepSize="Full" />
+
+        <TextView
+            android:id="@+id/tv_score_zhiliang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x50"
+            android:text="0 分"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x40" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:layout_marginTop="@dimen/y5"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x50"
+            android:text="服务态度"
+            android:textSize="@dimen/x40" />
+
+        <com.example.jason_jukes.laihuo.view.RatingBar
+            android:id="@+id/ratingBar_attitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:isIndicator="false"
+            app:clickable="true"
+            app:starCount="5"
+
+            app:starEmpty="@mipmap/rating_small_empty"
+            app:starFill="@mipmap/rating_small_full"
+            app:starHalf="@mipmap/rating_small_half"
+            app:starImageSize="@dimen/x60"
+            app:starPadding="@dimen/x20"
+            app:starStep="1"
+            app:stepSize="Full" />
+
+        <TextView
+            android:id="@+id/tv_score_attitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x50"
+            android:text="0 分"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x40" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:layout_marginTop="@dimen/y30"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="@dimen/x3"
+            android:layout_height="@dimen/y40"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x50"
+            android:background="@color/DarkOrange" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x20"
+            android:text="评价内容"
+            android:textSize="@dimen/x35" />
+
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_evaluate"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y250"
+        android:layout_marginTop="@dimen/y3"
+        android:background="@color/white"
+        android:gravity="top"
+        android:hint="您对本次服务是否满意,请您提出宝贵意见。"
+        android:maxLength="140"
+        android:paddingBottom="@dimen/x30"
+        android:paddingLeft="@dimen/x30"
+        android:paddingRight="@dimen/x30"
+        android:paddingTop="@dimen/x30"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/x35" />
+
+    <TextView
+        android:id="@+id/tv_sure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/y30"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginRight="@dimen/x50"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@drawable/bg_yellow_corner"
+        android:gravity="center"
+        android:paddingBottom="@dimen/y40"
+        android:paddingTop="@dimen/y40"
+        android:text="提交"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/x40" />
+
+</LinearLayout>

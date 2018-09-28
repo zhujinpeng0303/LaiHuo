@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x50"
+            android:layout_marginTop="@dimen/y50"
+            android:text="待审核未转账"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x40" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_name"
+            android:layout_below="@id/tv_name"
+            android:layout_marginBottom="@dimen/y50"
+            android:layout_marginTop="@dimen/y20"
+            android:text="2018-09-25 12:45:78"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/x35" />
+
+
+        <TextView
+            android:id="@+id/yuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x50"
+            android:text="元"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/x35" />
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x20"
+            android:layout_toLeftOf="@id/yuan"
+            android:text="+ 10"
+            android:textColor="@color/colorBlue"
+            android:textSize="@dimen/x60"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</LinearLayout>

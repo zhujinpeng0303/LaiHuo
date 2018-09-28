@@ -69,6 +69,9 @@
         <activity android:name=".activity.home.WorkDetailActivity" />
         <activity android:name=".activity.home.PostMessageActivity" />
         <activity android:name=".activity.home.MyPartakeMessageActivity" />
+        <activity android:name=".activity.home.SureArriveActivity" />
+        <activity android:name=".activity.home.SendScoreActivity" />
+        <activity android:name=".activity.mine.MineWithdrawActivity" />
 
     </application>
 
