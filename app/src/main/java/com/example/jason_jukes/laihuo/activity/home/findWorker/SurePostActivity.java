@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.tool.Contants;
+import com.example.jason_jukes.laihuo.view.IdentifyDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +87,7 @@ public class SurePostActivity extends BaseActivity {
 
             ImageView imageView = new ImageView(this);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            imageView.setPadding(dimension,0,dimension,dimension);
+            imageView.setPadding(dimension, 0, dimension, dimension);
             imageView.setLayoutParams(params);
             Glide.with(context).load(imgs.get(i)).placeholder(R.mipmap.ic_launcher).into(imageView);
 
@@ -103,6 +104,8 @@ public class SurePostActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_sure:
+                IdentifyDialog dialog = new IdentifyDialog(this);
+                dialog.commonDialog();
                 break;
         }
     }

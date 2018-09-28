@@ -1,6 +1,5 @@
 package com.example.jason_jukes.laihuo.activity.mine;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -37,6 +36,8 @@ public class BindCardActivity extends BaseActivity {
     EditText etCode;
     @InjectView(R.id.tv_get_code)
     TextView tvGetCode;
+    @InjectView(R.id.tv_cancel)
+    TextView tvCancel;
     private int time = 60;
     private boolean flag = true;
 
@@ -51,7 +52,8 @@ public class BindCardActivity extends BaseActivity {
     private void initView() {
 
         tvStatusBarName.setText("绑卡开户");
-        etRealName.addTextChangedListener(new LimitTextWatcher(getText(etRealName),etRealName));
+        tvCancel.setVisibility(View.GONE);
+        etRealName.addTextChangedListener(new LimitTextWatcher(getText(etRealName), etRealName));
 
     }
 

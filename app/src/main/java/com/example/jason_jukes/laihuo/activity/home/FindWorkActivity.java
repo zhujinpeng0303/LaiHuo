@@ -1,7 +1,9 @@
 package com.example.jason_jukes.laihuo.activity.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -57,8 +59,15 @@ public class FindWorkActivity extends BaseActivity {
         been.add("群力-装卸工");
         been.add("平房-力工");
 
-        adapter = new FindWorkLVAdapter(this,been);
+        adapter = new FindWorkLVAdapter(this, been);
         lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(new Intent(FindWorkActivity.this, WorkDetailActivity.class));
+            }
+        });
 
     }
 

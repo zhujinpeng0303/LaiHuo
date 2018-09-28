@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y110"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="@dimen/x2"
+                android:layout_height="@dimen/y30"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/x59"
+                android:background="@color/colorGrey" />
+
+            <ImageView
+                android:id="@+id/iv_circle"
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x20"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x50"
+                android:background="@drawable/bg_light_grey_big_corner" />
+
+            <View
+                android:layout_width="@dimen/x2"
+                android:layout_height="@dimen/y30"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/x59"
+                android:background="@color/colorGrey" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x30"
+            android:text="创建了服务工单"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x35" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_marginTop="@dimen/y7"
+            android:text="2018-25-45 45:45:54"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/x25" />
+
+    </LinearLayout>
+
+</LinearLayout>

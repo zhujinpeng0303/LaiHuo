@@ -2,6 +2,7 @@ package com.example.jason_jukes.laihuo.activity.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -59,6 +60,9 @@ public class MessageMarketActivity extends BaseActivity {
         lv.setDividerHeight(0);
         lv.setVerticalScrollBarEnabled(false);
 
+        View footerView = LayoutInflater.from(context).inflate(R.layout.footer_message_market_lv, null);
+        lv.addFooterView(footerView);
+
         imgList = new ArrayList<>();
         imgList.add("http://f.hiphotos.baidu.com/image/pic/item/eaf81a4c510fd9f90a220479282dd42a2834a4ed.jpg");
         imgList.add("http://e.hiphotos.baidu.com/image/pic/item/b03533fa828ba61e8480853f4c34970a304e59b7.jpg");
@@ -76,8 +80,18 @@ public class MessageMarketActivity extends BaseActivity {
 
     }
 
-    @OnClick(R.id.rl_back)
-    public void onViewClicked() {
-        finish();
+    @OnClick({R.id.rl_back, R.id.tv_post_message, R.id.tv_mine_part})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.rl_back:
+                finish();
+                break;
+            case R.id.tv_post_message:
+                startIntent(PostMessageActivity.class);
+                break;
+            case R.id.tv_mine_part:
+                startIntent(MyPartakeMessageActivity.class);
+                break;
+        }
     }
 }

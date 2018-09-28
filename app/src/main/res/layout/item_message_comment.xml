@@ -58,7 +58,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@mipmap/img_go"
+        android:background="@mipmap/img_menu"
         android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/y60"
         android:layout_marginRight="@dimen/x50"

@@ -30,7 +30,7 @@
         android:background="@drawable/bg_et_grey_corner"
         android:gravity="center_vertical"
         android:hint="请输入联系人电话"
-        android:inputType="phone"
+        android:inputType="number"
         android:maxLength="11"
         android:paddingLeft="@dimen/x20"
         android:textSize="@dimen/x35">

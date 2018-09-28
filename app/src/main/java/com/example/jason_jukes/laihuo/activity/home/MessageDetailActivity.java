@@ -33,7 +33,7 @@ public class MessageDetailActivity extends BaseActivity {
     @InjectView(R.id.lv)
     ListView lv;
     private View headerView;
-    private TextView date, content, focus_count, comment_count;
+    private TextView date, content, focus_count, comment_count, focus;
     private ImageView avatar;
     private LinearLayout ll;
     private NineGridlayout nineGridlayout;
@@ -46,7 +46,6 @@ public class MessageDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_message_detail);
         ButterKnife.inject(this);
         initView();
@@ -65,6 +64,14 @@ public class MessageDetailActivity extends BaseActivity {
         ll = (LinearLayout) headerView.findViewById(R.id.ll_img);
         nineGridlayout = (NineGridlayout) headerView.findViewById(R.id.iv_img_list);
         new_comment = (TextView) headerView.findViewById(R.id.tv_new_comment);
+        focus = (TextView) headerView.findViewById(R.id.tv_focus);
+
+        focus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showToast("关注");
+            }
+        });
 
         lv.addHeaderView(headerView);
 

@@ -66,6 +66,9 @@
         <activity android:name=".activity.home.findWorker.WorkAddressActivity" />
         <activity android:name=".activity.home.findWorker.SurePostActivity" />
         <activity android:name=".activity.CountActivity" />
+        <activity android:name=".activity.home.WorkDetailActivity" />
+        <activity android:name=".activity.home.PostMessageActivity" />
+        <activity android:name=".activity.home.MyPartakeMessageActivity" />
 
     </application>
 

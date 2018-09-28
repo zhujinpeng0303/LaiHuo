@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <include layout="@layout/status_bar"/>
+    <include layout="@layout/status_bar" />
 
     <EditText
         android:id="@+id/et_phone"
@@ -13,24 +14,27 @@
         android:background="@drawable/bg_et_grey_corner"
         android:gravity="center_vertical"
         android:hint="请输入绑定手机号"
-        android:inputType="phone"
+        android:inputType="number"
         android:maxLength="11"
         android:paddingLeft="@dimen/x20"
         android:textSize="@dimen/x35">
 
     </EditText>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y120"
         android:layout_marginBottom="@dimen/x50"
         android:layout_marginLeft="@dimen/x50"
-        android:layout_marginRight="@dimen/x50">
+        android:layout_marginRight="@dimen/x50"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/et_code"
-            android:layout_width="@dimen/x450"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/x50"
+            android:layout_weight="1"
             android:background="@drawable/bg_et_grey_corner"
             android:gravity="center_vertical"
             android:hint="请输入短信验证码"
@@ -41,16 +45,18 @@
 
         <TextView
             android:id="@+id/tv_get_code"
-            android:layout_width="@dimen/x450"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/x50"
+            android:layout_weight="1"
             android:background="@drawable/bg_light_grey_corner"
             android:gravity="center"
             android:text="获取短信验证码"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/x35" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_commit"

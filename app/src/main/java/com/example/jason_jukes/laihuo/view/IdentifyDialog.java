@@ -1,0 +1,158 @@
+package com.example.jason_jukes.laihuo.view;
+
+import android.app.AlertDialog;
+import android.content.Context;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.tool.IdCardUtil;
+import com.example.jason_jukes.laihuo.tool.StringUtil;
+
+/**
+ * 作者：Jason_Jukes on 2018/9/28 0028 14:35
+ * <p>
+ * When I wrote this, only God and I understood what I was doing
+ * Now, only God knows
+ */
+
+public class IdentifyDialog {
+
+    private Context context;
+    private AlertDialog dialog;
+    private boolean flag = false;
+    private int time = 60;
+    private TextView tvGetCode;
+
+    public IdentifyDialog(Context context) {
+        this.context = context;
+    }
+
+    public void commonDialog() {
+
+        AlertDialog.Builder adb = new AlertDialog.Builder(context);
+        dialog = adb.create();
+        View view = LayoutInflater.from(context).inflate(R.layout.identify_dialog_view, null);
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setView(view);
+
+        final EditText et_name = view.findViewById(R.id.et_real_name);
+        final EditText et_card = view.findViewById(R.id.et_id_num);
+        final EditText et_phone = view.findViewById(R.id.et_phone);
+        final EditText et_code = view.findViewById(R.id.et_code);
+        tvGetCode = view.findViewById(R.id.tv_get_code);
+
+        TextView tv_ok = view.findViewById(R.id.tv_commit);
+        TextView tv_cancel = view.findViewById(R.id.tv_cancel);
+
+        tvGetCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //获取验证码
+
+                if (!StringUtil.isMobileNo(et_phone.getText().toString())) {
+                    Toast.makeText(context, "手机号格式不正确", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                codeState();
+
+            }
+        });
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (TextUtils.isEmpty(et_name.getText().toString())) {
+                    Toast.makeText(context, "请输入真实姓名", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (new IdCardUtil(et_card.getText().toString()).isCorrect() != 0) {
+                    Toast.makeText(context, "身份证号格式不正确", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (!StringUtil.isMobileNo(et_phone.getText().toString())) {
+                    Toast.makeText(context, "手机号格式不正确", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+                if (TextUtils.isEmpty(et_code.getText().toString())) {
+                    Toast.makeText(context, "请输入短信验证码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                Toast.makeText(context, "提交", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dialog.dismiss();
+
+            }
+        });
+
+        dialog.show();
+
+    }
+
+
+    //验证码倒计时
+
+    public void codeState() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (flag) {
+                    time--;
+                    try {
+                        Thread.sleep(1000);
+                        tvGetCode.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                tvGetCode.setText(time + "s后重新获取");
+                                tvGetCode.setClickable(false);
+//                                tvGetCode.setTextSize(13);
+//                                tvGetCode.setTextColor(Color.parseColor("#5a5a5a"));
+
+                            }
+                        });
+
+                        if (time <= 1) {
+                            flag = false;
+                            tvGetCode.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    tvGetCode.setText("获取短信验证码");
+                                    tvGetCode.setClickable(true);
+//                                    tvGetCode.setTextSize(11);
+//                                    tvGetCode.setTextColor(Color.parseColor("#5a5a5a"));
+                                }
+                            });
+
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                flag = true;
+                time = 60;
+            }
+        }).start();
+
+    }
+
+
+}

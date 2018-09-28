@@ -29,5 +29,6 @@
     <color name="DarkOrange">#FF6700</color>
     <color name="Blue">#57B382</color>
     <color name="DarkPurple">#393345</color>
+    <color name="GREY">#E3E3E3</color>
 
 </resources>
