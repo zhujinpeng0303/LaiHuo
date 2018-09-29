@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroud"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_marginRight="@dimen/x2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x2"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorBackgroud" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_avatar"
+            android:layout_width="@dimen/x200"
+            android:layout_height="@dimen/x200"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/y20"
+            android:layout_marginTop="@dimen/y50"
+            android:background="@drawable/bg_grey_big_corner">
+
+            <ImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="@dimen/x180"
+                android:layout_height="@dimen/x180"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/ic_launcher_round" />
+
+            <ImageView
+                android:layout_width="@dimen/x180"
+                android:layout_height="@dimen/x180"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_alpha_black_big_corner"
+
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/img_yellow_phone" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_status"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/x50"
+            android:background="@drawable/bg_red_big_corner" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_avatar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y20"
+            android:text="马冬梅"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x40" />
+
+        <TextView
+            android:id="@+id/tv_jiage_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y50"
+            android:text="预估价格"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/x30" />
+
+        <RelativeLayout
+            android:id="@+id/rl_yuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_jiage_status"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/tv_jiage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20"
+                android:text="1000.00"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/x40" />
+
+            <TextView
+                android:id="@+id/tv_yuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tv_jiage"
+                android:layout_marginBottom="@dimen/y3"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_toRightOf="@id/tv_jiage"
+                android:text="元"
+                android:textColor="@color/colorGray"
+                android:textSize="@dimen/x35" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="@dimen/x35"
+            android:layout_height="@dimen/x35"
+            android:layout_below="@id/rl_yuan"
+            android:layout_marginBottom="@dimen/y50"
+            android:layout_marginLeft="@dimen/x50"
+            android:layout_marginTop="@dimen/y100"
+            android:background="@mipmap/rating_small_full" />
+
+        <TextView
+            android:id="@+id/tv_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_yuan"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y100"
+            android:layout_toRightOf="@id/iv"
+            android:text="4.8"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/x35" />
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/x60"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/rl_yuan"
+            android:layout_marginRight="@dimen/x50"
+            android:layout_marginTop="@dimen/y100"
+            android:background="@mipmap/img_more" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -9,6 +9,7 @@
         android:id="@+id/bar"
         layout="@layout/status_bar" />
 
+
     <TextView
         android:id="@+id/tv_sure"
         android:layout_width="match_parent"
@@ -46,6 +47,8 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="vertical">
+
+            <include layout="@layout/header_find_post_exp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

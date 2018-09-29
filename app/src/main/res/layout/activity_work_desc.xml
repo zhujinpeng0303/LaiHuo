@@ -16,6 +16,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <include layout="@layout/header_find_post_exp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

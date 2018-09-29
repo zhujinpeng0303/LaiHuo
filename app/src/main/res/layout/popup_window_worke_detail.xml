@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2212121"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/x100"
+        android:layout_marginRight="@dimen/x100">
+
+
+        <RelativeLayout
+            android:id="@+id/rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x50"
+            android:background="@drawable/bg_white_corner"
+
+            >
+
+            <ImageView
+                android:id="@+id/iv_go"
+                android:layout_width="@dimen/x50"
+                android:layout_height="@dimen/x50"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/x60"
+                android:background="@mipmap/img_go"
+                android:paddingLeft="@dimen/x20" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/y50"
+                android:text="那冬梅"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/x40" />
+
+            <ImageView
+                android:id="@+id/iv1"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x40"
+                android:layout_alignLeft="@id/tv_name"
+                android:layout_below="@id/tv_name"
+                android:layout_marginTop="@dimen/y20"
+                android:background="@mipmap/img_xueli_renzheng" />
+
+            <ImageView
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x40"
+                android:layout_below="@id/tv_name"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginTop="@dimen/y20"
+                android:layout_toRightOf="@id/iv1"
+                android:background="@mipmap/img_phone_renzheng" />
+
+
+            <TextView
+                android:id="@+id/ping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_name"
+                android:layout_marginLeft="@dimen/x50"
+                android:layout_marginTop="@dimen/y80"
+                android:text="评分: "
+                android:textColor="@color/colorGray"
+                android:textSize="@dimen/x35" />
+
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_name"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginTop="@dimen/y80"
+                android:layout_toRightOf="@id/ping"
+                android:text="4.8"
+                android:textColor="@color/DarkOrange"
+                android:textSize="@dimen/x35" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_name"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginTop="@dimen/y80"
+                android:layout_toRightOf="@id/tv_score"
+                android:text="分"
+                android:textColor="@color/colorGray"
+                android:textSize="@dimen/x35" />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/ping"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x50"
+                android:text="10000000000"
+                android:textColor="@color/DarkOrange"
+                android:textSize="@dimen/x35" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tv_phone"
+                android:layout_marginRight="@dimen/x10"
+                android:layout_toLeftOf="@id/tv_phone"
+                android:text="电话:"
+                android:textColor="@color/colorGray"
+                android:textSize="@dimen/x35" />
+
+            <View
+                android:id="@+id/v"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y2"
+                android:layout_below="@id/tv_phone"
+                android:layout_marginLeft="@dimen/x50"
+                android:layout_marginRight="@dimen/x50"
+                android:layout_marginTop="@dimen/y30"
+                android:background="@color/colorBackgroud" />
+
+
+            <LinearLayout
+                android:id="@+id/ll_evaluate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/v"
+                android:orientation="vertical">
+
+                <include layout="@layout/item_worker_evaluate_lv" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_evaluate"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/y30"
+                    android:layout_marginTop="@dimen/y30"
+                    android:drawableRight="@mipmap/img_go"
+                    android:text="查看更多评价"
+                    android:textColor="@color/colorGray"
+                    android:textSize="@dimen/x35" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_zuizong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll"
+                android:layout_marginLeft="@dimen/x50"
+                android:layout_marginRight="@dimen/x50"
+                android:layout_marginTop="@dimen/y30"
+                android:background="@drawable/bg_light_grey_corner"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y30"
+                    android:text="最终报价: 100元"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/x35" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/y30"
+                    android:gravity="center"
+                    android:text="TA已经输入了最终报价,如果您对TA的价格没有异议,请点击【选择TA】,合作开始"
+                    android:textColor="@color/colorGray"
+                    android:textSize="@dimen/x30" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_zuizong"
+                android:layout_margin="@dimen/x50"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_light_grey_corner"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/x30"
+                    android:paddingTop="@dimen/x30"
+                    android:text="取消"
+                    android:textColor="@color/colorBlack" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:layout_weight="2"
+                    android:background="@drawable/bg_yellow_corner"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/x30"
+                    android:paddingTop="@dimen/x30"
+                    android:text="选择TA"
+                    android:textColor="@color/colorBlack" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/x180"
+            android:layout_height="@dimen/x180"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/x50"
+            android:background="@drawable/bg_white_big_corner">
+
+            <ImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="@dimen/x160"
+                android:layout_height="@dimen/x160"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/ic_launcher_round"
+
+                />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
-import com.example.jason_jukes.laihuo.tool.Contants;
 import com.example.jason_jukes.laihuo.view.IdentifyDialog;
 
 import java.util.ArrayList;
@@ -56,6 +55,16 @@ public class SurePostActivity extends BaseActivity {
     RelativeLayout rlLuyin;
     @InjectView(R.id.ll_img)
     LinearLayout llImg;
+    @InjectView(R.id.tv_title)
+    TextView tvTitle;
+    @InjectView(R.id.iv1)
+    ImageView iv1;
+    @InjectView(R.id.iv2)
+    ImageView iv2;
+    @InjectView(R.id.iv3)
+    ImageView iv3;
+    @InjectView(R.id.iv4)
+    ImageView iv4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +76,12 @@ public class SurePostActivity extends BaseActivity {
     }
 
     private void initView() {
-
         tvStatusBarName.setText("确认发布内容");
-
+        tvTitle.setText("第四步·请确认您的提交内容");
+        iv1.setBackgroundResource(R.mipmap.img_dui);
+        iv2.setBackgroundResource(R.mipmap.img_dui);
+        iv3.setBackgroundResource(R.mipmap.img_dui);
+        iv4.setBackgroundResource(R.mipmap.img_four_choose);
     }
 
     private void initData() {

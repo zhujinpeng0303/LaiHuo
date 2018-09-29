@@ -64,6 +64,12 @@ public class WorkDescActivity extends BaseActivity {
     RelativeLayout rlYikoujia;
     @InjectView(R.id.rl_rb)
     RelativeLayout rlRb;
+    @InjectView(R.id.tv_title)
+    TextView tvTitle;
+    @InjectView(R.id.iv1)
+    ImageView iv1;
+    @InjectView(R.id.iv2)
+    ImageView iv2;
 
     private boolean flag = false;
 
@@ -79,6 +85,11 @@ public class WorkDescActivity extends BaseActivity {
     private void initView() {
 
         tvStatusBarName.setText("发布");
+
+        tvTitle.setText("第二步·请描述您的服务内容");
+        iv1.setBackgroundResource(R.mipmap.img_dui);
+        iv2.setBackgroundResource(R.mipmap.img_two_choose);
+
         tvTime.setVisibility(View.GONE);
         radioBtn.setChecked(false);
         llWorkTime.setClickable(true);

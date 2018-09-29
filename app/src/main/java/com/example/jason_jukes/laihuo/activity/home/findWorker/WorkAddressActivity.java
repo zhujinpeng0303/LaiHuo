@@ -2,8 +2,10 @@ package com.example.jason_jukes.laihuo.activity.home.findWorker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -36,6 +38,8 @@ public class WorkAddressActivity extends BaseActivity {
     private List<String> been;
     private AddressManagerLVAdapter adapter;
 
+    private View headerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,18 @@ public class WorkAddressActivity extends BaseActivity {
 
         tvStatusBarName.setText("发布");
 
+        headerView = LayoutInflater.from(context).inflate(R.layout.header_find_post_exp,null);
+        TextView title = headerView.findViewById(R.id.tv_title);
+        ImageView iv1 = headerView.findViewById(R.id.iv1);
+        ImageView iv2 = headerView.findViewById(R.id.iv2);
+        ImageView iv3 = headerView.findViewById(R.id.iv3);
+
+        title.setText("第三步·请选择服务地址");
+        iv1.setBackgroundResource(R.mipmap.img_dui);
+        iv2.setBackgroundResource(R.mipmap.img_dui);
+        iv3.setBackgroundResource(R.mipmap.img_three_choose);
+
+        lv.addHeaderView(headerView);
 
         been = new ArrayList<>();
         been.add("测试");

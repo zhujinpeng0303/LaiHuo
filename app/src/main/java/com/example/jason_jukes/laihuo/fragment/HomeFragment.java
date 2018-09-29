@@ -14,6 +14,7 @@ import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.activity.CountActivity;
 import com.example.jason_jukes.laihuo.activity.home.FindWorkActivity;
 import com.example.jason_jukes.laihuo.activity.home.MessageMarketActivity;
+import com.example.jason_jukes.laihuo.activity.home.NearbyPersonActivity;
 import com.example.jason_jukes.laihuo.activity.home.SendScoreActivity;
 import com.example.jason_jukes.laihuo.activity.home.findWorker.ChooseClassifyActivity;
 import com.example.jason_jukes.laihuo.tool.Contants;
@@ -111,7 +112,7 @@ public class HomeFragment extends BaseFragment {
                 break;
             case R.id.rl_count:
 
-                startIntent(SendScoreActivity.class);
+                startIntent(NearbyPersonActivity.class);
 
                 break;
         }

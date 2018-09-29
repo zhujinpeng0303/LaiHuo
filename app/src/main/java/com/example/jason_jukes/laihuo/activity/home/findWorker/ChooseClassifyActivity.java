@@ -1,6 +1,7 @@
 package com.example.jason_jukes.laihuo.activity.home.findWorker;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
@@ -37,7 +38,7 @@ public class ChooseClassifyActivity extends BaseActivity {
     private List<String> itemList, itemList1;
 
     private ClassifyExpLVAdapter adapter;
-
+    private View headerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,9 @@ public class ChooseClassifyActivity extends BaseActivity {
     private void initView() {
         tvStatusBarName.setText("发布");
 
+        headerView = LayoutInflater.from(context).inflate(R.layout.header_find_post_exp, null);
+
+        expLv.addHeaderView(headerView);
 
         groups = new ArrayList<>();
         groups.add("分类1");
@@ -90,7 +94,6 @@ public class ChooseClassifyActivity extends BaseActivity {
                 return true;
             }
         });
-
 
 
     }

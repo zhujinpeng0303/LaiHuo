@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -12,7 +13,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.adapter.WorkDetailGridViewAdapter;
 import com.example.jason_jukes.laihuo.view.BindCardDialog;
+import com.example.jason_jukes.laihuo.view.MyGridView;
+import com.example.jason_jukes.laihuo.view.RatingBar;
+import com.example.jason_jukes.laihuo.view.WorkDetailPopupwindow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +75,42 @@ public class WorkDetailActivity extends BaseActivity {
     RelativeLayout rlLuyin;
     @InjectView(R.id.ll_img)
     LinearLayout llImg;
+    @InjectView(R.id.gridView)
+    MyGridView gridView;
+    @InjectView(R.id.ratingBar_all)
+    RatingBar ratingBarAll;
+    @InjectView(R.id.tv_score_all)
+    TextView tvScoreAll;
+    @InjectView(R.id.ratingBar_jishi)
+    RatingBar ratingBarJishi;
+    @InjectView(R.id.tv_score_jishi)
+    TextView tvScoreJishi;
+    @InjectView(R.id.ratingBar_zhiliang)
+    RatingBar ratingBarZhiliang;
+    @InjectView(R.id.tv_score_zhiliang)
+    TextView tvScoreZhiliang;
+    @InjectView(R.id.ratingBar_attitude)
+    RatingBar ratingBarAttitude;
+    @InjectView(R.id.tv_score_attitude)
+    TextView tvScoreAttitude;
+    @InjectView(R.id.tv_evaluate)
+    TextView tvEvaluate;
+    @InjectView(R.id.iv_zhiding_avatar)
+    ImageView ivZhidingAvatar;
+    @InjectView(R.id.tv_zhiding_name)
+    TextView tvZhidingName;
+    @InjectView(R.id.tv_zhiding_score)
+    TextView tvZhidingScore;
+    @InjectView(R.id.tv_zhiding_phone)
+    TextView tvZhidingPhone;
+    @InjectView(R.id.tv_zhiding_jiage_status)
+    TextView tvZhidingJiageStatus;
+    @InjectView(R.id.rootView)
+    LinearLayout rootView;
+    @InjectView(R.id.iv_play)
+    ImageView ivPlay;
+
+    private WorkDetailGridViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +131,8 @@ public class WorkDetailActivity extends BaseActivity {
         imgs.add("http://e.hiphotos.baidu.com/image/pic/item/b03533fa828ba61e8480853f4c34970a304e59b7.jpg");
         imgs.add("http://f.hiphotos.baidu.com/image/pic/item/eaf81a4c510fd9f90a220479282dd42a2834a4ed.jpg");
         imgs.add("http://e.hiphotos.baidu.com/image/pic/item/94cad1c8a786c91723e93522c43d70cf3ac757c6.jpg");
+        imgs.add("http://e.hiphotos.baidu.com/image/pic/item/94cad1c8a786c91723e93522c43d70cf3ac757c6.jpg");
+        imgs.add("http://e.hiphotos.baidu.com/image/pic/item/94cad1c8a786c91723e93522c43d70cf3ac757c6.jpg");
 
         int dimension = (int) getResources().getDimension(R.dimen.x50);
         int dimension1 = (int) getResources().getDimension(R.dimen.y20);
@@ -107,7 +150,7 @@ public class WorkDetailActivity extends BaseActivity {
 
         }
 
-        List<String> texts = new ArrayList<>();
+        final List<String> texts = new ArrayList<>();
         texts.add("讲述了肯德基卡了");
         texts.add("可怜见覅器");
         texts.add("动一期货论坛功能联合");
@@ -124,10 +167,23 @@ public class WorkDetailActivity extends BaseActivity {
 
         }
 
+        adapter = new WorkDetailGridViewAdapter(this, imgs);
+        gridView.setAdapter(adapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                WorkDetailPopupwindow popupwindow = new WorkDetailPopupwindow(WorkDetailActivity.this);
+                popupwindow.show(rootView);
+
+            }
+        });
+
 
     }
 
-    @OnClick({R.id.rl_back, R.id.tv_shenqing, R.id.rl_luyin})
+    @OnClick({R.id.rl_back, R.id.tv_shenqing, R.id.rl_luyin,R.id.iv_play, R.id.rl_zhiding_avatar, R.id.iv_zhiding_more})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_back:
@@ -139,6 +195,13 @@ public class WorkDetailActivity extends BaseActivity {
                 break;
             case R.id.rl_luyin:
                 break;
+            case R.id.iv_play:
+                break;
+            case R.id.rl_zhiding_avatar:
+                break;
+            case R.id.iv_zhiding_more:
+                break;
         }
     }
+
 }

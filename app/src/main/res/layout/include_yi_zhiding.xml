@@ -32,13 +32,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y3"
         android:background="@color/white">
 
         <RelativeLayout
+            android:id="@+id/rl_zhiding_avatar"
             android:layout_width="@dimen/x200"
             android:layout_height="@dimen/x200"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/y50"
+            android:layout_marginBottom="@dimen/y20"
             android:layout_marginTop="@dimen/y50"
             android:background="@drawable/bg_grey_big_corner">
 
@@ -57,6 +59,12 @@
 
                 />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/img_yellow_phone" />
+
         </RelativeLayout>
 
         <TextView
@@ -69,6 +77,65 @@
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/x40" />
 
+        <ImageView
+            android:layout_width="@dimen/x35"
+            android:layout_height="@dimen/x35"
+            android:layout_alignBottom="@id/tv_zhiding_name"
+            android:layout_marginBottom="@dimen/y10"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_toRightOf="@id/tv_zhiding_name"
+            android:background="@mipmap/rating_small_full" />
+
+        <TextView
+            android:id="@+id/tv_zhiding_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_zhiding_name"
+            android:layout_marginBottom="@dimen/y5"
+            android:layout_marginLeft="@dimen/x70"
+            android:layout_toRightOf="@id/tv_zhiding_name"
+            android:text="4.8"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/x35" />
+
+        <TextView
+            android:id="@+id/tv_zhiding_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_zhiding_name"
+            android:layout_below="@id/tv_zhiding_name"
+            android:layout_marginTop="@dimen/y40"
+            android:text="10000000000"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/x40" />
+
+        <TextView
+            android:id="@+id/tv_zhiding_jiage_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_zhiding_name"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x100"
+            android:text="确认价格"
+            android:textSize="@dimen/x30" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_zhiding_phone"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x100"
+            android:text="1000.00元"
+            android:textColor="@color/colorBlack" />
+
+        <ImageView
+            android:id="@+id/iv_zhiding_more"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/x60"
+            android:layout_below="@id/rl_zhiding_avatar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/y30"
+            android:background="@mipmap/img_more" />
 
     </RelativeLayout>
 

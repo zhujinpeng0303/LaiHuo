@@ -51,6 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:isIndicator="false"
+            app:clickable="false"
             app:starCount="5"
             app:starEmpty="@mipmap/rating_small_empty"
             app:starFill="@mipmap/rating_small_full"
@@ -92,7 +93,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:isIndicator="false"
+            app:clickable="false"
             app:starCount="5"
+
             app:starEmpty="@mipmap/rating_small_empty"
             app:starFill="@mipmap/rating_small_full"
             app:starHalf="@mipmap/rating_small_half"
@@ -133,7 +136,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:isIndicator="false"
+            app:clickable="false"
             app:starCount="5"
+
             app:starEmpty="@mipmap/rating_small_empty"
             app:starFill="@mipmap/rating_small_full"
             app:starHalf="@mipmap/rating_small_half"
@@ -174,7 +179,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:isIndicator="false"
+            app:clickable="false"
             app:starCount="5"
+
             app:starEmpty="@mipmap/rating_small_empty"
             app:starFill="@mipmap/rating_small_full"
             app:starHalf="@mipmap/rating_small_half"

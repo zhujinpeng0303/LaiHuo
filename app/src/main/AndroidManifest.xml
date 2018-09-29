@@ -72,6 +72,7 @@
         <activity android:name=".activity.home.SureArriveActivity" />
         <activity android:name=".activity.home.SendScoreActivity" />
         <activity android:name=".activity.mine.MineWithdrawActivity" />
+        <activity android:name=".activity.home.NearbyPersonActivity" />
 
     </application>
 

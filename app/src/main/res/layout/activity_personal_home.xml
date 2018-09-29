@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroud"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/bar"
+        layout="@layout/status_bar" />
+
+    <TextView
+        android:id="@+id/tv_invist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/y30"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginRight="@dimen/x50"
+        android:layout_marginTop="@dimen/y30"
+        android:background="@drawable/bg_yellow_corner"
+        android:gravity="center"
+        android:paddingBottom="@dimen/y40"
+        android:paddingTop="@dimen/y40"
+        android:text="邀请他完成我的任务"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/x40" />
+
+    <View
+        android:id="@+id/v"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y2"
+        android:layout_above="@id/tv_invist"
+        android:background="@color/colorGrey" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/v"
+        android:layout_below="@id/bar"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_mine_yellow"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y490"
+                    android:background="@mipmap/img_bg_clound" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_avatar"
+                        android:layout_width="@dimen/x200"
+                        android:layout_height="@dimen/x200"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/y100"
+                        android:background="@mipmap/ic_launcher_round" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/y20"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_dark_yellow_corner"
+                            android:drawableLeft="@mipmap/img_mine_card_status"
+                            android:gravity="center"
+                            android:padding="@dimen/x10"
+                            android:text="未认证"
+                            android:textSize="@dimen/x30" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:background="@drawable/bg_dark_yellow_corner"
+                            android:drawableLeft="@mipmap/img_mine_phone_status"
+                            android:gravity="center"
+                            android:padding="@dimen/x10"
+                            android:text="未认证"
+                            android:textSize="@dimen/x30" />
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_focus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/y50"
+                        android:background="@drawable/bg_black_stroke_big_corner"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/x30"
+                        android:paddingLeft="@dimen/x80"
+                        android:paddingRight="@dimen/x80"
+                        android:paddingTop="@dimen/x30"
+                        android:text="关注TA"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/x35" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/y120"
+                        android:layout_marginTop="@dimen/y20"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:id="@+id/rl_guanzhu"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/tv1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/y50"
+                                android:text="TA的关注"
+                                android:textColor="@color/colorGray"
+                                android:textSize="@dimen/x30" />
+
+                            <TextView
+                                android:id="@+id/tv_guanzhu"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/tv1"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginBottom="@dimen/y50"
+                                android:layout_marginTop="@dimen/y10"
+                                android:text="0"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/x40"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_qianbao"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/tv2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/y50"
+                                android:text="TA的累计总评分"
+                                android:textColor="@color/colorGray"
+                                android:textSize="@dimen/x30" />
+
+                            <TextView
+                                android:id="@+id/tv_score"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/tv2"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginBottom="@dimen/y50"
+                                android:layout_marginTop="@dimen/y10"
+                                android:text="0"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/x40"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_fans"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/tv3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/y50"
+                                android:text="TA的粉丝"
+                                android:textColor="@color/colorGray"
+                                android:textSize="@dimen/x30" />
+
+                            <TextView
+                                android:id="@+id/tv_fans"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/tv3"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginBottom="@dimen/y50"
+                                android:layout_marginTop="@dimen/y10"
+                                android:text="0"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/x40"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x50"
+                android:layout_marginRight="@dimen/x50"
+                android:layout_marginTop="-30dp"
+                android:background="@drawable/bg_white_corner"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y150"
+                    android:layout_marginTop="@dimen/y30"
+                    android:background="@color/white">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x50"
+                        android:text="累计总评分"
+                        android:textSize="@dimen/x40" />
+
+                    <com.example.jason_jukes.laihuo.view.RatingBar
+                        android:id="@+id/ratingBar_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="@dimen/x50"
+                        android:isIndicator="false"
+                        app:clickable="false"
+                        app:starCount="5"
+                        app:starEmpty="@mipmap/rating_small_empty"
+                        app:starFill="@mipmap/rating_small_full"
+                        app:starHalf="@mipmap/rating_small_half"
+                        app:starImageSize="@dimen/x60"
+                        app:starPadding="@dimen/x20"
+                        app:starStep="1"
+                        app:stepSize="Full" />
+
+                    <TextView
+                        android:id="@+id/tv_score_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/x50"
+                        android:text="0 分"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/x40" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y150"
+                    android:layout_marginTop="@dimen/y5"
+                    android:background="@color/white">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x50"
+                        android:text="累计及时到场"
+                        android:textSize="@dimen/x40" />
+
+                    <com.example.jason_jukes.laihuo.view.RatingBar
+                        android:id="@+id/ratingBar_jishi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:isIndicator="false"
+                        app:clickable="false"
+                        app:starCount="5"
+
+                        app:starEmpty="@mipmap/rating_small_empty"
+                        app:starFill="@mipmap/rating_small_full"
+                        app:starHalf="@mipmap/rating_small_half"
+                        app:starImageSize="@dimen/x60"
+                        app:starPadding="@dimen/x20"
+                        app:starStep="1"
+                        app:stepSize="Full" />
+
+                    <TextView
+                        android:id="@+id/tv_score_jishi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/x50"
+                        android:text="0 分"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/x40" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y150"
+                    android:layout_marginTop="@dimen/y5"
+                    android:background="@color/white">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x50"
+                        android:text="累计服务质量"
+                        android:textSize="@dimen/x40" />
+
+                    <com.example.jason_jukes.laihuo.view.RatingBar
+                        android:id="@+id/ratingBar_zhiliang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:isIndicator="false"
+                        app:clickable="false"
+                        app:starCount="5"
+
+                        app:starEmpty="@mipmap/rating_small_empty"
+                        app:starFill="@mipmap/rating_small_full"
+                        app:starHalf="@mipmap/rating_small_half"
+                        app:starImageSize="@dimen/x60"
+                        app:starPadding="@dimen/x20"
+                        app:starStep="1"
+                        app:stepSize="Full" />
+
+                    <TextView
+                        android:id="@+id/tv_score_zhiliang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/x50"
+                        android:text="0 分"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/x40" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y150"
+                    android:layout_marginBottom="@dimen/y30"
+                    android:layout_marginTop="@dimen/y5"
+                    android:background="@color/white">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x50"
+                        android:text="累计服务态度"
+                        android:textSize="@dimen/x40" />
+
+                    <com.example.jason_jukes.laihuo.view.RatingBar
+                        android:id="@+id/ratingBar_attitude"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:isIndicator="false"
+                        app:clickable="false"
+                        app:starCount="5"
+
+                        app:starEmpty="@mipmap/rating_small_empty"
+                        app:starFill="@mipmap/rating_small_full"
+                        app:starHalf="@mipmap/rating_small_half"
+                        app:starImageSize="@dimen/x60"
+                        app:starPadding="@dimen/x20"
+                        app:starStep="1"
+                        app:stepSize="Full" />
+
+                    <TextView
+                        android:id="@+id/tv_score_attitude"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/x50"
+                        android:text="0 分"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/x40" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x50"
+                android:layout_marginRight="@dimen/x50"
+                android:layout_marginTop="@dimen/y50"
+                android:background="@drawable/bg_white_corner"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y30"
+                    android:text="TA的全部评价记录"
+                    android:textColor="@color/colorGray"
+                    android:textSize="@dimen/x30" />
+
+                <LinearLayout
+                    android:id="@+id/ll_pingjia_null"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y100"
+                    android:layout_marginTop="@dimen/y100"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/y100"
+                        android:background="@mipmap/img_null" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="里面什么也没有"
+                        android:textColor="@color/colorGray"
+                        android:textSize="@dimen/x35"
+
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x50"
+                android:layout_marginRight="@dimen/x50"
+                android:layout_marginTop="@dimen/y50"
+                android:background="@drawable/bg_white_corner"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y30"
+                    android:text="TA的资质"
+                    android:textColor="@color/colorGray"
+                    android:textSize="@dimen/x30" />
+
+                <LinearLayout
+                    android:id="@+id/ll_zizhi_null"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y100"
+                    android:layout_marginTop="@dimen/y100"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/y100"
+                        android:background="@mipmap/img_null" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="里面什么也没有"
+                        android:textColor="@color/colorGray"
+                        android:textSize="@dimen/x35"
+
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_jubao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y30"
+                android:layout_marginLeft="@dimen/x50"
+                android:layout_marginRight="@dimen/x50"
+                android:layout_marginTop="@dimen/y50"
+                android:background="@drawable/bg_light_grey_corner"
+                android:gravity="center"
+                android:paddingBottom="@dimen/y40"
+                android:paddingTop="@dimen/y40"
+                android:text="举报TA"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/x40" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</RelativeLayout>
