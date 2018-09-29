@@ -6,6 +6,6 @@
 
     <include layout="@layout/status_bar"/>
 
-    <include layout="@layout/window_bind_bank_card"/>
+    <include layout="@layout/window_bind_bank_card" />
 
 </LinearLayout>

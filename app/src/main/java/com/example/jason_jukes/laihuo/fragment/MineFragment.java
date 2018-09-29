@@ -27,6 +27,7 @@ import com.example.jason_jukes.laihuo.activity.mine.MineQualificationActivity;
 import com.example.jason_jukes.laihuo.activity.mine.MineScoreActivity;
 import com.example.jason_jukes.laihuo.activity.mine.MineWalletActivity;
 import com.example.jason_jukes.laihuo.activity.mine.PhoneCertificationActivity;
+import com.example.jason_jukes.laihuo.activity.mine.PhoneLoginActivity;
 import com.example.jason_jukes.laihuo.tool.PhotoHelper;
 import com.example.jason_jukes.laihuo.view.glide.GlideCircleTransform;
 import com.jph.takephoto.app.TakePhoto;
@@ -131,9 +132,11 @@ public class MineFragment extends BaseFragment implements InvokeListener, TakePh
                 startIntent(MineFocusListActivity.class);
                 break;
             case R.id.rl_qianbao:
-
+                startIntent(MineWalletActivity.class);
                 break;
             case R.id.rl_fans:
+                //测试登陆
+                startIntent(PhoneLoginActivity.class);
                 break;
             case R.id.rl_mine_post_work:
                 startIntent(MinePostWorkActivity.class);
