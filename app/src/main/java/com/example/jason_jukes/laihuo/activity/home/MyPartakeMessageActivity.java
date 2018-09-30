@@ -12,6 +12,7 @@ import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.fragment.MinePartWorkFragment;
 import com.example.jason_jukes.laihuo.fragment.MyPartakeMessageFragment;
+import com.example.jason_jukes.laihuo.tool.Contants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +54,8 @@ public class MyPartakeMessageActivity extends BaseActivity {
 
     private void initFragment() {
 
-        Fragment post = MyPartakeMessageFragment.createFragment("", "");
-        Fragment partake = MyPartakeMessageFragment.createFragment("", "");
+        Fragment post = MyPartakeMessageFragment.createFragment(Contants.MINE_POST_MESSAGE, "0");
+        Fragment partake = MyPartakeMessageFragment.createFragment(Contants.MINE_PARTAKE_MESSAGE, "1");
 
         mFragments = new ArrayList<>();
         mFragments.add(post);

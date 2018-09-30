@@ -3,15 +3,26 @@ package com.example.jason_jukes.laihuo.activity.mine;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.bean.MessageBean;
+import com.example.jason_jukes.laihuo.tool.Contants;
 import com.example.jason_jukes.laihuo.tool.LimitTextWatcher;
+import com.example.jason_jukes.laihuo.tool.SPTool;
 import com.example.jason_jukes.laihuo.tool.StringUtil;
+import com.example.jason_jukes.laihuo.tool.XUtil;
 import com.example.jason_jukes.laihuo.view.CommonDialog;
+import com.google.gson.Gson;
+
+import org.xutils.common.Callback;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -52,6 +63,10 @@ public class AddAddressActivity extends BaseActivity {
             tvStatusBarName.setText("修改地址");
             tvDel.setVisibility(View.VISIBLE);
             etName.setText(getIntent().getStringExtra("name"));
+            etPhone.setText(getIntent().getStringExtra("phone"));
+            tvServicePlace.setTextColor(getResources().getColor(R.color.colorBlack));
+            tvServicePlace.setText(getIntent().getStringExtra("place"));
+            etDetailAddress.setText(getIntent().getStringExtra("address"));
         }
 
         etName.addTextChangedListener(new LimitTextWatcher(getText(etName), etName));
@@ -82,17 +97,23 @@ public class AddAddressActivity extends BaseActivity {
                     return;
                 }
 
-                if (TextUtils.isEmpty(getText(tvServicePlace))) {
-                    showToast("请选择区域");
-                    return;
-                }
+//                if (TextUtils.isEmpty(getText(tvServicePlace))) {
+//                    showToast("请选择区域");
+//                    return;
+//                }
 
                 if (TextUtils.isEmpty(getText(etDetailAddress))) {
                     showToast("请输入详细地址");
                     return;
                 }
 
-                showToast("提交");
+                if (getIntent().getStringExtra("type").equals("add")) {
+                    addAddress();
+                } else {
+                    changeAddress();
+                }
+
+//                showToast("提交");
                 break;
             case R.id.tv_del:
 
@@ -116,6 +137,105 @@ public class AddAddressActivity extends BaseActivity {
 
                 break;
         }
+    }
+
+    private void addAddress() {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", "gggg");
+        map.put("address", getText(etDetailAddress));
+        map.put("tel", getText(etPhone));
+        map.put("username", getText(etName));
+        map.put("area_id", "237");
+        map.put("city_id", "236");
+
+        XUtil.Post(Contants.ADD_ADDRESS, map, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                MessageBean bean = new Gson().fromJson(result, MessageBean.class);
+                if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
+
+                    showToast("添加成功");
+                    finish();
+
+                } else {
+                    showToast(bean.getErrorMsg());
+                }
+
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                Log.e("fail", ex.getMessage());
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+    }
+
+    private void changeAddress() {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", "gggg");
+        map.put("address", getText(etDetailAddress));
+        map.put("tel", getText(etPhone));
+        map.put("username", getText(etName));
+        map.put("area_id", "237");
+        map.put("city_id", "236");
+        map.put("id", getIntent().getStringExtra("id"));
+
+        XUtil.Post(Contants.CHANGE_ADDRESS, map, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                MessageBean bean = new Gson().fromJson(result, MessageBean.class);
+                if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
+
+                    showToast("修改成功");
+                    finish();
+
+                } else {
+                    showToast(bean.getErrorMsg());
+                }
+
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                Log.e("fail", ex.getMessage());
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
     }
 
 

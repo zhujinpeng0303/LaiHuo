@@ -48,6 +48,8 @@ public class MainActivity extends BaseActivity {
     RelativeLayout rlMineInvist;
     @InjectView(R.id.ll_popUp_box)
     LinearLayout llPopUpBox;
+    @InjectView(R.id.iv_yellow)
+    ImageView ivYellow;
     private HomeFragment homeFragment;
     private MineFragment mineFragment;
     Fragment[] mFragments;
@@ -157,6 +159,12 @@ public class MainActivity extends BaseActivity {
         alphaAnimation.setDuration(500);
         alphaAnimation.setFillAfter(true);
         llPopUpBox.startAnimation(alphaAnimation);
+
+        Animation alphaAnimation1 = new AlphaAnimation(1, 0);
+        alphaAnimation1.setDuration(500);
+        alphaAnimation1.setFillAfter(true);
+        ivYellow.startAnimation(alphaAnimation1);
+
         Animation tra1 = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
                 Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
                 -0.5f, Animation.RELATIVE_TO_SELF, 0.0f);
@@ -219,6 +227,12 @@ public class MainActivity extends BaseActivity {
         alphaAnimation.setDuration(500);
         alphaAnimation.setFillAfter(true);
         llPopUpBox.startAnimation(alphaAnimation);
+
+        Animation alphaAnimation1 = new AlphaAnimation(0, 1);
+        alphaAnimation1.setDuration(500);
+        alphaAnimation1.setFillAfter(true);
+
+        ivYellow.startAnimation(alphaAnimation1);
 
         Animation tra1 = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
                 Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,

@@ -8,7 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.bean.MessageDetailBean;
+import com.example.jason_jukes.laihuo.view.glide.GlideCircleTransform;
 
 import java.util.List;
 
@@ -19,9 +22,9 @@ import java.util.List;
 public class MessageCommentLVAdapter extends BaseAdapter {
 
     private Context context;
-    private List<String> been;
+    private List<MessageDetailBean.DataObjBean.SreplyListBean> been;
 
-    public MessageCommentLVAdapter(Context context, List<String> been) {
+    public MessageCommentLVAdapter(Context context, List<MessageDetailBean.DataObjBean.SreplyListBean> been) {
         this.context = context;
         this.been = been;
     }
@@ -52,7 +55,11 @@ public class MessageCommentLVAdapter extends BaseAdapter {
             viewHolder = (MessageCommentLVAdapter.MyViewHolder) view.getTag();
         }
 
-        viewHolder.content.setText(been.get(i));
+        viewHolder.content.setText(been.get(i).getContents());
+        viewHolder.name.setText(been.get(i).getUsername());
+        viewHolder.date.setText(been.get(i).getCreate_time());
+        Glide.with(context).load(been.get(i).getHead_url()).transform(new GlideCircleTransform(context)).into(viewHolder.avatar);
+
 
         return view;
     }
@@ -68,6 +75,7 @@ public class MessageCommentLVAdapter extends BaseAdapter {
         public MyViewHolder(View view) {
 
             date = (TextView) view.findViewById(R.id.tv_date);
+            name = (TextView) view.findViewById(R.id.tv_name);
             content = (TextView) view.findViewById(R.id.tv_content);
             avatar = (ImageView) view.findViewById(R.id.iv_avatar);
 

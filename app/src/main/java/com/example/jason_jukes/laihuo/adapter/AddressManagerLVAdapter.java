@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.bean.AddressBean;
 
 import java.util.List;
 
@@ -22,9 +23,9 @@ import java.util.List;
 public class AddressManagerLVAdapter extends BaseAdapter {
 
     private Context context;
-    private List<String> been;
+    private List<AddressBean.DataArrBean> been;
 
-    public AddressManagerLVAdapter(Context context, List<String> been) {
+    public AddressManagerLVAdapter(Context context, List<AddressBean.DataArrBean> been) {
         this.context = context;
         this.been = been;
     }
@@ -55,7 +56,9 @@ public class AddressManagerLVAdapter extends BaseAdapter {
             viewHolder = (AddressManagerLVAdapter.MyViewHolder) view.getTag();
         }
 
-        viewHolder.name.setText(been.get(i));
+        viewHolder.name.setText(been.get(i).getUsername());
+        viewHolder.phone.setText(been.get(i).getTel());
+        viewHolder.address.setText(been.get(i).getArea_name_top() + "-" + been.get(i).getArea_name() + "-" + been.get(i).getAddress());
 
         return view;
     }

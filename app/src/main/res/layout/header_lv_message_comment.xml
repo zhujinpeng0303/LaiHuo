@@ -77,7 +77,7 @@
 
         <LinearLayout
             android:id="@+id/ll_img"
-            android:layout_width="@dimen/x100"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/y80"
             android:layout_below="@id/iv_img_list"
             android:layout_marginBottom="@dimen/y50"
@@ -111,7 +111,7 @@
             android:layout_alignBottom="@id/ll_img"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/x50"
-            android:background="@mipmap/img_home" />
+            android:background="@mipmap/img_comment" />
 
         <TextView
             android:id="@+id/tv_comment_count"

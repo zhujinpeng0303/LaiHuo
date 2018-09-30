@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,18 @@ import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.activity.home.MessageDetailActivity;
 import com.example.jason_jukes.laihuo.activity.home.MessageMarketActivity;
 import com.example.jason_jukes.laihuo.adapter.MessageMarketLVAdapter;
+import com.example.jason_jukes.laihuo.bean.MessageMarketBean;
+import com.example.jason_jukes.laihuo.tool.Contants;
+import com.example.jason_jukes.laihuo.tool.IsNetWork;
+import com.example.jason_jukes.laihuo.tool.XUtil;
+import com.google.gson.Gson;
+
+import org.xutils.common.Callback;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -34,10 +44,11 @@ public class MyPartakeMessageFragment extends BaseFragment {
     @InjectView(R.id.lv)
     ListView lv;
     private MessageMarketLVAdapter adapter;
-    private List<String> been;
-    private List<String> imgList;
+    private List<MessageMarketBean.DataObjBean.RtListBean> been;
 
     private View view;
+
+    private String url = "";
 
     public static Fragment createFragment(String url, String sign) {
         Fragment fragment = new MyPartakeMessageFragment();
@@ -70,32 +81,78 @@ public class MyPartakeMessageFragment extends BaseFragment {
 
     private void initData() {
 
+        Bundle bundle = getArguments();
+        url = bundle.getString("url");
+
         been = new ArrayList<>();
-        been.add("http://f.hiphotos.baidu.com/image/pic/item/eaf81a4c510fd9f90a220479282dd42a2834a4ed.jpg");
-        been.add("http://e.hiphotos.baidu.com/image/pic/item/b03533fa828ba61e8480853f4c34970a304e59b7.jpg");
-        been.add("http://e.hiphotos.baidu.com/image/pic/item/94cad1c8a786c91723e93522c43d70cf3ac757c6.jpg");
-        been.add("http://f.hiphotos.baidu.com/image/pic/item/eaf81a4c510fd9f90a220479282dd42a2834a4ed.jpg");
-        been.add("http://a.hiphotos.baidu.com/image/pic/item/574e9258d109b3dee4caf07ac1bf6c81800a4cae.jpg");
         adapter = new MessageMarketLVAdapter(context, been);
         lv.setAdapter(adapter);
         lv.setDividerHeight(0);
         lv.setVerticalScrollBarEnabled(false);
 
-        View footerView = LayoutInflater.from(context).inflate(R.layout.footer_message_market_lv, null);
-        lv.addFooterView(footerView);
-
-        imgList = new ArrayList<>();
-        imgList.add("http://f.hiphotos.baidu.com/image/pic/item/eaf81a4c510fd9f90a220479282dd42a2834a4ed.jpg");
-        imgList.add("http://e.hiphotos.baidu.com/image/pic/item/b03533fa828ba61e8480853f4c34970a304e59b7.jpg");
-        imgList.add("http://e.hiphotos.baidu.com/image/pic/item/94cad1c8a786c91723e93522c43d70cf3ac757c6.jpg");
-        imgList.add("http://f.hiphotos.baidu.com/image/pic/item/eaf81a4c510fd9f90a220479282dd42a2834a4ed.jpg");
-        imgList.add("http://a.hiphotos.baidu.com/image/pic/item/574e9258d109b3dee4caf07ac1bf6c81800a4cae.jpg");
+//        View footerView = LayoutInflater.from(context).inflate(R.layout.footer_message_market_lv, null);
+//        lv.addFooterView(footerView);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 startActivity(new Intent(context, MessageDetailActivity.class)
-                        .putStringArrayListExtra("list", (ArrayList<String>) been));
+                        .putExtra("id", been.get(i).getId()));
+            }
+        });
+
+        if (IsNetWork.isNetWork(context)) {
+            showPro();
+            getData();
+        } else {
+            showToast("请检查网络设置");
+        }
+
+    }
+
+    private void getData() {
+        Map<String, Object> map = new HashMap<>();
+//        map.put("user_id", SPTool.getInstance().getShareDataStr(Contants.USER_ID));
+        map.put("token", "gggg");
+        XUtil.Post(url, map, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                MessageMarketBean bean = new Gson().fromJson(result, MessageMarketBean.class);
+                if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
+
+                    for (int i = 0; i < bean.getDataObj().getRtList().size(); i++) {
+
+                        been.add(bean.getDataObj().getRtList().get(i));
+
+                    }
+
+                    adapter.notifyDataSetChanged();
+
+                } else {
+                    showToast(bean.getErrorMsg());
+                }
+
+                hidePro();
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                Log.e("fail", ex.getMessage());
+                hidePro();
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
             }
         });
 
