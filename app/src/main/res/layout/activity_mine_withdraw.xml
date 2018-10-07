@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ref"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroud"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <include
+            android:id="@+id/bar"
+            layout="@layout/status_bar" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/iv_null"
+                android:layout_width="@dimen/x300"
+                android:layout_height="@dimen/x300"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y900"
+                android:background="@mipmap/img_null" />
+
+            <TextView
+                android:id="@+id/tv_null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/y30"
+                android:text="里面什么也没有"
+                android:textColor="@color/colorGray"
+                android:textSize="@dimen/x35" />
+
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/bar"
+            android:scrollbars="none">
+
+        </ListView>
+
+    </RelativeLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>

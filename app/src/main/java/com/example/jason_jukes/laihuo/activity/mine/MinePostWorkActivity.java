@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
-import com.example.jason_jukes.laihuo.fragment.HomeFragment;
-import com.example.jason_jukes.laihuo.fragment.MineFragment;
 import com.example.jason_jukes.laihuo.fragment.MinePostWorkFragment;
 
 import java.util.ArrayList;
@@ -39,6 +37,10 @@ public class MinePostWorkActivity extends BaseActivity {
     TextView tvDaiJinxing;
     @InjectView(R.id.tv_dai_wancheng)
     TextView tvDaiWancheng;
+    @InjectView(R.id.tv_dai_pingjia)
+    TextView tvDaiPingjia;
+    @InjectView(R.id.tv_finished)
+    TextView tvFinished;
 
     private List<Fragment> mFragments;
     private FragmentManager mFragmentManager;
@@ -55,15 +57,19 @@ public class MinePostWorkActivity extends BaseActivity {
 
     private void initFragment() {
 
-        Fragment all = MinePostWorkFragment.createFragment("", "第一个");
-        Fragment zhifu = MinePostWorkFragment.createFragment("", "第二个");
-        Fragment jinxing = MinePostWorkFragment.createFragment("", "第三个");
-        Fragment wancheng = MinePostWorkFragment.createFragment("", "第四个");
+        Fragment all = MinePostWorkFragment.createFragment("", "");
+        Fragment zhifu = MinePostWorkFragment.createFragment("", "0,2");
+        Fragment jinxing = MinePostWorkFragment.createFragment("", "1");
+        Fragment wancheng = MinePostWorkFragment.createFragment("", "6,7,3,10,11");
+        Fragment pingjia = MinePostWorkFragment.createFragment("", "4");
+        Fragment finish = MinePostWorkFragment.createFragment("", "5,12");
         mFragments = new ArrayList<>();
         mFragments.add(all);
         mFragments.add(zhifu);
         mFragments.add(jinxing);
         mFragments.add(wancheng);
+        mFragments.add(pingjia);
+        mFragments.add(finish);
         mFragmentManager = getSupportFragmentManager();
 
         showFragment(0);
@@ -74,7 +80,7 @@ public class MinePostWorkActivity extends BaseActivity {
         tvStatusBarName.setText("我发布的活");
     }
 
-    @OnClick({R.id.rl_back, R.id.tv_all, R.id.tv_dai_zhifu, R.id.tv_dai_jinxing, R.id.tv_dai_wancheng})
+    @OnClick({R.id.rl_back, R.id.tv_all, R.id.tv_dai_zhifu, R.id.tv_dai_jinxing, R.id.tv_dai_wancheng, R.id.tv_dai_pingjia, R.id.tv_finished})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_back:
@@ -82,13 +88,17 @@ public class MinePostWorkActivity extends BaseActivity {
                 break;
             case R.id.tv_all:
                 tvAll.setTextColor(getResources().getColor(R.color.white));
-                tvAll.setBackground(getDrawable(R.drawable.bg_dark_grey_big_corner));
+                tvAll.setBackground(getResources().getDrawable(R.drawable.bg_dark_grey_big_corner));
                 tvDaiZhifu.setTextColor(getResources().getColor(R.color.colorBlack));
                 tvDaiZhifu.setBackground(null);
                 tvDaiJinxing.setTextColor(getResources().getColor(R.color.colorBlack));
                 tvDaiJinxing.setBackground(null);
                 tvDaiWancheng.setTextColor(getResources().getColor(R.color.colorBlack));
                 tvDaiWancheng.setBackground(null);
+                tvDaiPingjia.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvDaiPingjia.setBackground(null);
+                tvFinished.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvFinished.setBackground(null);
 
                 showFragment(0);
 
@@ -97,12 +107,15 @@ public class MinePostWorkActivity extends BaseActivity {
                 tvAll.setTextColor(getResources().getColor(R.color.colorBlack));
                 tvAll.setBackground(null);
                 tvDaiZhifu.setTextColor(getResources().getColor(R.color.white));
-                tvDaiZhifu.setBackground(getDrawable(R.drawable.bg_dark_grey_big_corner));
+                tvDaiZhifu.setBackground(getResources().getDrawable(R.drawable.bg_dark_grey_big_corner));
                 tvDaiJinxing.setTextColor(getResources().getColor(R.color.colorBlack));
                 tvDaiJinxing.setBackground(null);
                 tvDaiWancheng.setTextColor(getResources().getColor(R.color.colorBlack));
                 tvDaiWancheng.setBackground(null);
-
+                tvDaiPingjia.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvDaiPingjia.setBackground(null);
+                tvFinished.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvFinished.setBackground(null);
                 showFragment(1);
 
                 break;
@@ -113,10 +126,13 @@ public class MinePostWorkActivity extends BaseActivity {
                 tvDaiZhifu.setTextColor(getResources().getColor(R.color.colorBlack));
                 tvDaiZhifu.setBackground(null);
                 tvDaiJinxing.setTextColor(getResources().getColor(R.color.white));
-                tvDaiJinxing.setBackground(getDrawable(R.drawable.bg_dark_grey_big_corner));
+                tvDaiJinxing.setBackground(getResources().getDrawable(R.drawable.bg_dark_grey_big_corner));
                 tvDaiWancheng.setTextColor(getResources().getColor(R.color.colorBlack));
                 tvDaiWancheng.setBackground(null);
-
+                tvDaiPingjia.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvDaiPingjia.setBackground(null);
+                tvFinished.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvFinished.setBackground(null);
                 showFragment(2);
 
                 break;
@@ -129,11 +145,49 @@ public class MinePostWorkActivity extends BaseActivity {
                 tvDaiJinxing.setTextColor(getResources().getColor(R.color.colorBlack));
                 tvDaiJinxing.setBackground(null);
                 tvDaiWancheng.setTextColor(getResources().getColor(R.color.white));
-                tvDaiWancheng.setBackground(getDrawable(R.drawable.bg_dark_grey_big_corner));
-
+                tvDaiWancheng.setBackground(getResources().getDrawable(R.drawable.bg_dark_grey_big_corner));
+                tvDaiPingjia.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvDaiPingjia.setBackground(null);
+                tvFinished.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvFinished.setBackground(null);
                 showFragment(3);
 
                 break;
+
+            case R.id.tv_dai_pingjia:
+
+                tvAll.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvAll.setBackground(null);
+                tvDaiZhifu.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvDaiZhifu.setBackground(null);
+                tvDaiJinxing.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvDaiJinxing.setBackground(null);
+                tvDaiWancheng.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvDaiWancheng.setBackground(null);
+                tvDaiPingjia.setTextColor(getResources().getColor(R.color.white));
+                tvDaiPingjia.setBackground(getResources().getDrawable(R.drawable.bg_dark_grey_big_corner));
+                tvFinished.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvFinished.setBackground(null);
+                showFragment(4);
+
+                break;
+            case R.id.tv_finished:
+                tvAll.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvAll.setBackground(null);
+                tvDaiZhifu.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvDaiZhifu.setBackground(null);
+                tvDaiJinxing.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvDaiJinxing.setBackground(null);
+                tvDaiWancheng.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvDaiWancheng.setBackground(null);
+                tvDaiPingjia.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvDaiPingjia.setBackground(null);
+                tvFinished.setTextColor(getResources().getColor(R.color.white));
+                tvFinished.setBackground(getResources().getDrawable(R.drawable.bg_dark_grey_big_corner));
+                showFragment(5);
+
+                break;
+
         }
     }
 
@@ -178,6 +232,22 @@ public class MinePostWorkActivity extends BaseActivity {
                     mFragmentTransaction.show(mFragments.get(3));
                 }
                 break;
+            case 4:
+                if (!mFragments.get(4).isAdded()) {
+                    mFragmentTransaction.add(R.id.frame, mFragments.get(4));
+                    mFragmentTransaction.show(mFragments.get(4));
+                } else {
+                    mFragmentTransaction.show(mFragments.get(4));
+                }
+                break;
+            case 5:
+                if (!mFragments.get(5).isAdded()) {
+                    mFragmentTransaction.add(R.id.frame, mFragments.get(5));
+                    mFragmentTransaction.show(mFragments.get(5));
+                } else {
+                    mFragmentTransaction.show(mFragments.get(5));
+                }
+                break;
 
         }
         mFragmentTransaction.commit();
@@ -197,7 +267,14 @@ public class MinePostWorkActivity extends BaseActivity {
         if (mFragments.get(3) != null) {
             ft.hide(mFragments.get(3));
         }
+        if (mFragments.get(4) != null) {
+            ft.hide(mFragments.get(4));
+        }
+        if (mFragments.get(5) != null) {
+            ft.hide(mFragments.get(5));
+        }
 
     }
+
 
 }

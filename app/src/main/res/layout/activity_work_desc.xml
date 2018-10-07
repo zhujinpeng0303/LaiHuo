@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <include layout="@layout/header_find_post_exp"/>
+            <include layout="@layout/header_find_post_exp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -78,7 +78,8 @@
                             android:layout_alignBottom="@id/ll_yuyin"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="@dimen/x50"
-                            android:background="@mipmap/img_home" />
+                            android:background="@mipmap/img_home"
+                            android:visibility="gone" />
 
                         <ImageView
                             android:id="@+id/iv_play"
@@ -86,7 +87,8 @@
                             android:layout_height="@dimen/x120"
                             android:layout_marginRight="@dimen/x50"
                             android:layout_toLeftOf="@id/iv_del"
-                            android:background="@mipmap/img_home" />
+                            android:background="@mipmap/img_home"
+                            android:visibility="gone" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -95,7 +97,8 @@
                         android:layout_height="@dimen/x120"
                         android:layout_marginLeft="@dimen/x50"
                         android:layout_marginRight="@dimen/x50"
-                        android:background="@drawable/bg_grey_stroke_big_corner">
+                        android:background="@drawable/bg_grey_stroke_big_corner"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -213,8 +216,7 @@
                     android:layout_height="@dimen/x80"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/x50"
-                    android:background="@mipmap/ic_launcher_round" />
+                    android:layout_marginRight="@dimen/x50" />
 
                 <EditText
                     android:id="@+id/et_jiage"
@@ -234,6 +236,7 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:layout_marginTop="@dimen/y2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -286,7 +289,6 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/x50"
                     android:gravity="center_vertical"
-                    android:text="2018-09-29 12:45"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/x35" />
 

@@ -3,6 +3,11 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     buildToolsVersion "27.0.0"
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
     defaultConfig {
         applicationId "com.example.jason_jukes.laihuo"
         minSdkVersion 15
@@ -34,10 +39,10 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.jph.takephoto:takephoto_library:4.0.3'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'jp.wasabeef:glide-transformations:1.2.1'
+    //    compile 'com.github.bumptech.glide:glide:3.7.0'
+    //    compile 'jp.wasabeef:glide-transformations:1.2.1'
     //Glide转换器支持库
-    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.3.0'
+    //    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.3.0'
     //GPU加速渲染库
     compile 'com.xhb:xbanner:1.2.2'
     compile 'org.xutils:xutils:3.3.42'
@@ -45,4 +50,8 @@ dependencies {
     //    compile 'com.jakewharton:butterknife:8.5.1'
     compile 'com.jakewharton:butterknife:5.1.1'
     compile 'com.bm.photoview:library:1.4.1'
+    compile 'com.contrarywind:Android-PickerView:4.1.6'
+    compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
+    compile files('libs/BaiduLBS_Android.jar')
+    compile 'com.github.AndroidMsky:RandomTextView:v1.4'
 }

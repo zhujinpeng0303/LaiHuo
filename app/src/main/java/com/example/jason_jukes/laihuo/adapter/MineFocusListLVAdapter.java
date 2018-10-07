@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.jason_jukes.laihuo.R;
-import com.example.jason_jukes.laihuo.view.nineImage.NineGridlayout;
+import com.example.jason_jukes.laihuo.bean.FocusBean;
+import com.example.jason_jukes.laihuo.view.glide.GlideCircleTransform;
 
 import java.util.List;
 
@@ -21,9 +23,9 @@ import java.util.List;
 public class MineFocusListLVAdapter extends BaseAdapter {
 
     private Context context;
-    private List<String> been;
+    private List<FocusBean.DataObjBean.RtListBean> been;
 
-    public MineFocusListLVAdapter(Context context, List<String> been) {
+    public MineFocusListLVAdapter(Context context, List<FocusBean.DataObjBean.RtListBean> been) {
         this.context = context;
         this.been = been;
     }
@@ -54,7 +56,9 @@ public class MineFocusListLVAdapter extends BaseAdapter {
             viewHolder = (MineFocusListLVAdapter.MyViewHolder) view.getTag();
         }
 
-        viewHolder.name.setText(been.get(i));
+        Glide.with(context).load(been.get(i).getHead_url()).apply(RequestOptions.bitmapTransform(new GlideCircleTransform(context))).into(viewHolder.avatar);
+        viewHolder.name.setText(been.get(i).getUsername());
+        viewHolder.count.setText(been.get(i).getRanking_last());
 
         return view;
     }

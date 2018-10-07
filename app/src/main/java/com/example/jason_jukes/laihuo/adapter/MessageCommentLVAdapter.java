@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.bean.MessageDetailBean;
 import com.example.jason_jukes.laihuo.view.glide.GlideCircleTransform;
@@ -58,7 +59,7 @@ public class MessageCommentLVAdapter extends BaseAdapter {
         viewHolder.content.setText(been.get(i).getContents());
         viewHolder.name.setText(been.get(i).getUsername());
         viewHolder.date.setText(been.get(i).getCreate_time());
-        Glide.with(context).load(been.get(i).getHead_url()).transform(new GlideCircleTransform(context)).into(viewHolder.avatar);
+        Glide.with(context).load(been.get(i).getHead_url()).apply(RequestOptions.bitmapTransform(new GlideCircleTransform(context))).into(viewHolder.avatar);
 
 
         return view;

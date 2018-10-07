@@ -11,6 +11,7 @@ import org.xutils.http.app.ResponseParser;
 import org.xutils.http.request.UriRequest;
 import org.xutils.x;
 
+import java.io.File;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.security.KeyStore;
@@ -85,7 +86,11 @@ public class XUtil {
                 params.addParameter(entry.getKey(), entry.getValue());
             }
         }
-        params.setMultipart(true);
+
+        params.setMultipart(true);//设置表单传送
+        // 	params.setCancelFast(true);//设置可以立即被停止
+//         	params.addBodyParameter("Filedata", new File(filePath),"multipart/form-data");
+
         Callback.Cancelable cancelable = x.http().get(params, callback);
         return cancelable;
     }

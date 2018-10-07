@@ -14,9 +14,20 @@ import android.widget.TextView;
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.adapter.FeedbackLVAdapter;
+import com.example.jason_jukes.laihuo.bean.AddressBean;
+import com.example.jason_jukes.laihuo.bean.MessageBean;
+import com.example.jason_jukes.laihuo.bean.TousuBean;
+import com.example.jason_jukes.laihuo.tool.Contants;
+import com.example.jason_jukes.laihuo.tool.IsNetWork;
+import com.example.jason_jukes.laihuo.tool.XUtil;
+import com.google.gson.Gson;
+
+import org.xutils.common.Callback;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -41,10 +52,12 @@ public class FeedbackActivity extends BaseActivity {
     private EditText et_feedback_content, et_phone;
     private TextView submit;
 
-    private List<String> been;
+    private List<TousuBean.DataArrBean> been;
     private FeedbackLVAdapter adapter;
 
-    private String content = "";
+    private String content = "", causeValue = "";
+    private String type = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +74,12 @@ public class FeedbackActivity extends BaseActivity {
         //分type 加载不同的接口
         if (getIntent().getStringExtra("type").equals("yijian")) {
             tvStatusBarName.setText("平台建议");
-        } else {
+        } else if (getIntent().getStringExtra("type").equals("tousu")) {
             tvStatusBarName.setText("平台投诉");
+        } else if (getIntent().getStringExtra("type").equals("user")) {
+            tvStatusBarName.setText("举报用户");
+        }else if (getIntent().getStringExtra("type").equals("work")) {
+            tvStatusBarName.setText("举报工单");
         }
 
         headerView = LayoutInflater.from(context).inflate(R.layout.header_feedback_lv, null);
@@ -74,7 +91,7 @@ public class FeedbackActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
 
-                if (TextUtils.isEmpty(content)){
+                if (TextUtils.isEmpty(content)) {
                     showToast("请选择投诉原因");
                     return;
                 }
@@ -84,14 +101,29 @@ public class FeedbackActivity extends BaseActivity {
                     return;
                 }
 
-                if (getIntent().getStringExtra("type").equals("jianyi")) {
-                    showToast("提交建议");
-                    showToast(content);
-                } else {
-                    showToast("提交投诉");
-                    showToast(content);
+                if (getIntent().getStringExtra("type").equals("yijian")) {
+                    type = "suggest_tipoff";
+                    feedBack(type);
+
+                } else if (getIntent().getStringExtra("type").equals("tousu")) {
+
+                    type = "complain_tipoff";
+                    feedBack(type);
+
+                } else if (getIntent().getStringExtra("type").equals("user")) {
+
+                    type = "user_info_tipoff";
+                    feedBack(type);
+
+                }else if (getIntent().getStringExtra("type").equals("work")) {
+
+                    type = "work_order_tipoff";
+                    feedBack(type);
 
                 }
+
+//                work_order_tipoff（订单详情页-举报工单）
+
 
             }
         });
@@ -100,9 +132,6 @@ public class FeedbackActivity extends BaseActivity {
         lv.addFooterView(footerView, null, false);
 
         been = new ArrayList<>();
-        been.add("异常处理");
-        been.add("完善");
-        been.add("卡健身房里看见放假");
 
         adapter = new FeedbackLVAdapter(this, been);
         lv.setAdapter(adapter);
@@ -119,7 +148,8 @@ public class FeedbackActivity extends BaseActivity {
                 //刷新数据，调用getView刷新ListView
                 adapter.notifyDataSetChanged();
 
-                content = been.get(i - 1);
+                content = been.get(i - 1).getName();
+                causeValue = been.get(i - 1).getValue();
 
             }
         });
@@ -127,6 +157,132 @@ public class FeedbackActivity extends BaseActivity {
     }
 
     private void initData() {
+
+        if (IsNetWork.isNetWork(this)) {
+            showProgressDialog();
+            if (getIntent().getStringExtra("type").equals("yijian")) {
+                type = "suggest_tipoff";
+                getData(type);
+
+            } else if (getIntent().getStringExtra("type").equals("tousu")) {
+
+                type = "complain_tipoff";
+                getData(type);
+
+            } else if (getIntent().getStringExtra("type").equals("user")) {
+
+                type = "user_info_tipoff";
+                getData(type);
+
+            }else if (getIntent().getStringExtra("type").equals("work")) {
+
+                type = "work_order_tipoff";
+                getData(type);
+
+            }
+
+//                work_order_tipoff（订单详情页-举报工单）user_info_tipoff（查看他人信息-举报用户）
+
+        } else {
+
+            showToast("请检查网络设置");
+
+        }
+
+    }
+
+    private void getData(String type) {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", "gggg");
+        map.put("type", type);
+
+        XUtil.Post(Contants.TOUSU_CAUSE_LIST, map, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                TousuBean bean = new Gson().fromJson(result, TousuBean.class);
+                if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
+
+                    for (int i = 0; i < bean.getDataArr().size(); i++) {
+
+                        been.add(bean.getDataArr().get(i));
+
+                    }
+
+                    adapter.notifyDataSetChanged();
+
+                } else {
+                    showToast(bean.getErrorMsg());
+                }
+
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                Log.e("fail", ex.getMessage());
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+    }
+
+    private void feedBack(String type) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", "gggg");
+        map.put("user_tel", getText(et_phone));
+        map.put("tipoff_type", type);
+        map.put("tipoff_scope", causeValue);
+        map.put("tipoff_text", getText(et_feedback_content));
+
+        XUtil.Post(Contants.SEND_TOUSU, map, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                MessageBean bean = new Gson().fromJson(result, MessageBean.class);
+                if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
+                    showToast(bean.getErrorMsg());
+                    finish();
+                } else {
+                    showToast(bean.getErrorMsg());
+                }
+
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                Log.e("fail", ex.getMessage());
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
 
 
     }

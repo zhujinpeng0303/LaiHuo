@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/ref"
     android:orientation="vertical">
 
-    <include layout="@layout/status_bar" />
-
-    <ListView
-        android:id="@+id/lv"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none">
+        android:layout_height="match_parent">
 
-    </ListView>
 
-</LinearLayout>
+        <include
+            android:id="@+id/bar"
+            layout="@layout/status_bar" />
+
+        <include layout="@layout/include_null" />
+
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/bar"
+            android:scrollbars="none">
+
+        </ListView>
+    </RelativeLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>

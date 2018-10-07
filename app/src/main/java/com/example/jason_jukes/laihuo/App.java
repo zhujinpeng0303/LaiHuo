@@ -3,6 +3,10 @@ package com.example.jason_jukes.laihuo;
 import android.app.Activity;
 import android.app.Application;
 
+import com.baidu.mapapi.CoordType;
+import com.baidu.mapapi.SDKInitializer;
+import com.example.jason_jukes.laihuo.tool.SPTool;
+
 import org.xutils.x;
 
 import java.util.HashMap;
@@ -16,7 +20,7 @@ import java.util.Set;
  * Now, only God knows
  */
 
-public class App extends Application{
+public class App extends Application {
 
     private static Map<String, Activity> destoryMap = new HashMap<>();
 
@@ -26,7 +30,10 @@ public class App extends Application{
 
         //XUtils3 初始化
         x.Ext.init(this);
+        SPTool.getInstance().setApp(this);
 
+        SDKInitializer.initialize(this);
+        SDKInitializer.setCoordType(CoordType.BD09LL);
 
     }
 

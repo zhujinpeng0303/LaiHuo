@@ -20,7 +20,7 @@ import java.util.List;
  * Now, only God knows
  */
 
-public class AddressManagerLVAdapter extends BaseAdapter {
+public class    AddressManagerLVAdapter extends BaseAdapter {
 
     private Context context;
     private List<AddressBean.DataArrBean> been;

@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.bean.TousuBean;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.List;
 public class FeedbackLVAdapter extends BaseAdapter {
 
     private Activity context;
-    private List<String> been;
+    private List<TousuBean.DataArrBean> been;
     private int pos;
     private int temp = -1;//记录每次点击的按钮的Id
 
@@ -34,7 +35,7 @@ public class FeedbackLVAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public FeedbackLVAdapter(Activity context, List<String> been) {
+    public FeedbackLVAdapter(Activity context, List<TousuBean.DataArrBean> been) {
         this.context = context;
         this.been = been;
     }
@@ -66,30 +67,7 @@ public class FeedbackLVAdapter extends BaseAdapter {
             viewHolder = (FeedbackLVAdapter.MyViewHolder) view.getTag();
         }
 
-        viewHolder.content.setText(been.get(i));
-
-//        viewHolder.rb.setId(i);
-//        viewHolder.rb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//                if (b) {//如果是选中状态
-//                    if (temp != -1) {//temp不为-1，说明已经进行过点击事件
-//                        RadioButton tempButton = (RadioButton) context.findViewById(temp);
-//                        if (tempButton != null) {
-//                            tempButton.setChecked(false);//取到上一次点击的RadioButton，并设置为未选中状态
-//                        }
-//                    }
-//                    temp = compoundButton.getId();//将temp重新赋值，记录下本次点击的RadioButton
-//                }
-//            }
-//        });
-
-//        if (i == pos) {
-//            viewHolder.rb.setChecked(true);
-//        } else {
-//            viewHolder.rb.setChecked(false);
-//        }
-
+        viewHolder.content.setText(been.get(i).getName());
         boolean res = false;
         if (getStates(i) == null || getStates(i) == false)//判断当前位置的radiobutton点击状态
         {

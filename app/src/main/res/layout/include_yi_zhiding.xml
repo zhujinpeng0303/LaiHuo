@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_yi_zhiding"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackgroud"
@@ -48,8 +49,7 @@
                 android:id="@+id/iv_zhiding_avatar"
                 android:layout_width="@dimen/x180"
                 android:layout_height="@dimen/x180"
-                android:layout_centerInParent="true"
-                android:background="@mipmap/ic_launcher_round" />
+                android:layout_centerInParent="true" />
 
             <ImageView
                 android:layout_width="@dimen/x180"
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x50"
             android:layout_marginTop="@dimen/y80"
-            android:text="马冬梅"
+            android:text="-"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/x40" />
 
@@ -94,7 +94,7 @@
             android:layout_marginBottom="@dimen/y5"
             android:layout_marginLeft="@dimen/x70"
             android:layout_toRightOf="@id/tv_zhiding_name"
-            android:text="4.8"
+            android:text="-"
             android:textColor="@color/colorGray"
             android:textSize="@dimen/x35" />
 
@@ -105,7 +105,7 @@
             android:layout_alignLeft="@id/tv_zhiding_name"
             android:layout_below="@id/tv_zhiding_name"
             android:layout_marginTop="@dimen/y40"
-            android:text="10000000000"
+            android:text="-"
             android:textColor="@color/colorGray"
             android:textSize="@dimen/x40" />
 
@@ -120,13 +120,15 @@
             android:textSize="@dimen/x30" />
 
         <TextView
+            android:id="@+id/tv_zhiding_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/tv_zhiding_phone"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/x100"
-            android:text="1000.00元"
-            android:textColor="@color/colorBlack" />
+            android:text="-元"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x40" />
 
         <ImageView
             android:id="@+id/iv_zhiding_more"

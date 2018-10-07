@@ -2,12 +2,23 @@ package com.example.jason_jukes.laihuo.activity.home;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.bean.AddressBean;
+import com.example.jason_jukes.laihuo.bean.MessageBean;
+import com.example.jason_jukes.laihuo.tool.Contants;
+import com.example.jason_jukes.laihuo.tool.XUtil;
+import com.google.gson.Gson;
+
+import org.xutils.common.Callback;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -53,9 +64,55 @@ public class SureArriveActivity extends BaseActivity {
                     return;
                 }
 
-                showToast("确认");
+                showProgressDialog();
+                sureArrive();
 
                 break;
         }
+    }
+
+    private void sureArrive() {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("order_id", getIntent().getStringExtra("id"));
+        map.put("door_code", getText(etOpenDoorPassword));
+
+        XUtil.Post(Contants.SURE_ARRIVE, map, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                MessageBean bean = new Gson().fromJson(result, MessageBean.class);
+                if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
+
+                    showToast(bean.getErrorMsg());
+                    finish();
+
+                } else {
+                    showToast(bean.getErrorMsg());
+                }
+
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                Log.e("fail", ex.getMessage());
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
     }
 }

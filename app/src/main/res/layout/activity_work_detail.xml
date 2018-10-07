@@ -1,19 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apptool="http://schemas.android.com/tools"
     android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackgroud"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
-
 
     <include layout="@layout/status_bar" />
 
+    <LinearLayout
+        android:id="@+id/ll_null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/x300"
+            android:layout_height="@dimen/x300"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y200"
+            android:background="@mipmap/img_error" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="当前用户无查看订单权限"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/x35" />
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
 
         <LinearLayout
+            android:id="@+id/ll_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -30,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/y50"
-                    android:text="道理-xxx"
+                    apptool:text="道理-xxx"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/x50" />
 
@@ -45,7 +73,7 @@
                     android:paddingLeft="@dimen/x30"
                     android:paddingRight="@dimen/x30"
                     android:paddingTop="@dimen/x10"
-                    android:text="议价中"
+                    apptool:text="议价中"
                     android:textColor="@color/white"
                     android:textSize="@dimen/x35" />
 
@@ -56,7 +84,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="@dimen/y50"
                     android:layout_marginTop="@dimen/y50"
-                    android:text="发布时间: 2018-58-85 12:45:56"
+                    apptool:text="发布时间: 2018-58-85 12:45:56"
                     android:textColor="@color/colorGray"
                     android:textSize="@dimen/x35" />
 
@@ -124,7 +152,7 @@
                         android:layout_marginBottom="@dimen/y40"
                         android:layout_marginTop="@dimen/y30"
                         android:gravity="center_horizontal"
-                        android:text="推荐分类-开锁修锁"
+                        android:text="-"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/x35" />
 
@@ -162,7 +190,7 @@
                         android:layout_marginBottom="@dimen/y40"
                         android:layout_marginTop="@dimen/y30"
                         android:gravity="center_horizontal"
-                        android:text="哈尔滨-道里区"
+                        android:text="-"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/x35" />
 
@@ -207,7 +235,7 @@
                         android:layout_marginBottom="@dimen/y40"
                         android:layout_marginTop="@dimen/y30"
                         android:gravity="center_horizontal"
-                        android:text="52222元"
+                        android:text="-元"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/x35" />
 
@@ -245,13 +273,24 @@
                         android:layout_marginBottom="@dimen/y40"
                         android:layout_marginTop="@dimen/y30"
                         android:gravity="center_horizontal"
-                        android:text="2019-09-65 15:23"
+                        android:text="-"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/x35" />
 
                 </LinearLayout>
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_zhuyi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/y50"
+                android:text="请在30分钟内完成支付,过时将自动关闭订单"
+                android:textColor="@color/colorGray"
+                android:textSize="@dimen/x35"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_shenqing"
@@ -266,9 +305,28 @@
                 android:gravity="center"
                 android:paddingBottom="@dimen/y40"
                 android:paddingTop="@dimen/y40"
-                android:text="申请报价"
+                android:text="-"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/x40" />
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/y30"
+                android:layout_marginLeft="@dimen/x50"
+                android:layout_marginRight="@dimen/x50"
+                android:layout_marginTop="@dimen/y10"
+                android:background="@drawable/bg_light_grey_corner"
+                android:gravity="center"
+                android:paddingBottom="@dimen/y40"
+                android:paddingTop="@dimen/y40"
+                android:text="关闭订单"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/x40" />
+
+            <include layout="@layout/include_jiedan_message" />
 
             <include layout="@layout/include_detail_evaluate" />
 
@@ -278,303 +336,116 @@
 
             <include layout="@layout/include_jingjia_list" />
 
+            <include layout="@layout/include_service_address" />
+
+            <include layout="@layout/include_renwu_zhuizhong" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y100"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y30"
                 android:background="@color/white"
-                android:orientation="horizontal">
-
-                <View
-                    android:layout_width="@dimen/x3"
-                    android:layout_height="@dimen/y40"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/x50"
-                    android:background="@color/DarkOrange" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/x20"
-                    android:text="服务地址"
-                    android:textSize="@dimen/x35" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y3"
-                android:layout_marginLeft="@dimen/x50"
-                android:layout_marginRight="@dimen/x50"
-                android:background="@color/colorBackgroud" />
-
-            <RelativeLayout
-                android:id="@+id/rl_work_address"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y450"
-                android:background="@mipmap/img_address_mohu"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_kejian"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="接单后可见"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/x50" />
-
                 <LinearLayout
-                    android:id="@+id/ll_work_address"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/y100"
                     android:background="@color/white"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/y40"
-                                android:gravity="end"
-                                android:text="联系人姓名"
-                                android:textColor="@color/colorGray"
-                                android:textSize="@dimen/x30"
-
-                                />
-
-                            <TextView
-                                android:id="@+id/tv_name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="@dimen/y40"
-                                android:layout_marginTop="@dimen/y30"
-                                android:gravity="end"
-                                android:text="测试"
-                                android:textColor="@color/colorBlack"
-                                android:textSize="@dimen/x35" />
-
-
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="@dimen/x153"
-                            android:layout_height="@dimen/x153"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="@dimen/x50"
-                            android:layout_marginRight="@dimen/x50"
-                            android:background="@mipmap/img_call"
-
-                            />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/y40"
-                                android:gravity="left"
-                                android:text="联系人电话"
-                                android:textColor="@color/colorGray"
-                                android:textSize="@dimen/x30"
-
-                                />
-
-                            <TextView
-                                android:id="@+id/tv_phone"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="@dimen/y40"
-                                android:layout_marginTop="@dimen/y30"
-                                android:gravity="left"
-                                android:text="15464215621"
-                                android:textColor="@color/colorBlack"
-                                android:textSize="@dimen/x35" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
+                    android:orientation="horizontal">
 
                     <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/y3"
+                        android:layout_width="@dimen/x3"
+                        android:layout_height="@dimen/y40"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/x50"
-                        android:layout_marginRight="@dimen/x50"
-                        android:background="@color/colorBackgroud" />
+                        android:background="@color/DarkOrange" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/y40"
-                            android:gravity="center_horizontal"
-                            android:text="服务地址"
-                            android:textColor="@color/colorGray"
-                            android:textSize="@dimen/x30" />
-
-                        <TextView
-                            android:id="@+id/tv_detail_address"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/y40"
-                            android:layout_marginTop="@dimen/y30"
-                            android:gravity="center_horizontal"
-                            android:text="哈尔滨道里区测试"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/x35" />
-
-                    </LinearLayout>
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:text="服务描述"
+                        android:textSize="@dimen/x35" />
 
                 </LinearLayout>
 
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y100"
-                android:layout_marginTop="@dimen/y30"
-                android:background="@color/white"
-                android:orientation="horizontal">
-
                 <View
-                    android:layout_width="@dimen/x3"
-                    android:layout_height="@dimen/y40"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/x50"
-                    android:background="@color/DarkOrange" />
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y20"
+                    android:background="@color/colorBackgroud" />
 
                 <TextView
+                    android:id="@+id/tv_work_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/x20"
-                    android:text="任务追踪"
-                    android:textSize="@dimen/x35" />
+                    android:layout_margin="@dimen/x50"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/x35"
+                    apptool:text="阿斯加德开了房间阿斯利康积分拉开纠纷拉开尽快立法骄傲联发科" />
 
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y3"
-                android:layout_marginLeft="@dimen/x50"
-                android:layout_marginRight="@dimen/x50"
-                android:background="@color/colorBackgroud" />
-
-            <LinearLayout
-
-                android:id="@+id/ll_zhuizong"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/y30"
-                android:paddingTop="@dimen/y30">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y100"
-                android:layout_marginTop="@dimen/y30"
-                android:background="@color/white"
-                android:orientation="horizontal">
-
-                <View
-                    android:layout_width="@dimen/x3"
-                    android:layout_height="@dimen/y40"
-                    android:layout_gravity="center_vertical"
+                <RelativeLayout
+                    android:id="@+id/rl_luyin"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y180"
                     android:layout_marginLeft="@dimen/x50"
-                    android:background="@color/DarkOrange" />
+                    android:layout_marginRight="@dimen/x50"
+                    android:background="@drawable/bg_purple_big_corner">
 
-                <TextView
-                    android:layout_width="wrap_content"
+
+                    <ImageView
+                        android:id="@+id/iv_play"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@mipmap/img_luyin_play" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/x50"
+                        android:layout_toLeftOf="@id/iv_play"
+                        android:background="@mipmap/img_luyin_bg" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x50"
+                        android:layout_toRightOf="@id/iv_play"
+                        android:background="@mipmap/img_luyin_bg" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_img"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/x20"
-                    android:text="服务描述"
-                    android:textSize="@dimen/x35" />
+                    android:layout_marginTop="@dimen/y50"
+                    android:orientation="vertical">
+
+
+                </LinearLayout>
 
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y20"
-                android:background="@color/colorBackgroud" />
 
             <TextView
-                android:id="@+id/tv_work_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/x50"
-                android:text="阿斯加德开了房间阿斯利康积分拉开纠纷拉开尽快立法骄傲联发科"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/x35" />
-
-            <RelativeLayout
-                android:id="@+id/rl_luyin"
+                android:id="@+id/tv_jubao"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y180"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/y30"
                 android:layout_marginLeft="@dimen/x50"
                 android:layout_marginRight="@dimen/x50"
-                android:background="@drawable/bg_purple_big_corner">
-
-
-                <ImageView
-                    android:id="@+id/iv_play"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:background="@mipmap/img_luyin_play" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/x50"
-                    android:layout_toLeftOf="@id/iv_play"
-                    android:background="@mipmap/img_luyin_bg" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x50"
-                    android:layout_toRightOf="@id/iv_play"
-                    android:background="@mipmap/img_luyin_bg" />
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_img"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y50"
-                android:orientation="vertical">
-
-
-            </LinearLayout>
+                android:layout_marginTop="@dimen/y10"
+                android:background="@drawable/bg_light_grey_corner"
+                android:gravity="center"
+                android:paddingBottom="@dimen/y40"
+                android:paddingTop="@dimen/y40"
+                android:text="举报内容"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/x40" />
 
         </LinearLayout>
 

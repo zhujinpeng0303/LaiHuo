@@ -73,5 +73,8 @@ public class ViewPagerActivity extends BaseActivity {
             }
         });
 
+        viewPager.setCurrentItem(getIntent().getIntExtra("pos", 0));
+
+
     }
 }

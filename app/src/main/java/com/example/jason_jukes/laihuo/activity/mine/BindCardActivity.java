@@ -2,15 +2,26 @@ package com.example.jason_jukes.laihuo.activity.mine;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.bean.MessageBean;
+import com.example.jason_jukes.laihuo.tool.Contants;
 import com.example.jason_jukes.laihuo.tool.IdCardUtil;
 import com.example.jason_jukes.laihuo.tool.LimitTextWatcher;
+import com.example.jason_jukes.laihuo.tool.SPTool;
 import com.example.jason_jukes.laihuo.tool.StringUtil;
+import com.example.jason_jukes.laihuo.tool.XUtil;
+import com.google.gson.Gson;
+
+import org.xutils.common.Callback;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -70,7 +81,7 @@ public class BindCardActivity extends BaseActivity {
                     return;
                 }
 
-                codeState();
+                getCode();
 
                 break;
             case R.id.tv_commit:
@@ -106,10 +117,108 @@ public class BindCardActivity extends BaseActivity {
                     return;
                 }
 
-                showToast("提交");
+                bindCard();
 
                 break;
         }
+    }
+
+    private void bindCard() {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", "gggg");
+        map.put("bank_code", getText(etCardNum));
+        map.put("user_name", getText(etRealName));
+        map.put("id_card", getText(etIdNum));
+        map.put("phoneno", getText(etPhone));
+        map.put("sms_code", getText(etCode));
+        map.put("code_type", "bindIdcard");
+
+        XUtil.Post(Contants.BIND_CARD, map, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                MessageBean bean = new Gson().fromJson(result, MessageBean.class);
+                if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
+
+                    showToast(bean.getErrorMsg());
+                    SPTool.getInstance().setShareData(Contants.CARD_STATUS,"1");
+
+                } else {
+                    showToast(bean.getErrorMsg());
+                }
+
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                Log.e("fail", ex.getMessage());
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+    }
+
+    private void getCode() {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", "gggg");
+        map.put("phoneno", getText(etPhone));
+        map.put("code_type", "bindIdcard");
+
+        XUtil.Post(Contants.GET_CODE, map, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                MessageBean bean = new Gson().fromJson(result, MessageBean.class);
+                if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
+
+                    showToast(bean.getErrorMsg());
+
+                    codeState();
+
+                } else {
+                    showToast(bean.getErrorMsg());
+                }
+
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                Log.e("fail", ex.getMessage());
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+
     }
 
     //验证码倒计时

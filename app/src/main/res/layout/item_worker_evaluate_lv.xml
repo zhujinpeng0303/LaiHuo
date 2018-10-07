@@ -2,6 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:appTool="http://schemas.android.com/tools"
+    android:id="@+id/rl_evaluate"
     android:orientation="vertical">
 
 
@@ -9,8 +11,7 @@
         android:id="@+id/iv_avatar"
         android:layout_width="@dimen/x120"
         android:layout_height="@dimen/x120"
-        android:layout_margin="@dimen/x50"
-        android:background="@mipmap/ic_launcher_round" />
+        android:layout_margin="@dimen/x50" />
 
     <TextView
         android:id="@+id/tv_name"
@@ -18,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x60"
         android:layout_toRightOf="@id/iv_avatar"
-        android:text="谁谁"
+        appTool:text="谁谁"
         android:textSize="@dimen/x35" />
 
     <TextView
@@ -28,7 +29,7 @@
         android:layout_alignLeft="@id/tv_name"
         android:layout_below="@id/tv_name"
         android:layout_marginTop="@dimen/y10"
-        android:text="2018-25-25"
+        appTool:text="2018-25-25"
         android:textSize="@dimen/x30" />
 
 
@@ -40,7 +41,7 @@
         android:layout_marginRight="@dimen/x80"
         android:layout_marginTop="@dimen/y30"
         android:layout_toRightOf="@id/iv_avatar"
-        android:text="评论内容上课了的机会回家佛IQ我卡拉胶双方都立刻就拉上就拉上课了金坷垃"
+        appTool:text="评论内容上课了的机会回家佛IQ我卡拉胶双方都立刻就拉上就拉上课了金坷垃"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/x35" />
 
@@ -60,7 +61,7 @@
         android:layout_alignBottom="@id/tv_name"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/x50"
-        android:text="4.8"
+        appTool:text="4.8"
         android:textColor="@color/colorGray"
         android:textSize="@dimen/x40" />
 
