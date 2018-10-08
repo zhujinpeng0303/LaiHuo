@@ -53,6 +53,8 @@ public class AddressManageActivity extends BaseActivity {
 
     }
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
