@@ -37,6 +37,11 @@ public class MessageMarketLVAdapter extends BaseAdapter {
         this.been = been;
     }
 
+    public void addBeen1(List<MessageMarketBean.DataObjBean.RtListBean> been1){
+        been.addAll(been1);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return been != null && been.size() > 0 ? been.size() : 0;

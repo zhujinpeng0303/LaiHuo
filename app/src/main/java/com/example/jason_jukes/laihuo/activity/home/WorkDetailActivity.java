@@ -27,6 +27,7 @@ import com.example.jason_jukes.laihuo.bean.WorkDetailBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
 import com.example.jason_jukes.laihuo.tool.IsNetWork;
 import com.example.jason_jukes.laihuo.tool.SPTool;
+import com.example.jason_jukes.laihuo.tool.StringUtil;
 import com.example.jason_jukes.laihuo.tool.XUtil;
 import com.example.jason_jukes.laihuo.view.BindCardDialog;
 import com.example.jason_jukes.laihuo.view.ClassifyPopupWindow;
@@ -182,6 +183,11 @@ public class WorkDetailActivity extends BaseActivity {
     private ClassifyPopupWindow classifyPopupWindow;
     private View popView;
 
+    private ImageView iv_avatar, avatar;
+    private TextView tv_score, tv_phone, tv_cancel, tv_xuanze, tv_money, tv_name, name, score, content, date;
+    private LinearLayout ll_detail_more, ll_detail_zuizhong, ll_null, ll_evaluate;
+    private RelativeLayout rl_user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -219,99 +225,35 @@ public class WorkDetailActivity extends BaseActivity {
 
     private void initData() {
         popView = LayoutInflater.from(this).inflate(R.layout.popup_window_worke_detail, null);
-        final ImageView iv_avatar = popView.findViewById(R.id.iv_detail_avatar);
-        final TextView tv_score = popView.findViewById(R.id.tv_detail_score);
-        final TextView tv_phone = popView.findViewById(R.id.tv_phone);
-        final TextView tv_cancel = popView.findViewById(R.id.tv_detail_cancel);
-        final TextView tv_xuanze = popView.findViewById(R.id.tv_detail_xuanze);
-        final TextView tv_money = popView.findViewById(R.id.tv_detail_money);
-        final TextView tv_name = popView.findViewById(R.id.tv_detail_name);
+        iv_avatar = popView.findViewById(R.id.iv_detail_avatar);
+        tv_score = popView.findViewById(R.id.tv_detail_score);
+        tv_phone = popView.findViewById(R.id.tv_phone);
+        tv_cancel = popView.findViewById(R.id.tv_detail_cancel);
+        tv_xuanze = popView.findViewById(R.id.tv_detail_xuanze);
+        tv_money = popView.findViewById(R.id.tv_detail_money);
+        tv_name = popView.findViewById(R.id.tv_detail_name);
 
 
-        final ImageView avatar = popView.findViewById(R.id.iv_avatar);
-        final TextView name = popView.findViewById(R.id.tv_name);
-        final TextView score = popView.findViewById(R.id.tv_score);
-        final TextView content = popView.findViewById(R.id.tv_content);
-        final TextView date = popView.findViewById(R.id.tv_time);
+        avatar = popView.findViewById(R.id.iv_avatar);
+        name = popView.findViewById(R.id.tv_name);
+        score = popView.findViewById(R.id.tv_score);
+        content = popView.findViewById(R.id.tv_content);
+        date = popView.findViewById(R.id.tv_time);
 
 
-        final LinearLayout ll_detail_more = popView.findViewById(R.id.ll_detail_more);
-        final LinearLayout ll_detail_zuizhong = popView.findViewById(R.id.ll_detail_zuizong);
-        final LinearLayout ll_null = popView.findViewById(R.id.ll_null);
-        final LinearLayout ll_evaluate = popView.findViewById(R.id.ll_evaluate);
+        ll_detail_more = popView.findViewById(R.id.ll_detail_more);
+        ll_detail_zuizhong = popView.findViewById(R.id.ll_detail_zuizong);
+        ll_null = popView.findViewById(R.id.ll_null);
+        ll_evaluate = popView.findViewById(R.id.ll_evaluate);
 
-        final RelativeLayout rl_user = popView.findViewById(R.id.rl_user);
+        rl_user = popView.findViewById(R.id.rl_user);
 
 
         moreClick = new WorkDetailGridViewAdapter.moreClick() {
             @Override
             public void MoreClick(final int pos) {
 
-                String url = "";
-
-                Glide.with(WorkDetailActivity.this)
-                        .load(been.get(pos).getHead_url())
-                        .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(WorkDetailActivity.this)))
-                        .into(iv_avatar);
-                tv_name.setText(been.get(pos).getUsername());
-                tv_score.setText(been.get(pos).getRanking_last() + "分");
-                tv_phone.setText(been.get(pos).getPhoneno());
-
-                if (been.get(pos).getBid_status() == 0) {
-                    tv_xuanze.setText("请TA输入最终报价");
-                    tv_xuanze.setBackgroundResource(R.drawable.bg_dark_yellow_corner);
-                    ll_detail_zuizhong.setVisibility(View.GONE);
-                    url = Contants.PLEASE_INPUT_PRICE;
-                } else if (been.get(pos).getBid_status() == 1) {
-                    tv_xuanze.setText("选择TA");
-                    tv_xuanze.setBackgroundResource(R.drawable.bg_dark_yellow_corner);
-                    ll_detail_zuizhong.setVisibility(View.VISIBLE);
-                    tv_money.setText("最终报价: " + been.get(pos).getBid_price_last() + "元");
-                    url = Contants.CHOOSE_IT;
-                } else if (been.get(pos).getBid_status() == 2) {
-                    tv_xuanze.setText("等待TA输入最终价格");
-                    tv_xuanze.setBackgroundResource(R.drawable.bg_et_grey_corner);
-                    tv_xuanze.setClickable(false);
-                    ll_detail_zuizhong.setVisibility(View.GONE);
-                }
-
-                rl_user.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(WorkDetailActivity.this, PersonalHomeActivity.class)
-                                .putExtra("id", been.get(pos).getBid_user_id() + ""));
-                    }
-                });
-
-                ll_detail_more.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(WorkDetailActivity.this, PersonalHomeActivity.class)
-                                .putExtra("id", been.get(pos).getBid_user_id() + ""));
-                    }
-                });
-
-                popupWindow = new PopupWindow(popView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                classifyPopupWindow = new ClassifyPopupWindow(WorkDetailActivity.this, popupWindow);
-                popupWindow.showAtLocation(rootView, Gravity.BOTTOM, 0, 0);
-
-                tv_cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        popupWindow.dismiss();
-                    }
-                });
-
-                final String finalUrl = url;
-                tv_xuanze.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        showProgressDialog();
-                        postChoose(finalUrl, been.get(pos).getBid_user_id() + "");
-
-                    }
-                });
+                showWorkerDetail(pos);
 
             }
         };
@@ -332,7 +274,6 @@ public class WorkDetailActivity extends BaseActivity {
             showToast("请检查网络设置");
 
         }
-
 
     }
 
@@ -380,6 +321,76 @@ public class WorkDetailActivity extends BaseActivity {
             }
         });
 
+
+    }
+
+    private void showWorkerDetail(final int pos) {
+
+        String url = "";
+
+        Glide.with(WorkDetailActivity.this)
+                .load(been.get(pos).getHead_url())
+                .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(WorkDetailActivity.this)))
+                .into(iv_avatar);
+        tv_name.setText(been.get(pos).getUsername());
+        tv_score.setText(been.get(pos).getRanking_last());
+        tv_phone.setText(been.get(pos).getPhoneno());
+
+        if (been.get(pos).getBid_status() == 0) {
+            tv_xuanze.setText("请TA输入最终报价");
+            tv_xuanze.setBackgroundResource(R.drawable.bg_dark_yellow_corner);
+            ll_detail_zuizhong.setVisibility(View.GONE);
+            url = Contants.PLEASE_INPUT_PRICE;
+        } else if (been.get(pos).getBid_status() == 1) {
+            tv_xuanze.setText("选择TA");
+            tv_xuanze.setBackgroundResource(R.drawable.bg_dark_yellow_corner);
+            ll_detail_zuizhong.setVisibility(View.VISIBLE);
+            tv_money.setText("最终报价: " + been.get(pos).getBid_price_last() + "元");
+            url = Contants.CHOOSE_IT;
+        } else if (been.get(pos).getBid_status() == 2) {
+            tv_xuanze.setText("等待TA输入最终价格");
+            tv_xuanze.setBackgroundResource(R.drawable.bg_et_grey_corner);
+            tv_xuanze.setClickable(false);
+            ll_detail_zuizhong.setVisibility(View.GONE);
+        }
+
+        rl_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(WorkDetailActivity.this, PersonalHomeActivity.class)
+                        .putExtra("id", been.get(pos).getBid_user_id() + ""));
+            }
+        });
+
+        ll_detail_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(WorkDetailActivity.this, PersonalHomeActivity.class)
+                        .putExtra("id", been.get(pos).getBid_user_id() + ""));
+            }
+        });
+
+        popupWindow = new PopupWindow(popView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        classifyPopupWindow = new ClassifyPopupWindow(WorkDetailActivity.this, popupWindow);
+        popupWindow.showAtLocation(rootView, Gravity.BOTTOM, 0, 0);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+            }
+        });
+
+        final String finalUrl = url;
+        tv_xuanze.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                showProgressDialog();
+                postChoose(finalUrl, been.get(pos).getBid_user_id() + "");
+
+            }
+        });
 
     }
 
@@ -559,7 +570,8 @@ public class WorkDetailActivity extends BaseActivity {
 
                     }
 
-                    if (status.equals("creator.waitSelectUser")) {   //创建者，待选择工人 ② (没有满意的？去邀请更多人出价， 关闭订单)
+                    if (status.equals("creator.waitSelectUser")) {                   //创建者，待选择工人 ② (没有满意的？去邀请更多人出价， 关闭订单)
+
 
                         //可还价返回该值的判断
                         if (bean.getDataObj().getOrderType().equals("talk_price")) {
@@ -574,13 +586,24 @@ public class WorkDetailActivity extends BaseActivity {
                             llServiceAddress.setVisibility(View.VISIBLE);
                             llWorkAddress.setVisibility(View.VISIBLE);
 
+
+                            String idCount = "";
+
                             for (int i = 0; i < bean.getDataObj().getGetWorkerBidList().size(); i++) {
                                 been.add(bean.getDataObj().getGetWorkerBidList().get(i));
+                                idCount += bean.getDataObj().getGetWorkerBidList().get(i).getBid_status() + "";
                             }
+
+                            Log.e("rrrrrrrrrrr", idCount.indexOf("1") + "");
 
                             adapter = new WorkDetailGridViewAdapter(WorkDetailActivity.this, been, moreClick, phoneClick);
                             gridView.setAdapter(adapter);
 
+                            if (StringUtil.countStr(idCount, "1") == 1) {
+
+                                showWorkerDetail(idCount.indexOf("1"));
+
+                            }
 
                             tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                             tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
@@ -638,7 +661,7 @@ public class WorkDetailActivity extends BaseActivity {
 
                     }
 
-                    if (status.equals("creator.waitPay")) {   //创建者，待支付订单 ③ （预支付服务费）
+                    if (status.equals("creator.waitPay")) {                                    //创建者，待支付订单 ③ （预支付服务费）
 
                         //可还价返回该值的判断
                         if (bean.getDataObj().getOrderType().equals("talk_price")) {

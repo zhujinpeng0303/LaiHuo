@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 
 import org.xutils.common.Callback;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +72,8 @@ public class MineInvistWorkActivity extends BaseActivity {
         TextView textView = headerView.findViewById(R.id.tv_top_text);
         textView.setText("本页面显示的是您收到的邀请信息,用户在发起订单并支付押金后可以发起邀请,如果您为''下班状态'',用户将无法主动邀请您,可在个人中心页面切换为上班状态!");
 
-        adapter = new MinePartWorkAdapter(context, been);
+        been = new ArrayList<>();
+        adapter = new MinePartWorkAdapter(context, been,"1");
         lv.setAdapter(adapter);
 
         lv.addHeaderView(headerView, null, false);
@@ -131,8 +133,8 @@ public class MineInvistWorkActivity extends BaseActivity {
 
                 PartWorkBean bean = new Gson().fromJson(result, PartWorkBean.class);
                 if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
-                    llNull.setVisibility(View.GONE);
                     if (bean.getDataObj().getRtList().size() > 0) {
+                        llNull.setVisibility(View.GONE);
                         for (int i = 0; i < bean.getDataObj().getRtList().size(); i++) {
 
                             been.add(bean.getDataObj().getRtList().get(i));
@@ -154,7 +156,6 @@ public class MineInvistWorkActivity extends BaseActivity {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-
                 Log.e("fail", ex.getMessage());
                 hideProgressDialog();
                 ref.setRefreshing(false);

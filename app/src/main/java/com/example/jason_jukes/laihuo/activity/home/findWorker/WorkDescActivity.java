@@ -123,14 +123,14 @@ public class WorkDescActivity extends BaseActivity {
     private List<String> imgs = new ArrayList<>();
 
     private WorkDescGridAdapter.delClick delClick;
+    private List<String> imgPaths = new ArrayList<>();
 
     private MediaRecorder mRecorder;
     private String mFileName = "";
+
     private MediaPlayer mPlayer = new MediaPlayer();
 
     private boolean isPlaying = false;
-
-    private List<String> imgPaths = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

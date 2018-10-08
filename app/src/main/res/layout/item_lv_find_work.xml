@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:appTool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -27,10 +28,9 @@
         android:id="@+id/ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_alignLeft="@id/tv_name"
         android:layout_below="@id/tv_name"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_status"
@@ -78,36 +78,41 @@
         android:textColor="@color/colorGray"
         android:textSize="@dimen/x35" />
 
-    <TextView
-        android:id="@+id/tv_time"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/x50"
         android:layout_marginTop="@dimen/y60"
-        android:text="05-18 14:45"
-        android:textColor="@color/colorGray"
-        android:textSize="@dimen/x25" />
+        android:orientation="horizontal">
 
-    <View
-        android:id="@+id/v"
-        android:layout_width="@dimen/x2"
-        android:layout_height="@dimen/y30"
-        android:layout_marginRight="@dimen/x20"
-        android:layout_marginTop="@dimen/y65"
-        android:layout_toLeftOf="@id/tv_time"
-        android:background="@color/colorGrey" />
 
-    <TextView
-        android:id="@+id/tv_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/x20"
-        android:layout_marginTop="@dimen/y60"
-        android:layout_toLeftOf="@id/v"
-        android:text="哈尔滨_南岗"
-        android:textColor="@color/colorGray"
-        android:textSize="@dimen/x25" />
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="哈尔滨_南岗"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/x25" />
+
+        <View
+            android:layout_gravity="center_vertical"
+            android:id="@+id/v"
+            android:layout_width="@dimen/x2"
+            android:layout_height="@dimen/y30"
+            android:layout_marginRight="@dimen/x20"
+            android:layout_marginLeft="@dimen/x20"
+            android:background="@color/colorGrey" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/x25"
+            appTool:text="2018/05/25 14:45:12" />
+
+    </LinearLayout>
 
     <ImageView
         android:layout_width="@dimen/x50"

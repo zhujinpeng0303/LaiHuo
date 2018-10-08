@@ -6,23 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.jason_jukes.laihuo.R;
-import com.example.jason_jukes.laihuo.bean.AddressBean;
-import com.example.jason_jukes.laihuo.tool.Contants;
 import com.example.jason_jukes.laihuo.view.glide.GlideRoundTransform;
 
 import java.util.List;
 
 /**
- * 作者：Jason_Jukes on 2018/10/8 0008 09:17
- * <p>
- * When I wrote this, only God and I understood what I was doing
- * Now, only God knows
+ * Created by Administrator on 2018/10/3 0003.
  */
 
 public class GridAdapter extends BaseAdapter {
@@ -63,7 +58,7 @@ public class GridAdapter extends BaseAdapter {
 
         Glide.with(context)
                 .load(been.get(i))
-                .apply(RequestOptions.bitmapTransform(new GlideRoundTransform(context)))
+                .apply(RequestOptions.bitmapTransform(new GlideRoundTransform(context,6)))
                 .into(viewHolder.iv);
 
         return view;
@@ -72,17 +67,15 @@ public class GridAdapter extends BaseAdapter {
 
     class MyViewHolder {
 
-
         ImageView iv;
-
 
         public MyViewHolder(View view) {
 
-
-            iv = (ImageView) view.findViewById(R.id.iv);
+            iv = view.findViewById(R.id.iv);
 
 
         }
     }
+
 
 }

@@ -20,18 +20,20 @@
         android:textSize="@dimen/x35" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/y3"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <com.example.jason_jukes.laihuo.view.MyGridView
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/y150"
-            android:background="@mipmap/img_home" />
+            android:layout_marginTop="@dimen/y2"
+            android:background="@color/white"
+            android:numColumns="3"
+            android:orientation="vertical">
 
-
+        </com.example.jason_jukes.laihuo.view.MyGridView>
     </LinearLayout>
 
     <TextView

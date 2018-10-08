@@ -2,13 +2,10 @@ package com.example.jason_jukes.laihuo.activity.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.BaseActivity;
@@ -18,13 +15,17 @@ import com.example.jason_jukes.laihuo.bean.MessageMarketBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
 import com.example.jason_jukes.laihuo.tool.IsNetWork;
 import com.example.jason_jukes.laihuo.tool.XUtil;
+import com.example.jason_jukes.laihuo.view.XListView;
 import com.google.gson.Gson;
 
 import org.xutils.common.Callback;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import butterknife.ButterKnife;
@@ -35,15 +36,17 @@ import butterknife.OnClick;
  * Created by Administrator on 2018/9/23 0023.
  */
 
-public class MessageMarketActivity extends BaseActivity {
+public class MessageMarketActivity extends BaseActivity implements XListView.IXListViewListener {
     @InjectView(R.id.tv_status_bar_name)
     TextView tvStatusBarName;
     @InjectView(R.id.lv)
-    ListView lv;
-    @InjectView(R.id.ref)
-    SwipeRefreshLayout ref;
+    XListView lv;
+
     private MessageMarketLVAdapter adapter;
     private List<MessageMarketBean.DataObjBean.RtListBean> been = new ArrayList<>();
+    private List<MessageMarketBean.DataObjBean.RtListBean> been1 = new ArrayList<>();
+
+    private int page = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,16 +68,16 @@ public class MessageMarketActivity extends BaseActivity {
 
         tvStatusBarName.setText("信息市场");
 
-        ref.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                onResume();
-            }
-        });
 
     }
 
     private void initData() {
+
+        lv.setPullRefreshEnable(true);
+        lv.setPullLoadEnable(true);
+        lv.setAutoLoadEnable(false);
+        lv.setXListViewListener(this);
+        lv.setRefreshTime(getTime());
 
         been = new ArrayList<>();
         adapter = new MessageMarketLVAdapter(this, been);
@@ -94,35 +97,113 @@ public class MessageMarketActivity extends BaseActivity {
         });
 
 
-        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView absListView, int i) {
-
-            }
-
-            @Override
-            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-                boolean enable = false;
-                if (lv != null && lv.getChildCount() > 0) {
-                    // check if the first item of the list is visible
-                    boolean firstItemVisible = lv.getFirstVisiblePosition() == 0;
-                    // check if the top of the first item is visible
-                    boolean topOfFirstItemVisible = lv.getChildAt(0).getTop() == 0;
-                    // enabling or disabling the refresh layout
-                    enable = firstItemVisible && topOfFirstItemVisible;
-                }
-                ref.setEnabled(enable);
-            }
-        });
+//        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(AbsListView absListView, int i) {
+//
+//            }
+//
+//            @Override
+//            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+//                boolean enable = false;
+//                if (lv != null && lv.getChildCount() > 0) {
+//                    // check if the first item of the list is visible
+//                    boolean firstItemVisible = lv.getFirstVisiblePosition() == 0;
+//                    // check if the top of the first item is visible
+//                    boolean topOfFirstItemVisible = lv.getChildAt(0).getTop() == 0;
+//                    // enabling or disabling the refresh layout
+//                    enable = firstItemVisible && topOfFirstItemVisible;
+//                }
+//                ref.setEnabled(enable);
+//            }
+//        });
 
         if (IsNetWork.isNetWork(this)) {
             showProgressDialog();
-            ref.setRefreshing(true);
+//            ref.setRefreshing(true);
             getData();
         } else {
             showToast("请检查网络设置");
 
         }
+    }
+
+
+    @Override
+    public void onRefresh() {
+
+        page = 1;
+        lv.setPullRefreshEnable(true);
+        onResume();
+
+    }
+
+    @Override
+    public void onLoadMore() {
+
+        page++;
+        been1.clear();
+        lv.setPullLoadEnable(true);
+        loadData();
+
+    }
+
+    private void loadData() {
+
+        Map<String, Object> map = new HashMap<>();
+//        map.put("user_id", SPTool.getInstance().getShareDataStr(Contants.USER_ID));
+        map.put("token", "gggg");
+        map.put("page", page + "");
+        map.put("rows", "10");
+        XUtil.Post(Contants.MESSAGE_MARKET, map, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                MessageMarketBean bean = new Gson().fromJson(result, MessageMarketBean.class);
+                if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
+
+                    if (bean.getDataObj().getRtList().size() > 0) {
+
+                        for (int i = 0; i < bean.getDataObj().getRtList().size(); i++) {
+
+                            been1.add(bean.getDataObj().getRtList().get(i));
+
+                        }
+
+                        adapter.addBeen1(been1);
+                    } else {
+                        showToast("没有数据了");
+                        lv.setPullLoadEnable(false);
+                    }
+
+                } else {
+                    showToast(bean.getErrorMsg());
+                }
+
+                hideProgressDialog();
+//                ref.setRefreshing(false);
+                onLoad();
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                Log.e("fail", ex.getMessage());
+                hideProgressDialog();
+                onLoad();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
 
 
     }
@@ -132,6 +213,8 @@ public class MessageMarketActivity extends BaseActivity {
         Map<String, Object> map = new HashMap<>();
 //        map.put("user_id", SPTool.getInstance().getShareDataStr(Contants.USER_ID));
         map.put("token", "gggg");
+        map.put("page", page + "");
+        map.put("rows", "10");
         XUtil.Post(Contants.MESSAGE_MARKET, map, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -152,7 +235,8 @@ public class MessageMarketActivity extends BaseActivity {
                 }
 
                 hideProgressDialog();
-                ref.setRefreshing(false);
+                onLoad();
+//                ref.setRefreshing(false);
 
             }
 
@@ -161,7 +245,7 @@ public class MessageMarketActivity extends BaseActivity {
 
                 Log.e("fail", ex.getMessage());
                 hideProgressDialog();
-
+                onLoad();
             }
 
             @Override
@@ -191,4 +275,18 @@ public class MessageMarketActivity extends BaseActivity {
                 break;
         }
     }
+
+    private void onLoad() {
+        lv.stopRefresh();
+        lv.stopLoadMore();
+//        lv.setPullRefreshEnable(false);
+//        lv.setPullLoadEnable(false);
+        lv.setRefreshTime(getTime());
+    }
+
+    private String getTime() {
+        return new SimpleDateFormat("MM-dd HH:mm", Locale.CHINA).format(new Date());
+    }
+
+
 }

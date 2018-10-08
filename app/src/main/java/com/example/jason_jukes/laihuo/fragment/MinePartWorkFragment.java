@@ -88,7 +88,7 @@ public class MinePartWorkFragment extends BaseFragment {
 
 
         been = new ArrayList<>();
-        adapter = new MinePartWorkAdapter(context, been);
+        adapter = new MinePartWorkAdapter(context, been,"0");
         lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

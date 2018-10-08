@@ -12,7 +12,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.bean.PartWorkBean;
-import com.example.jason_jukes.laihuo.bean.PostWorkBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
 import com.example.jason_jukes.laihuo.view.glide.GlideCircleTransform;
 
@@ -26,10 +25,12 @@ public class MinePartWorkAdapter extends BaseAdapter {
 
     private Context context;
     private List<PartWorkBean.DataObjBean.RtListBean> been;
+    private String type;
 
-    public MinePartWorkAdapter(Context context, List<PartWorkBean.DataObjBean.RtListBean> been) {
+    public MinePartWorkAdapter(Context context, List<PartWorkBean.DataObjBean.RtListBean> been, String type) {
         this.context = context;
         this.been = been;
+        this.type = type;
     }
 
     @Override
@@ -61,7 +62,14 @@ public class MinePartWorkAdapter extends BaseAdapter {
         Glide.with(context).load(Contants.URL_IMG_BASE + been.get(i).getClassify_photo_path()).apply(RequestOptions.bitmapTransform(new GlideCircleTransform(context))).into(viewHolder.img);
         viewHolder.name.setText(been.get(i).getOrder_title());
         viewHolder.content.setText(been.get(i).getOrder_desc());
-        viewHolder.date.setText(been.get(i).getCreate_time_day() + " " + been.get(i).getCreate_time_second());
+        if (type.equals("1")) {
+            viewHolder.date.setVisibility(View.VISIBLE);
+            viewHolder.v.setVisibility(View.VISIBLE);
+            viewHolder.date.setText(been.get(i).getOrder_create_time_day() + " " + been.get(i).getOrder_create_time_second());
+        } else {
+            viewHolder.date.setVisibility(View.GONE);
+            viewHolder.v.setVisibility(View.GONE);
+        }
 //        viewHolder.work_status.setText(been.get(i).getOrder_status_text());
         viewHolder.work_status.setVisibility(View.GONE);
         viewHolder.address.setText(been.get(i).getArea_name_two());
@@ -90,6 +98,7 @@ public class MinePartWorkAdapter extends BaseAdapter {
 
         TextView date, content, name, work_status, jiage_status, address;
         ImageView img;
+        View v;
 
         public MyViewHolder(View view) {
 
@@ -100,6 +109,7 @@ public class MinePartWorkAdapter extends BaseAdapter {
             address = (TextView) view.findViewById(R.id.tv_address);
             content = (TextView) view.findViewById(R.id.tv_content);
             img = (ImageView) view.findViewById(R.id.iv_img);
+            v = view.findViewById(R.id.v);
 
         }
     }

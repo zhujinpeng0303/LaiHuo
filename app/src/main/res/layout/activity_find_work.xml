@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="@color/colorBackgroud"
     android:orientation="vertical">
 
@@ -86,21 +87,14 @@
 
         <include layout="@layout/include_null" />
 
-        <com.example.jason_jukes.laihuo.view.RefreshLayout
-            android:id="@+id/ref"
+        <com.example.jason_jukes.laihuo.view.XListView
+            android:id="@+id/lv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/y3"
+            android:scrollbars="none">
 
-            <ListView
-                android:id="@+id/lv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/y3"
-                android:scrollbars="none">
-
-            </ListView>
-
-        </com.example.jason_jukes.laihuo.view.RefreshLayout>
+        </com.example.jason_jukes.laihuo.view.XListView>
 
     </LinearLayout>
 

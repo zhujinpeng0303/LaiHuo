@@ -47,10 +47,10 @@
                         android:layout_height="wrap_content">
 
                         <LinearLayout
-                            android:layout_centerVertical="true"
                             android:id="@+id/ll_yuyin"
                             android:layout_width="@dimen/x600"
                             android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
                             android:layout_marginBottom="@dimen/y50"
                             android:layout_marginLeft="@dimen/x50"
                             android:background="@drawable/bg_grey_stroke_big_corner"
@@ -60,7 +60,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/x30"
-                                android:background="@mipmap/img_home" />
+                                android:background="@mipmap/img_desc_laba" />
 
                             <TextView
                                 android:id="@+id/tv_lunyin_word"
@@ -87,9 +87,9 @@
                             android:id="@+id/iv_play"
                             android:layout_width="@dimen/x80"
                             android:layout_height="@dimen/x80"
+                            android:layout_alignBottom="@id/ll_yuyin"
                             android:layout_marginRight="@dimen/x50"
                             android:layout_toLeftOf="@id/iv_del"
-                            android:layout_alignBottom="@id/ll_yuyin"
                             android:background="@mipmap/img_desc_luyin_play"
                             android:visibility="visible" />
                     </RelativeLayout>
@@ -158,7 +158,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_kehuanjia"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginBottom="@dimen/y20"
                     android:layout_marginLeft="@dimen/x50"
                     android:layout_marginTop="@dimen/y20"
@@ -173,7 +173,8 @@
                         android:layout_marginBottom="@dimen/y30"
                         android:layout_marginTop="@dimen/y30"
                         android:layout_weight="1"
-                        android:drawableLeft="@mipmap/img_home"
+                        android:drawableLeft="@mipmap/img_duihao"
+                        android:drawablePadding="@dimen/x20"
                         android:gravity="center"
                         android:text="可还价"
                         android:textColor="@color/white"
@@ -183,7 +184,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_yikoujia"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginBottom="@dimen/y20"
                     android:layout_marginRight="@dimen/x50"
                     android:layout_marginTop="@dimen/y20"
@@ -198,6 +199,9 @@
                         android:layout_marginBottom="@dimen/y30"
                         android:layout_marginTop="@dimen/y30"
                         android:layout_weight="1"
+                        android:background="@drawable/bg_white_corner"
+                        android:drawableLeft="@mipmap/img_duihao"
+                        android:drawablePadding="@dimen/x20"
                         android:gravity="center"
                         android:text="一口价"
                         android:textColor="@color/colorBlack"

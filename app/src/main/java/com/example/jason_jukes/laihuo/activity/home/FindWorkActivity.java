@@ -4,18 +4,15 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,14 +32,17 @@ import com.example.jason_jukes.laihuo.tool.SPTool;
 import com.example.jason_jukes.laihuo.tool.XUtil;
 import com.example.jason_jukes.laihuo.view.ClassifyPopupWindow;
 import com.example.jason_jukes.laihuo.view.CommonDialog;
-import com.example.jason_jukes.laihuo.view.RefreshLayout;
+import com.example.jason_jukes.laihuo.view.XListView;
 import com.google.gson.Gson;
 
 import org.xutils.common.Callback;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import butterknife.ButterKnife;
@@ -53,7 +53,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2018/9/25 0025.
  */
 
-public class FindWorkActivity extends BaseActivity {
+public class FindWorkActivity extends BaseActivity implements XListView.IXListViewListener {
 
     @InjectView(R.id.tv_status_bar_name)
     TextView tvStatusBarName;
@@ -64,13 +64,11 @@ public class FindWorkActivity extends BaseActivity {
     @InjectView(R.id.tv_work_status)
     TextView tvWorkStatus;
     @InjectView(R.id.lv)
-    ListView lv;
+    XListView lv;
     @InjectView(R.id.ll_null)
     LinearLayout llNull;
     @InjectView(R.id.rootView)
     LinearLayout rootView;
-    @InjectView(R.id.ref)
-    RefreshLayout ref;
 
     private List<FindWorkBean.DataObjBean.RtListBean> been = new ArrayList<>();
     private List<FindWorkBean.DataObjBean.RtListBean> been1 = new ArrayList<>();
@@ -126,6 +124,12 @@ public class FindWorkActivity extends BaseActivity {
 
         tvStatusBarName.setText("找活干");
 
+        lv.setPullRefreshEnable(true);
+        lv.setPullLoadEnable(true);
+        lv.setAutoLoadEnable(false);
+        lv.setXListViewListener(this);
+        lv.setRefreshTime(getTime());
+
         been = new ArrayList<>();
         adapter = new FindWorkLVAdapter(this, been);
         lv.setAdapter(adapter);
@@ -147,44 +151,26 @@ public class FindWorkActivity extends BaseActivity {
 
         expandableListView.addHeaderView(headerView);
 
-        ref.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                page = 1;
-                initData();
-            }
-        });
-
-//        ref.setOnLoadListener(new RefreshLayout.OnLoadListener() {
+//        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
 //            @Override
-//            public void onLoad() {
-//                ref.setLoading(true);
-//                been1.clear();
-//                page++;
-//                loadData();
+//            public void onScrollStateChanged(AbsListView absListView, int i) {
+//
+//            }
+//
+//            @Override
+//            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+//                boolean enable = false;
+//                if (lv != null && lv.getChildCount() > 0) {
+//                    // check if the first item of the list is visible
+//                    boolean firstItemVisible = lv.getFirstVisiblePosition() == 0;
+//                    // check if the top of the first item is visible
+//                    boolean topOfFirstItemVisible = lv.getChildAt(0).getTop() == 0;
+//                    // enabling or disabling the refresh layout
+//                    enable = firstItemVisible && topOfFirstItemVisible;
+//                }
+////                ref.setEnabled(enable);
 //            }
 //        });
-
-        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView absListView, int i) {
-
-            }
-
-            @Override
-            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-                boolean enable = false;
-                if (lv != null && lv.getChildCount() > 0) {
-                    // check if the first item of the list is visible
-                    boolean firstItemVisible = lv.getFirstVisiblePosition() == 0;
-                    // check if the top of the first item is visible
-                    boolean topOfFirstItemVisible = lv.getChildAt(0).getTop() == 0;
-                    // enabling or disabling the refresh layout
-                    enable = firstItemVisible && topOfFirstItemVisible;
-                }
-                ref.setEnabled(enable);
-            }
-        });
 
     }
 
@@ -192,7 +178,7 @@ public class FindWorkActivity extends BaseActivity {
     private void initData() {
         if (IsNetWork.isNetWork(this)) {
             showProgressDialog();
-            ref.setRefreshing(true);
+//            ref.setRefreshing(true);
             been.clear();
             groups.clear();
             items.clear();
@@ -204,6 +190,25 @@ public class FindWorkActivity extends BaseActivity {
         }
 
     }
+
+    @Override
+    public void onRefresh() {
+        page = 1;
+        lv.setPullRefreshEnable(true);
+        initData();
+
+    }
+
+    @Override
+    public void onLoadMore() {
+
+        been1.clear();
+        page++;
+        lv.setPullLoadEnable(true);
+        loadData();
+
+    }
+
 
     private void getCalssify() {
 
@@ -299,7 +304,8 @@ public class FindWorkActivity extends BaseActivity {
                 }
 
                 hideProgressDialog();
-                ref.setRefreshing(false);
+//                ref.setRefreshing(false);
+                onLoad();
 
             }
 
@@ -308,7 +314,8 @@ public class FindWorkActivity extends BaseActivity {
 
                 Log.e("fail", ex.getMessage());
                 hideProgressDialog();
-                ref.setRefreshing(false);
+//                ref.setRefreshing(false);
+                onLoad();
             }
 
             @Override
@@ -352,9 +359,9 @@ public class FindWorkActivity extends BaseActivity {
 
                         adapter.addBeen1(been1);
 
-
                     } else {
                         showToast("没有数据了");
+                        lv.setPullLoadEnable(false);
                     }
                 } else {
                     showToast(bean.getErrorMsg());
@@ -362,6 +369,7 @@ public class FindWorkActivity extends BaseActivity {
 
                 hideProgressDialog();
 //                ref.setLoading(false);
+                onLoad();
 
             }
 
@@ -370,7 +378,8 @@ public class FindWorkActivity extends BaseActivity {
 
                 Log.e("fail", ex.getMessage());
                 hideProgressDialog();
-//                ref.setLoading(false);
+//                ref.setLoadMoreEnabled(false);
+                onLoad();
             }
 
             @Override
@@ -602,5 +611,16 @@ public class FindWorkActivity extends BaseActivity {
         initData();
 
     }
+
+    private void onLoad() {
+        lv.stopRefresh();
+        lv.stopLoadMore();
+        lv.setRefreshTime(getTime());
+    }
+
+    private String getTime() {
+        return new SimpleDateFormat("MM-dd HH:mm", Locale.CHINA).format(new Date());
+    }
+
 
 }

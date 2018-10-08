@@ -47,9 +47,7 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 
 import org.xutils.common.Callback;
-import org.xutils.common.util.KeyValue;
 import org.xutils.http.RequestParams;
-import org.xutils.http.body.MultipartBody;
 import org.xutils.x;
 
 import java.io.File;
@@ -565,7 +563,6 @@ public class MineFragment extends BaseFragment {
 //        RequestParams params = new RequestParams(Contants.POST_HUANJIA);
 //        params.setRequestBody(body);
         params.setMultipart(true);
-
         params.addBodyParameter("file", new File(path), "multipart/form-data");
 
 
@@ -611,14 +608,13 @@ public class MineFragment extends BaseFragment {
         });
 
 //        Map<String, Object> map = new HashMap<>();
-//        map.put("file", path);
+//        map.put("base64Code", "asd");
 //
-//        XUtil.UpLoadFile(Contants.URL_BASE + "fileUploadOrderImage", map, new Callback.CommonCallback<String>() {
+//        XUtil.UpLoadFile("http://120.27.25.35:8087/xsbx2/xsbx2/uploadpicForBase64", map, new Callback.CommonCallback<String>() {
 //            @Override
 //            public void onSuccess(String result) {
 //
-//                Log.e("result",result);
-//
+//                Log.e("result", result);
 //
 //
 //            }
