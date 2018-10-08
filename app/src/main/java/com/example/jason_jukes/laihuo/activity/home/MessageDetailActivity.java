@@ -2,32 +2,39 @@ package com.example.jason_jukes.laihuo.activity.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.activity.ViewPagerActivity;
+import com.example.jason_jukes.laihuo.adapter.GridAdapter;
 import com.example.jason_jukes.laihuo.adapter.MessageCommentLVAdapter;
+import com.example.jason_jukes.laihuo.bean.MessageBean;
 import com.example.jason_jukes.laihuo.bean.MessageDetailBean;
-import com.example.jason_jukes.laihuo.bean.MessageMarketBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
 import com.example.jason_jukes.laihuo.tool.IsNetWork;
 import com.example.jason_jukes.laihuo.tool.XUtil;
+import com.example.jason_jukes.laihuo.view.MyGridView;
 import com.example.jason_jukes.laihuo.view.glide.GlideCircleTransform;
-import com.example.jason_jukes.laihuo.view.nineImage.NineGridlayout;
 import com.google.gson.Gson;
 
 import org.xutils.common.Callback;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,11 +53,14 @@ public class MessageDetailActivity extends BaseActivity {
     TextView tvStatusBarName;
     @InjectView(R.id.lv)
     ListView lv;
+    @InjectView(R.id.ref)
+    SwipeRefreshLayout ref;
     private View headerView;
-    private TextView name, date, content, focus_count, comment_count, focus;
+    private TextView name, date, content, focus_count, comment_count;
     private ImageView avatar;
     private LinearLayout ll;
-    private NineGridlayout nineGridlayout;
+    private RelativeLayout rl_top;
+    private MyGridView myGridView;
     private TextView new_comment;
 
     private MessageCommentLVAdapter adapter;
@@ -67,6 +77,14 @@ public class MessageDetailActivity extends BaseActivity {
 //        initData();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        been.clear();
+        ll.removeAllViews();
+        initData();
+    }
+
     private void initView() {
         tvStatusBarName.setText("信息市场");
 
@@ -78,18 +96,20 @@ public class MessageDetailActivity extends BaseActivity {
         comment_count = (TextView) headerView.findViewById(R.id.tv_comment_count);
         avatar = (ImageView) headerView.findViewById(R.id.iv_avatar);
         ll = (LinearLayout) headerView.findViewById(R.id.ll_img);
-        nineGridlayout = (NineGridlayout) headerView.findViewById(R.id.iv_img_list);
+        rl_top = (RelativeLayout) headerView.findViewById(R.id.rl_top);
+        myGridView = (MyGridView) headerView.findViewById(R.id.iv_img_list);
         new_comment = (TextView) headerView.findViewById(R.id.tv_new_comment);
-        focus = (TextView) headerView.findViewById(R.id.tv_focus);
 
-        focus.setOnClickListener(new View.OnClickListener() {
+
+        rl_top.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showToast("关注");
+                startActivity(new Intent(MessageDetailActivity.this, PersonalHomeActivity.class)
+                        .putExtra("id", bean.getDataObj().getUser_id() + ""));
             }
         });
 
-        lv.addHeaderView(headerView);
+        lv.addHeaderView(headerView, null, false);
 
         been = new ArrayList<>();
 
@@ -100,26 +120,56 @@ public class MessageDetailActivity extends BaseActivity {
         lv.setVerticalScrollBarEnabled(false);
 
 
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(new Intent(MessageDetailActivity.this, PersonalHomeActivity.class)
+                        .putExtra("id", been.get(i - 1).getUser_id() + ""));
+            }
+        });
+
+
+        ref.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                onResume();
+            }
+        });
+
+        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+                boolean enable = false;
+                if (lv != null && lv.getChildCount() > 0) {
+                    // check if the first item of the list is visible
+                    boolean firstItemVisible = lv.getFirstVisiblePosition() == 0;
+                    // check if the top of the first item is visible
+                    boolean topOfFirstItemVisible = lv.getChildAt(0).getTop() == 0;
+                    // enabling or disabling the refresh layout
+                    enable = firstItemVisible && topOfFirstItemVisible;
+                }
+                ref.setEnabled(enable);
+            }
+        });
+
     }
 
     private void initData() {
 
         if (IsNetWork.isNetWork(this)) {
             showProgressDialog();
+            ref.setRefreshing(true);
             getData();
         } else {
             showToast("请检查网络设置");
 
         }
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        been.clear();
-        ll.removeAllViews();
-        initData();
     }
 
     private void getData() {
@@ -143,40 +193,57 @@ public class MessageDetailActivity extends BaseActivity {
 
                     adapter.notifyDataSetChanged();
 
+                    if (bean.getDataObj().getPics().length() > 0) {
+                        myGridView.setVisibility(View.VISIBLE);
+                    } else {
+                        myGridView.setVisibility(View.GONE);
+                    }
+
                     final List<String> imgs = new ArrayList<>();
                     String str = bean.getDataObj().getPics();
                     String[] arr = str.split(",");//分割字符串得到数组
-                    List<String> list = java.util.Arrays.asList(arr);//字符数组转list
+                    List<String> list = Arrays.asList(arr);//字符数组转list
 
                     for (int i1 = 0; i1 < list.size(); i1++) {
                         imgs.add(Contants.URL_IMG_BASE + list.get(i1));
                     }
 
-                    nineGridlayout.setImagesData(imgs);
-                    nineGridlayout.setOnClickListener(new View.OnClickListener() {
+                    GridAdapter adapter = new GridAdapter(MessageDetailActivity.this, imgs);
+                    myGridView.setAdapter(adapter);
+
+                    myGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
-                        public void onClick(View view) {
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             startActivity(new Intent(MessageDetailActivity.this, ViewPagerActivity.class)
-                                    .putStringArrayListExtra("list", (ArrayList<String>) imgs));
+                                    .putStringArrayListExtra("list", (ArrayList<String>) imgs)
+                                    .putExtra("pos", i));
                         }
                     });
 
+
+//                    if (bean.getDataObj() == 0) {
+//                        tvFocus.setText("关注TA");
+//                        tvFocus.setBackgroundResource(R.drawable.bg_blue_big_corner);
+//                    } else {
+//                        tvFocus.setText("取消关注");
+//                        tvFocus.setBackgroundResource(R.drawable.bg_grey_big_corner);
+//                    }
                     name.setText(bean.getDataObj().getUsername());
                     date.setText(bean.getDataObj().getCreate_time());
                     content.setText(bean.getDataObj().getContents());
                     focus_count.setText(bean.getDataObj().getClick_count() + "");
                     comment_count.setText(bean.getDataObj().getSreplyList().size() + "");
                     new_comment.setText("最新评论(" + bean.getDataObj().getSreplyList().size() + ")");
-                    Glide.with(context).load(bean.getDataObj().getHead_url()).transform(new GlideCircleTransform(context)).into(avatar);
+                    Glide.with(context).load(bean.getDataObj().getHead_url()).apply(RequestOptions.bitmapTransform(new GlideCircleTransform(context))).into(avatar);
 
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int) context.getResources().getDimension(R.dimen.y80), ViewGroup.LayoutParams.MATCH_PARENT);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int) context.getResources().getDimension(R.dimen.y60), ViewGroup.LayoutParams.MATCH_PARENT);
 
                     for (int i = 0; i < bean.getDataObj().getTopicLogList().size(); i++) {
                         ImageView imageView = new ImageView(context);
                         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                         imageView.setPadding(0, 0, 0, 0);
                         imageView.setLayoutParams(params);
-                        Glide.with(context).load(bean.getDataObj().getTopicLogList().get(i).getHead_url()).transform(new GlideCircleTransform(context)).into(imageView);
+                        Glide.with(context).load(bean.getDataObj().getTopicLogList().get(i).getHead_url()).apply(RequestOptions.bitmapTransform(new GlideCircleTransform(context))).into(imageView);
                         ll.addView(imageView);
                     }
 
@@ -186,6 +253,7 @@ public class MessageDetailActivity extends BaseActivity {
                 }
 
                 hideProgressDialog();
+                ref.setRefreshing(false);
 
             }
 

@@ -39,7 +39,7 @@
             app:starHalf="@mipmap/rating_small_half"
             app:starImageSize="@dimen/x100"
             app:starPadding="@dimen/x20"
-            app:starStep="1"
+            app:starStep="4"
             app:stepSize="Full" />
 
         <TextView
@@ -109,7 +109,7 @@
             app:starHalf="@mipmap/rating_small_half"
             app:starImageSize="@dimen/x60"
             app:starPadding="@dimen/x20"
-            app:starStep="1"
+            app:starStep="4"
             app:stepSize="Full" />
 
         <TextView
@@ -119,7 +119,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x50"
-            android:text="0 分"
+            android:text="4 分"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/x40" />
     </RelativeLayout>
@@ -151,7 +151,7 @@
             app:starHalf="@mipmap/rating_small_half"
             app:starImageSize="@dimen/x60"
             app:starPadding="@dimen/x20"
-            app:starStep="1"
+            app:starStep="4"
             app:stepSize="Full" />
 
         <TextView
@@ -161,7 +161,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x50"
-            android:text="0 分"
+            android:text="4 分"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/x40" />
     </RelativeLayout>
@@ -188,13 +188,12 @@
             android:isIndicator="false"
             app:clickable="true"
             app:starCount="5"
-
             app:starEmpty="@mipmap/rating_small_empty"
             app:starFill="@mipmap/rating_small_full"
             app:starHalf="@mipmap/rating_small_half"
             app:starImageSize="@dimen/x60"
             app:starPadding="@dimen/x20"
-            app:starStep="1"
+            app:starStep="4"
             app:stepSize="Full" />
 
         <TextView
@@ -204,7 +203,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x50"
-            android:text="0 分"
+            android:text="4 分"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/x40" />
     </RelativeLayout>

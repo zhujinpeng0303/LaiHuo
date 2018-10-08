@@ -1,13 +1,23 @@
 package com.example.jason_jukes.laihuo.activity.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.bean.MessageBean;
+import com.example.jason_jukes.laihuo.tool.Contants;
+import com.example.jason_jukes.laihuo.tool.XUtil;
 import com.example.jason_jukes.laihuo.view.RatingBar;
+import com.google.gson.Gson;
+
+import org.xutils.common.Callback;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -40,6 +50,8 @@ public class SendScoreActivity extends BaseActivity {
     @InjectView(R.id.et_evaluate)
     EditText etEvaluate;
 
+    private String all = "4", jishi = "4", zhiliang = "4", attitude = "4";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,31 +66,37 @@ public class SendScoreActivity extends BaseActivity {
         ratingBarAll.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
             @Override
             public void onRatingChange(float ratingCount) {
-                tvScoreDesc.setText(ratingCount + " 分");
+                all = Math.round(ratingCount) + "";
+                tvScoreDesc.setText(Math.round(ratingCount) + " 分 比较满意,服务周到");
             }
         });
 
         ratingBarJishi.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
             @Override
             public void onRatingChange(float ratingCount) {
-                tvScoreJishi.setText(ratingCount + " 分");
+                tvScoreJishi.setText(Math.round(ratingCount) + " 分");
+                jishi = Math.round(ratingCount) + "";
+
             }
         });
 
         ratingBarZhiliang.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
             @Override
             public void onRatingChange(float ratingCount) {
-                tvScoreZhiliang.setText(ratingCount + " 分");
+                tvScoreZhiliang.setText(Math.round(ratingCount) + " 分");
+                zhiliang = Math.round(ratingCount) + "";
+
             }
         });
 
         ratingBarAttitude.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
             @Override
             public void onRatingChange(float ratingCount) {
-                tvScoreAttitude.setText(ratingCount + " 分");
+                tvScoreAttitude.setText(Math.round(ratingCount) + " 分");
+                attitude = Math.round(ratingCount) + "";
+
             }
         });
-
 
     }
 
@@ -89,8 +107,58 @@ public class SendScoreActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_sure:
-                showToast("提交");
+                showProgressDialog();
+                sendScore();
                 break;
         }
+    }
+
+    private void sendScore() {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("order_id", getIntent().getStringExtra("id"));
+        map.put("ranking_quick", jishi);
+        map.put("ranking_quality", zhiliang);
+        map.put("ranking_attitude",attitude);
+        map.put("ranking_last", all);
+        map.put("ranking_text", getText(etEvaluate));
+
+
+        XUtil.Post(Contants.MY_ADDRESS, map, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                MessageBean bean = new Gson().fromJson(result, MessageBean.class);
+                if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
+
+                    showToast(bean.getErrorMsg());
+                    finish();
+
+                } else {
+                    showToast(bean.getErrorMsg());
+                }
+
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                Log.e("fail", ex.getMessage());
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
     }
 }

@@ -12,6 +12,7 @@ import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.fragment.MinePartWorkFragment;
 import com.example.jason_jukes.laihuo.fragment.MinePostWorkFragment;
+import com.example.jason_jukes.laihuo.tool.Contants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,9 +58,9 @@ public class MinePartWorkActivity extends BaseActivity {
 
     private void initFragment() {
 
-        Fragment shenqing = MinePartWorkFragment.createFragment("", "第1个");
-        Fragment jinxing = MinePartWorkFragment.createFragment("", "第2个");
-        Fragment wancheng = MinePartWorkFragment.createFragment("", "第3个");
+        Fragment shenqing = MinePartWorkFragment.createFragment(Contants.MINE_PART_WORK_SHENQING, "");
+        Fragment jinxing = MinePartWorkFragment.createFragment(Contants.MINE_PART_WORKING, "");
+        Fragment wancheng = MinePartWorkFragment.createFragment(Contants.MINE_PART_WORKED, "5");
         mFragments = new ArrayList<>();
         mFragments.add(shenqing);
         mFragments.add(jinxing);
@@ -85,7 +86,7 @@ public class MinePartWorkActivity extends BaseActivity {
             case R.id.tv_shenqing:
 
                 tvShenqing.setTextColor(getResources().getColor(R.color.white));
-                tvShenqing.setBackground(getDrawable(R.drawable.bg_dark_grey_big_corner));
+                tvShenqing.setBackground(getResources().getDrawable(R.drawable.bg_dark_grey_big_corner));
                 tvJinxing.setTextColor(getResources().getColor(R.color.colorBlack));
                 tvJinxing.setBackground(null);
                 tvWancheng.setTextColor(getResources().getColor(R.color.colorBlack));
@@ -99,7 +100,7 @@ public class MinePartWorkActivity extends BaseActivity {
                 tvShenqing.setTextColor(getResources().getColor(R.color.colorBlack));
                 tvShenqing.setBackground(null);
                 tvJinxing.setTextColor(getResources().getColor(R.color.white));
-                tvJinxing.setBackground(getDrawable(R.drawable.bg_dark_grey_big_corner));
+                tvJinxing.setBackground(getResources().getDrawable(R.drawable.bg_dark_grey_big_corner));
                 tvWancheng.setTextColor(getResources().getColor(R.color.colorBlack));
                 tvWancheng.setBackground(null);
 
@@ -113,7 +114,7 @@ public class MinePartWorkActivity extends BaseActivity {
                 tvJinxing.setTextColor(getResources().getColor(R.color.colorBlack));
                 tvJinxing.setBackground(null);
                 tvWancheng.setTextColor(getResources().getColor(R.color.white));
-                tvWancheng.setBackground(getDrawable(R.drawable.bg_dark_grey_big_corner));
+                tvWancheng.setBackground(getResources().getDrawable(R.drawable.bg_dark_grey_big_corner));
 
                 showFragment(2);
 

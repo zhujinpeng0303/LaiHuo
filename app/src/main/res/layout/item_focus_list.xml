@@ -9,8 +9,7 @@
         android:id="@+id/iv_avatar"
         android:layout_width="@dimen/x150"
         android:layout_height="@dimen/x150"
-        android:layout_margin="@dimen/x30"
-        android:background="@mipmap/ic_launcher" />
+        android:layout_margin="@dimen/x30" />
 
     <TextView
         android:id="@+id/tv_name"
@@ -39,7 +38,8 @@
         android:layout_below="@id/tv_name"
         android:layout_marginTop="@dimen/x20"
         android:layout_toRightOf="@id/iv_card"
-        android:background="@mipmap/img_home" />
+        android:layout_marginLeft="@dimen/x10"
+        android:background="@mipmap/img_phone_renzheng" />
 
     <TextView
         android:id="@+id/tv_star_count"
@@ -49,6 +49,7 @@
         android:layout_marginRight="@dimen/x30"
         android:layout_marginTop="@dimen/x30"
         android:text="5.0"
+        android:layout_marginLeft="@dimen/x10"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/x35" />
 
@@ -57,7 +58,7 @@
         android:layout_height="@dimen/x35"
         android:layout_marginTop="@dimen/x32"
         android:layout_toLeftOf="@id/tv_star_count"
-        android:background="@mipmap/img_home" />
+        android:background="@mipmap/rating_small_full" />
 
     <ImageView
         android:layout_width="@dimen/x48"

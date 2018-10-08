@@ -1,10 +1,7 @@
 package com.example.jason_jukes.laihuo.bean;
 
 /**
- * 作者：Jason_Jukes on 2018/9/30 0030 15:24
- * <p>
- * When I wrote this, only God and I understood what I was doing
- * Now, only God knows
+ * Created by Administrator on 2018/9/30 0030.
  */
 
 public class MessageBean {

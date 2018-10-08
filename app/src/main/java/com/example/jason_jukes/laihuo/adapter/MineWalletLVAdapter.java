@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.bean.WalletChangeBean;
 
 import java.util.List;
 
@@ -22,9 +23,9 @@ import java.util.List;
 public class MineWalletLVAdapter extends BaseAdapter {
 
     private Context context;
-    private List<String> been;
+    private List<WalletChangeBean.DataObjBean.RtListBean> been;
 
-    public MineWalletLVAdapter(Context context, List<String> been) {
+    public MineWalletLVAdapter(Context context, List<WalletChangeBean.DataObjBean.RtListBean> been) {
         this.context = context;
         this.been = been;
     }
@@ -55,15 +56,15 @@ public class MineWalletLVAdapter extends BaseAdapter {
             viewHolder = (MineWalletLVAdapter.MyViewHolder) view.getTag();
         }
 
-        viewHolder.name.setText(been.get(i));
-        if (been.get(i).equals("0")){
-            viewHolder.money.setText("+ 1000");
+        viewHolder.name.setText(been.get(i).getForeign_type_text());
+        viewHolder.time.setText(been.get(i).getCreate_time_text());
+
+        if (been.get(i).getAdd_or_sub().equals("ADD")){
+            viewHolder.money.setText("+ " + been.get(i).getMoney());
             viewHolder.money.setTextColor(context.getResources().getColor(R.color.Blue));
         }else {
-
-            viewHolder.money.setText("- 500");
+            viewHolder.money.setText("- " + been.get(i).getMoney());
             viewHolder.money.setTextColor(context.getResources().getColor(R.color.Orange));
-
         }
 
         return view;

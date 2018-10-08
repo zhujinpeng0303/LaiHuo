@@ -1,22 +1,21 @@
 package com.example.jason_jukes.laihuo.adapter;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.jason_jukes.laihuo.App;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.activity.ViewPagerActivity;
-import com.example.jason_jukes.laihuo.activity.home.MessageDetailActivity;
+import com.example.jason_jukes.laihuo.bean.MineQuaBean;
+import com.example.jason_jukes.laihuo.tool.Contants;
 import com.example.jason_jukes.laihuo.view.CommonDialog;
-import com.example.jason_jukes.laihuo.view.nineImage.NineGridlayout;
+import com.example.jason_jukes.laihuo.view.MyGridView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,11 +31,13 @@ import java.util.List;
 public class MineQualificationLVAdapter extends BaseAdapter {
 
     private Context context;
-    private List<String> been;
+    private List<MineQuaBean.DataArrBean> been;
+    private String type;
 
-    public MineQualificationLVAdapter(Context context, List<String> been) {
+    public MineQualificationLVAdapter(Context context, List<MineQuaBean.DataArrBean> been, String type) {
         this.context = context;
         this.been = been;
+        this.type = type;
     }
 
     public void remove(int pos) {
@@ -70,16 +71,47 @@ public class MineQualificationLVAdapter extends BaseAdapter {
             viewHolder = (MineQualificationLVAdapter.MyViewHolder) view.getTag();
         }
 
-        viewHolder.nineGridlayout.setImagesData(been);
+//        viewHolder.nineGridlayout.setImagesData(been);
 
-        viewHolder.nineGridlayout.setOnClickListener(new View.OnClickListener() {
+//        viewHolder.nineGridlayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                context.startActivity(new Intent(context, ViewPagerActivity.class)
+//                        .putExtra("list", (Serializable) been));
+//            }
+//
+//        });
+
+        viewHolder.content.setText(been.get(i).getCert_title());
+
+        final List<String> imgs = new ArrayList<>();
+        String str = been.get(i).getCert_imgs();
+        String[] arr = str.split(",");//分割字符串得到数组
+        List<String> list = java.util.Arrays.asList(arr);//字符数组转list
+
+        for (int i1 = 0; i1 < list.size(); i1++) {
+            imgs.add(Contants.URL_IMG_BASE + list.get(i1));
+        }
+
+        GridAdapter adapter = new GridAdapter(context,imgs);
+        viewHolder.gridView.setAdapter(adapter);
+
+        viewHolder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                context.startActivity(new Intent(context, ViewPagerActivity.class)
-                        .putExtra("list", (Serializable) been));
-            }
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                context.startActivity(new Intent(context,ViewPagerActivity.class)
+                .putExtra("list", (Serializable) imgs)
+                .putExtra("pos",i));
+
+            }
         });
+
+        if (type.equals("yes")){
+            viewHolder.del.setVisibility(View.VISIBLE);
+        }else {
+            viewHolder.del.setVisibility(View.GONE);
+        }
 
         viewHolder.del.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +127,6 @@ public class MineQualificationLVAdapter extends BaseAdapter {
                     @Override
                     public void cancelClick(AlertDialog dialog) {
                         dialog.dismiss();
-
                     }
                 });
             }
@@ -108,13 +139,14 @@ public class MineQualificationLVAdapter extends BaseAdapter {
 
 
         TextView content, del;
-        NineGridlayout nineGridlayout;
+        //        NineGridlayout nineGridlayout;
+        MyGridView gridView;
 
         public MyViewHolder(View view) {
             del = (TextView) view.findViewById(R.id.tv_del);
             content = (TextView) view.findViewById(R.id.tv_content);
-            nineGridlayout = (NineGridlayout) view.findViewById(R.id.iv_img_list);
-
+//            nineGridlayout = (NineGridlayout) view.findViewById(R.id.iv_img_list);
+            gridView = view.findViewById(R.id.gridView);
         }
     }
 

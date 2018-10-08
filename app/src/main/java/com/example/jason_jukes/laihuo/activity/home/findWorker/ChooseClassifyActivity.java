@@ -1,18 +1,31 @@
 package com.example.jason_jukes.laihuo.activity.home.findWorker;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
+import com.example.jason_jukes.laihuo.App;
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.adapter.ClassifyExpLVAdapter;
+import com.example.jason_jukes.laihuo.bean.ClassifyBean;
+import com.example.jason_jukes.laihuo.tool.Contants;
+import com.example.jason_jukes.laihuo.tool.IsNetWork;
+import com.example.jason_jukes.laihuo.tool.SPTool;
+import com.example.jason_jukes.laihuo.tool.Singleton;
+import com.example.jason_jukes.laihuo.tool.XUtil;
+import com.google.gson.Gson;
+
+import org.xutils.common.Callback;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -32,13 +45,13 @@ public class ChooseClassifyActivity extends BaseActivity {
     @InjectView(R.id.exp_lv)
     ExpandableListView expLv;
 
-    private List<String> groups;
-    private List<List<String>> items;
-
-    private List<String> itemList, itemList1;
+    private List<ClassifyBean.DataArrBean> groups;
+    private List<List<ClassifyBean.DataArrBean.ChildsBean>> items;
 
     private ClassifyExpLVAdapter adapter;
     private View headerView;
+
+    private ClassifyExpLVAdapter.itemClick itemClick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,32 +68,30 @@ public class ChooseClassifyActivity extends BaseActivity {
 
         headerView = LayoutInflater.from(context).inflate(R.layout.header_find_post_exp, null);
 
-        expLv.addHeaderView(headerView);
+        expLv.addHeaderView(headerView, null, false);
 
         groups = new ArrayList<>();
-        groups.add("分类1");
-        groups.add("分类2");
-        groups.add("分类3");
-        groups.add("分类4");
+
 //        groups.add("分类3");
-
-        itemList = new ArrayList<>();
-        itemList.add("http://e.hiphotos.baidu.com/image/pic/item/b03533fa828ba61e8480853f4c34970a304e59b7.jpg");
-        itemList.add("http://e.hiphotos.baidu.com/image/pic/item/b03533fa828ba61e8480853f4c34970a304e59b7.jpg");
-        itemList.add("http://e.hiphotos.baidu.com/image/pic/item/94cad1c8a786c91723e93522c43d70cf3ac757c6.jpg");
-        itemList.add("http://e.hiphotos.baidu.com/image/pic/item/b03533fa828ba61e8480853f4c34970a304e59b7.jpg");
-        itemList.add("http://e.hiphotos.baidu.com/image/pic/item/94cad1c8a786c91723e93522c43d70cf3ac757c6.jpg");
-        itemList.add("http://e.hiphotos.baidu.com/image/pic/item/94cad1c8a786c91723e93522c43d70cf3ac757c6.jpg");
-        itemList.add("http://e.hiphotos.baidu.com/image/pic/item/b03533fa828ba61e8480853f4c34970a304e59b7.jpg");
-
         items = new ArrayList<>();
-        items.add(itemList);
-        items.add(itemList);
-        items.add(itemList);
-        items.add(itemList);
+
+        itemClick = new ClassifyExpLVAdapter.itemClick() {
+            @Override
+            public void ItemClick(int pos, int p) {
+
+                startActivity(new Intent(context, WorkDescActivity.class));
+                SPTool.getInstance().setShareData(Contants.CLASSIFY_ID, items.get(pos).get(p).getId() + "");
+
+                Singleton.instance.setClassify_id(items.get(pos).get(p).getId() + "");
+                Singleton.instance.setClassify_name(groups.get(pos).getCertification_classify_name() + "-" + items.get(pos).get(p).getCertification_classify_name() + "");
+
+                App.addDestoryActivity(ChooseClassifyActivity.this, "classify");
 
 
-        adapter = new ClassifyExpLVAdapter(this, groups, items);
+            }
+        };
+
+        adapter = new ClassifyExpLVAdapter(this, groups, items, itemClick);
         expLv.setAdapter(adapter);
 
         for (int i = 0; i < groups.size(); i++) {
@@ -95,10 +106,77 @@ public class ChooseClassifyActivity extends BaseActivity {
             }
         });
 
-
     }
 
     private void initData() {
+
+        if (IsNetWork.isNetWork(this)) {
+            showProgressDialog();
+            getData();
+        } else {
+            showToast("请检查网络设置");
+
+        }
+
+    }
+
+    private void getData() {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", "gggg");
+        map.put("id", "0");
+
+        XUtil.Post(Contants.GET_CLASSIFY, map, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                ClassifyBean bean = new Gson().fromJson(result, ClassifyBean.class);
+                if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
+
+                    for (int i = 0; i < bean.getDataArr().size(); i++) {
+
+                        groups.add(bean.getDataArr().get(i));
+
+                        List<ClassifyBean.DataArrBean.ChildsBean> childs = new ArrayList<ClassifyBean.DataArrBean.ChildsBean>();
+
+                        for (int i1 = 0; i1 < bean.getDataArr().get(i).getChilds().size(); i1++) {
+
+                            childs.add(bean.getDataArr().get(i).getChilds().get(i1));
+
+                        }
+
+                        items.add(childs);
+
+                        expLv.expandGroup(i);
+                    }
+                    adapter.notifyDataSetChanged();
+
+                } else {
+                    showToast(bean.getErrorMsg());
+                }
+
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                Log.e("fail", ex.getMessage());
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
 
     }
 

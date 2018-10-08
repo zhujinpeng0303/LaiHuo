@@ -1,20 +1,35 @@
 package com.example.jason_jukes.laihuo.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.BaseFragment;
 import com.example.jason_jukes.laihuo.R;
-import com.example.jason_jukes.laihuo.adapter.FindWorkLVAdapter;
+import com.example.jason_jukes.laihuo.activity.home.WorkDetailActivity;
+import com.example.jason_jukes.laihuo.adapter.PostWorkLVAdapter;
+import com.example.jason_jukes.laihuo.bean.PostWorkBean;
+import com.example.jason_jukes.laihuo.tool.Contants;
+import com.example.jason_jukes.laihuo.tool.IsNetWork;
+import com.example.jason_jukes.laihuo.tool.XUtil;
+import com.google.gson.Gson;
+
+import org.xutils.common.Callback;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -30,12 +45,15 @@ public class MinePostWorkFragment extends BaseFragment {
 
     @InjectView(R.id.lv)
     ListView lv;
-    @InjectView(R.id.tv)
-    TextView tv;
+    @InjectView(R.id.ll_null)
+    LinearLayout llNull;
+    @InjectView(R.id.ref)
+    SwipeRefreshLayout ref;
     private View view;
 
-    private List<String> been = new ArrayList<>();
-    private FindWorkLVAdapter adapter;
+    private List<PostWorkBean.DataArrBean> been = new ArrayList<>();
+    private PostWorkLVAdapter adapter;
+    private String status = "";
 
     public static Fragment createFragment(String url, String sign) {
         Fragment fragment = new MinePostWorkFragment();
@@ -64,21 +82,120 @@ public class MinePostWorkFragment extends BaseFragment {
 
     private void initView() {
         Bundle bundle = getArguments();
-        tv.setText(bundle.getString("sign"));
+        status = bundle.getString("sign");
 
         been = new ArrayList<>();
-        been.add("道理-瓦匠");
-        been.add("道外-砖工");
-        been.add("南岗-砌砖");
-        been.add("群力-装卸工");
-        been.add("平房-力工");
-
-        adapter = new FindWorkLVAdapter(context,been);
+        adapter = new PostWorkLVAdapter(context, been);
         lv.setAdapter(adapter);
+
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(new Intent(context, WorkDetailActivity.class)
+                        .putExtra("id", been.get(i).getId() + "")
+                        .putExtra("type", been.get(i).getOrder_type()));
+            }
+        });
+
+        ref.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                been.clear();
+                initData();
+            }
+        });
+
+        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+                boolean enable = false;
+                if (lv != null && lv.getChildCount() > 0) {
+                    // check if the first item of the list is visible
+                    boolean firstItemVisible = lv.getFirstVisiblePosition() == 0;
+                    // check if the top of the first item is visible
+                    boolean topOfFirstItemVisible = lv.getChildAt(0).getTop() == 0;
+                    // enabling or disabling the refresh layout
+                    enable = firstItemVisible && topOfFirstItemVisible;
+                }
+                ref.setEnabled(enable);
+            }
+        });
 
     }
 
     private void initData() {
+
+        if (IsNetWork.isNetWork(context)) {
+            showPro();
+            ref.setRefreshing(true);
+            getData();
+        } else {
+            showToast("请检查网络设置");
+
+        }
+
+    }
+
+    private void getData() {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", "gggg");
+        map.put("order_status", status);
+
+
+        XUtil.Post(Contants.MINE_POST_WORK, map, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                PostWorkBean bean = new Gson().fromJson(result, PostWorkBean.class);
+                if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
+                    if (bean.getDataArr().size() > 0) {
+                        llNull.setVisibility(View.GONE);
+                        for (int i = 0; i < bean.getDataArr().size(); i++) {
+
+                            been.add(bean.getDataArr().get(i));
+
+                        }
+
+                        adapter.notifyDataSetChanged();
+
+                    } else {
+                        llNull.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    showToast(bean.getErrorMsg());
+                }
+
+                hidePro();
+                ref.setRefreshing(false);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                Log.e("fail", ex.getMessage());
+                hidePro();
+                ref.setRefreshing(false);
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
     }
 
     @Override

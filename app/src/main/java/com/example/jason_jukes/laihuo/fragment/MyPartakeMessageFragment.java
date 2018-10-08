@@ -4,17 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.jason_jukes.laihuo.BaseFragment;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.activity.home.MessageDetailActivity;
-import com.example.jason_jukes.laihuo.activity.home.MessageMarketActivity;
 import com.example.jason_jukes.laihuo.adapter.MessageMarketLVAdapter;
 import com.example.jason_jukes.laihuo.bean.MessageMarketBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
@@ -43,6 +44,8 @@ public class MyPartakeMessageFragment extends BaseFragment {
 
     @InjectView(R.id.lv)
     ListView lv;
+    @InjectView(R.id.ref)
+    SwipeRefreshLayout ref;
     private MessageMarketLVAdapter adapter;
     private List<MessageMarketBean.DataObjBean.RtListBean> been;
 
@@ -77,6 +80,35 @@ public class MyPartakeMessageFragment extends BaseFragment {
 
     private void initView() {
 
+        ref.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                been.clear();
+                initData();
+            }
+        });
+
+        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+                boolean enable = false;
+                if (lv != null && lv.getChildCount() > 0) {
+                    // check if the first item of the list is visible
+                    boolean firstItemVisible = lv.getFirstVisiblePosition() == 0;
+                    // check if the top of the first item is visible
+                    boolean topOfFirstItemVisible = lv.getChildAt(0).getTop() == 0;
+                    // enabling or disabling the refresh layout
+                    enable = firstItemVisible && topOfFirstItemVisible;
+                }
+                ref.setEnabled(enable);
+            }
+        });
+
     }
 
     private void initData() {
@@ -103,6 +135,7 @@ public class MyPartakeMessageFragment extends BaseFragment {
 
         if (IsNetWork.isNetWork(context)) {
             showPro();
+            ref.setRefreshing(true);
             getData();
         } else {
             showToast("请检查网络设置");
@@ -134,6 +167,7 @@ public class MyPartakeMessageFragment extends BaseFragment {
                 }
 
                 hidePro();
+                ref.setRefreshing(false);
 
             }
 
@@ -142,6 +176,7 @@ public class MyPartakeMessageFragment extends BaseFragment {
 
                 Log.e("fail", ex.getMessage());
                 hidePro();
+                ref.setRefreshing(false);
 
             }
 
@@ -158,4 +193,9 @@ public class MyPartakeMessageFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
 }

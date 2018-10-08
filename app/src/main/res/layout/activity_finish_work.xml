@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/status_bar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:layout_marginTop="@dimen/y50">
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="工作干完,把工作成果拍下来吧"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/x30" />
+
+        <View
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/y3"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x50"
+            android:layout_toLeftOf="@id/tv"
+            android:background="@color/colorBackgroud" />
+
+        <View
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/y3"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x50"
+            android:layout_toRightOf="@id/tv"
+            android:background="@color/colorBackgroud" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_sure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/y30"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginRight="@dimen/x50"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@drawable/bg_yellow_corner"
+        android:gravity="center"
+        android:paddingBottom="@dimen/y40"
+        android:paddingTop="@dimen/y40"
+        android:text="确认完成"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/x40" />
+
+
+</LinearLayout>

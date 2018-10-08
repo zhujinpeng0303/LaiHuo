@@ -8,7 +8,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.bean.NearbyPersonBean;
+import com.example.jason_jukes.laihuo.view.glide.GlideCircleTransform;
 
 import java.util.List;
 
@@ -22,9 +26,9 @@ import java.util.List;
 public class NearbyPersonLVAdapter extends BaseAdapter {
 
     private Context context;
-    private List<String> been;
+    private List<NearbyPersonBean.DataArrBean> been;
 
-    public NearbyPersonLVAdapter(Context context, List<String> been) {
+    public NearbyPersonLVAdapter(Context context, List<NearbyPersonBean.DataArrBean> been) {
         this.context = context;
         this.been = been;
     }
@@ -55,7 +59,10 @@ public class NearbyPersonLVAdapter extends BaseAdapter {
             viewHolder = (NearbyPersonLVAdapter.MyViewHolder) view.getTag();
         }
 
-        viewHolder.name.setText(been.get(i));
+        Glide.with(context).load(been.get(i).getHead_url()).apply(RequestOptions.bitmapTransform(new GlideCircleTransform(context))).into(viewHolder.avatar);
+        viewHolder.name.setText(been.get(i).getName());
+        viewHolder.juli.setText("距离" + been.get(i).getJuli() + "米");
+        viewHolder.score.setText(been.get(i).getScore() + "");
 
         return view;
     }

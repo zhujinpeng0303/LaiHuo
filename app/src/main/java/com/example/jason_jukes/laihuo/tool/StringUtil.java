@@ -34,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -445,8 +446,8 @@ public class StringUtil {
      *
      * @return
      */
-    public static String getCurrentTime() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+    public static String getCurrentTime(String type) {
+        SimpleDateFormat sdf = new SimpleDateFormat(type);
         Log.d("--33333---", sdf.format(new java.util.Date()));
         return sdf.format(new java.util.Date());
     }
@@ -646,6 +647,25 @@ public class StringUtil {
                 (ip >> 24 & 0xFF);
     }
 
+    //获取指定位数的随机数字
+    public static String getRandom(int lenth) {
 
+        String strRand = "";
+        for (int i = 0; i < lenth; i++) {
+            strRand += String.valueOf((int) (Math.random() * 10));
+        }
+
+        return strRand;
+
+    }
+
+    public static List<String> splitStr(String s) {
+
+        String[] arr = s.split(",");//分割字符串得到数组
+        List<String> list = java.util.Arrays.asList(arr);
+
+        return list;
+
+    }
 
 }

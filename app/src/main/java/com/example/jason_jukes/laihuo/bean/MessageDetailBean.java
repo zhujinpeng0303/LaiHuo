@@ -3,10 +3,7 @@ package com.example.jason_jukes.laihuo.bean;
 import java.util.List;
 
 /**
- * 作者：Jason_Jukes on 2018/9/30 0030 14:38
- * <p>
- * When I wrote this, only God and I understood what I was doing
- * Now, only God knows
+ * Created by Administrator on 2018/9/30 0030.
  */
 
 public class MessageDetailBean {
@@ -15,7 +12,7 @@ public class MessageDetailBean {
     /**
      * errorCode : 0000
      * errorMsg : 成功
-     * dataObj : {"topicLogList":[{"head_url":"https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELmNSO5CqZFIXtrUd3RscFwaaYWcAVricrIvhiaLAAbfEG0BafsWQUOw4OL95dTUvDuO7um61Hv2KPQ/132","create_time":"2018-09-30 11:29:26","user_id":"100011","id":219,"topic_id":"185"},{"head_url":"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoTcUxr0HmWOh9nHHyMuCeYAGsznic6zEpOlzxujwucmhXomtPnGBEr9ht9ah66Xt2icvjfTtzKtEibQ/132","create_time":"2018-09-30 11:25:43","user_id":"1","id":218,"topic_id":"185"}],"head_url":"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoTcUxr0HmWOh9nHHyMuCeYAGsznic6zEpOlzxujwucmhXomtPnGBEr9ht9ah66Xt2icvjfTtzKtEibQ/132","create_time":"2018-09-30 11:25:40","user_id":"1","contents":"测试内容","sreplyList":[{"head_url":"https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELmNSO5CqZFIXtrUd3RscFwaaYWcAVricrIvhiaLAAbfEG0BafsWQUOw4OL95dTUvDuO7um61Hv2KPQ/132","create_time":"2018-09-30 11:29:36","user_id":"100011","contents":"评论冰冰","id":179,"topic_id":"185","username":"张槟冰"},{"head_url":"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoTcUxr0HmWOh9nHHyMuCeYAGsznic6zEpOlzxujwucmhXomtPnGBEr9ht9ah66Xt2icvjfTtzKtEibQ/132","create_time":"2018-09-30 11:29:04","user_id":"1","contents":"回复","id":178,"topic_id":"185","username":"GGGG"}],"click_count":2,"id":185,"title":"","pics":"userBbsImage/userBbsImage-ZpOXFpYNPssg.png","username":"GGGG"}
+     * dataObj : {"topicLogList":[{"head_url":"https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELmNSO5CqZFIXtrUd3RscFwaaYWcAVricrIvhiaLAAbfEG0BafsWQUOw4OL95dTUvDuO7um61Hv2KPQ/132","create_time":"2018-09-30 11:29:26","user_id":"100011","id":219,"topic_id":"185"},{"head_url":"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoTcUxr0HmWOh9nHHyMuCeYAGsznic6zEpOlzxujwucmhXomtPnGBEr9ht9ah66Xt2icvjfTtzKtEibQ/132","create_time":"2018-09-30 11:25:43","user_id":"1","id":218,"topic_id":"185"}],"head_url":"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoTcUxr0HmWOh9nHHyMuCeYAGsznic6zEpOlzxujwucmhXomtPnGBEr9ht9ah66Xt2icvjfTtzKtEibQ/132","create_time":"2018-09-30 11:25:40","user_id":"1","contents":"测试内容","sreplyList":[{"head_url":"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoTcUxr0HmWOh9nHHyMuCeYAGsznic6zEpOlzxujwucmhXomtPnGBEr9ht9ah66Xt2icvjfTtzKtEibQ/132","create_time":"2018-09-30 15:48:20","user_id":"1","contents":"","id":190,"topic_id":"185","username":"GGGG"},{"head_url":"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoTcUxr0HmWOh9nHHyMuCeYAGsznic6zEpOlzxujwucmhXomtPnGBEr9ht9ah66Xt2icvjfTtzKtEibQ/132","create_time":"2018-09-30 15:40:10","user_id":"1","contents":"111111","id":187,"topic_id":"185","username":"GGGG"},{"head_url":"https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELmNSO5CqZFIXtrUd3RscFwaaYWcAVricrIvhiaLAAbfEG0BafsWQUOw4OL95dTUvDuO7um61Hv2KPQ/132","create_time":"2018-09-30 11:29:36","user_id":"100011","contents":"评论冰冰","id":179,"topic_id":"185","username":"张槟冰"},{"head_url":"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoTcUxr0HmWOh9nHHyMuCeYAGsznic6zEpOlzxujwucmhXomtPnGBEr9ht9ah66Xt2icvjfTtzKtEibQ/132","create_time":"2018-09-30 11:29:04","user_id":"1","contents":"回复","id":178,"topic_id":"185","username":"GGGG"}],"click_count":2,"id":185,"title":"","pics":"userBbsImage/userBbsImage-ZpOXFpYNPssg.png","username":"GGGG"}
      */
 
     private String errorCode;
@@ -53,7 +50,7 @@ public class MessageDetailBean {
          * create_time : 2018-09-30 11:25:40
          * user_id : 1
          * contents : 测试内容
-         * sreplyList : [{"head_url":"https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELmNSO5CqZFIXtrUd3RscFwaaYWcAVricrIvhiaLAAbfEG0BafsWQUOw4OL95dTUvDuO7um61Hv2KPQ/132","create_time":"2018-09-30 11:29:36","user_id":"100011","contents":"评论冰冰","id":179,"topic_id":"185","username":"张槟冰"},{"head_url":"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoTcUxr0HmWOh9nHHyMuCeYAGsznic6zEpOlzxujwucmhXomtPnGBEr9ht9ah66Xt2icvjfTtzKtEibQ/132","create_time":"2018-09-30 11:29:04","user_id":"1","contents":"回复","id":178,"topic_id":"185","username":"GGGG"}]
+         * sreplyList : [{"head_url":"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoTcUxr0HmWOh9nHHyMuCeYAGsznic6zEpOlzxujwucmhXomtPnGBEr9ht9ah66Xt2icvjfTtzKtEibQ/132","create_time":"2018-09-30 15:48:20","user_id":"1","contents":"","id":190,"topic_id":"185","username":"GGGG"},{"head_url":"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoTcUxr0HmWOh9nHHyMuCeYAGsznic6zEpOlzxujwucmhXomtPnGBEr9ht9ah66Xt2icvjfTtzKtEibQ/132","create_time":"2018-09-30 15:40:10","user_id":"1","contents":"111111","id":187,"topic_id":"185","username":"GGGG"},{"head_url":"https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELmNSO5CqZFIXtrUd3RscFwaaYWcAVricrIvhiaLAAbfEG0BafsWQUOw4OL95dTUvDuO7um61Hv2KPQ/132","create_time":"2018-09-30 11:29:36","user_id":"100011","contents":"评论冰冰","id":179,"topic_id":"185","username":"张槟冰"},{"head_url":"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoTcUxr0HmWOh9nHHyMuCeYAGsznic6zEpOlzxujwucmhXomtPnGBEr9ht9ah66Xt2icvjfTtzKtEibQ/132","create_time":"2018-09-30 11:29:04","user_id":"1","contents":"回复","id":178,"topic_id":"185","username":"GGGG"}]
          * click_count : 2
          * id : 185
          * title :
@@ -219,13 +216,13 @@ public class MessageDetailBean {
 
         public static class SreplyListBean {
             /**
-             * head_url : https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELmNSO5CqZFIXtrUd3RscFwaaYWcAVricrIvhiaLAAbfEG0BafsWQUOw4OL95dTUvDuO7um61Hv2KPQ/132
-             * create_time : 2018-09-30 11:29:36
-             * user_id : 100011
-             * contents : 评论冰冰
-             * id : 179
+             * head_url : https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoTcUxr0HmWOh9nHHyMuCeYAGsznic6zEpOlzxujwucmhXomtPnGBEr9ht9ah66Xt2icvjfTtzKtEibQ/132
+             * create_time : 2018-09-30 15:48:20
+             * user_id : 1
+             * contents :
+             * id : 190
              * topic_id : 185
-             * username : 张槟冰
+             * username : GGGG
              */
 
             private String head_url;

@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.bean.WithdrawBean;
 
 import java.util.List;
 
@@ -18,9 +19,9 @@ import java.util.List;
 public class MineWithdrawLVAdapter extends BaseAdapter {
 
     private Context context;
-    private List<String> been;
+    private List<WithdrawBean.DataArrBean> been;
 
-    public MineWithdrawLVAdapter(Context context, List<String> been) {
+    public MineWithdrawLVAdapter(Context context, List<WithdrawBean.DataArrBean> been) {
         this.context = context;
         this.been = been;
     }
@@ -51,7 +52,7 @@ public class MineWithdrawLVAdapter extends BaseAdapter {
             viewHolder = (MineWithdrawLVAdapter.MyViewHolder) view.getTag();
         }
 
-        viewHolder.money.setText(been.get(i));
+        viewHolder.money.setText(been.get(i).getMoney());
 
 
         return view;

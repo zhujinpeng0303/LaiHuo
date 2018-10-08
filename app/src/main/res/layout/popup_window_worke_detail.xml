@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aooTool="http://schemas.android.com/apk/res-auto"
+    xmlns:appTool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F2212121"
@@ -7,125 +9,132 @@
 
 
     <RelativeLayout
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginRight="@dimen/x50"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="@dimen/x100"
-        android:layout_marginRight="@dimen/x100">
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
 
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/rl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/x50"
             android:background="@drawable/bg_white_corner"
+            android:orientation="vertical">
 
-            >
-
-            <ImageView
-                android:id="@+id/iv_go"
-                android:layout_width="@dimen/x50"
-                android:layout_height="@dimen/x50"
-                android:layout_alignParentRight="true"
-                android:layout_margin="@dimen/x60"
-                android:background="@mipmap/img_go"
-                android:paddingLeft="@dimen/x20" />
-
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/y50"
-                android:text="那冬梅"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/x40" />
-
-            <ImageView
-                android:id="@+id/iv1"
-                android:layout_width="@dimen/x40"
-                android:layout_height="@dimen/x40"
-                android:layout_alignLeft="@id/tv_name"
-                android:layout_below="@id/tv_name"
-                android:layout_marginTop="@dimen/y20"
-                android:background="@mipmap/img_xueli_renzheng" />
-
-            <ImageView
-                android:layout_width="@dimen/x40"
-                android:layout_height="@dimen/x40"
-                android:layout_below="@id/tv_name"
-                android:layout_marginLeft="@dimen/x20"
-                android:layout_marginTop="@dimen/y20"
-                android:layout_toRightOf="@id/iv1"
-                android:background="@mipmap/img_phone_renzheng" />
-
-
-            <TextView
-                android:id="@+id/ping"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_name"
-                android:layout_marginLeft="@dimen/x50"
-                android:layout_marginTop="@dimen/y80"
-                android:text="评分: "
-                android:textColor="@color/colorGray"
-                android:textSize="@dimen/x35" />
-
-            <TextView
-                android:id="@+id/tv_score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_name"
-                android:layout_marginLeft="@dimen/x10"
-                android:layout_marginTop="@dimen/y80"
-                android:layout_toRightOf="@id/ping"
-                android:text="4.8"
-                android:textColor="@color/DarkOrange"
-                android:textSize="@dimen/x35" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_name"
-                android:layout_marginLeft="@dimen/x10"
-                android:layout_marginTop="@dimen/y80"
-                android:layout_toRightOf="@id/tv_score"
-                android:text="分"
-                android:textColor="@color/colorGray"
-                android:textSize="@dimen/x35" />
-
-            <TextView
-                android:id="@+id/tv_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/ping"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/x50"
-                android:text="10000000000"
-                android:textColor="@color/DarkOrange"
-                android:textSize="@dimen/x35" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/tv_phone"
-                android:layout_marginRight="@dimen/x10"
-                android:layout_toLeftOf="@id/tv_phone"
-                android:text="电话:"
-                android:textColor="@color/colorGray"
-                android:textSize="@dimen/x35" />
-
-            <View
-                android:id="@+id/v"
+            <RelativeLayout
+                android:id="@+id/rl_user"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y2"
-                android:layout_below="@id/tv_phone"
-                android:layout_marginLeft="@dimen/x50"
-                android:layout_marginRight="@dimen/x50"
-                android:layout_marginTop="@dimen/y30"
-                android:background="@color/colorBackgroud" />
+                android:layout_height="wrap_content">
 
+
+                <ImageView
+                    android:id="@+id/iv_go"
+                    android:layout_width="@dimen/x50"
+                    android:layout_height="@dimen/x50"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="@dimen/x60"
+                    android:background="@mipmap/img_go"
+                    android:paddingLeft="@dimen/x20" />
+
+                <TextView
+                    android:id="@+id/tv_detail_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/y50"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/x40"
+                    appTool:text="那冬梅" />
+
+                <ImageView
+                    android:id="@+id/iv1"
+                    android:layout_width="@dimen/x40"
+                    android:layout_height="@dimen/x40"
+                    android:layout_alignLeft="@id/tv_detail_name"
+                    android:layout_below="@id/tv_detail_name"
+                    android:layout_marginTop="@dimen/y20"
+                    android:background="@mipmap/img_xueli_renzheng" />
+
+                <ImageView
+                    android:layout_width="@dimen/x40"
+                    android:layout_height="@dimen/x40"
+                    android:layout_below="@id/tv_detail_name"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:layout_marginTop="@dimen/y20"
+                    android:layout_toRightOf="@id/iv1"
+                    android:background="@mipmap/img_phone_renzheng" />
+
+
+                <TextView
+                    android:id="@+id/ping"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_detail_name"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:layout_marginTop="@dimen/y80"
+                    android:text="评分: "
+                    android:textColor="@color/colorGray"
+                    android:textSize="@dimen/x35" />
+
+                <TextView
+                    android:id="@+id/tv_detail_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_detail_name"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_marginTop="@dimen/y80"
+                    android:layout_toRightOf="@id/ping"
+                    android:textColor="@color/DarkOrange"
+                    android:textSize="@dimen/x35"
+                    appTool:text="4.8" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_detail_name"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_marginTop="@dimen/y80"
+                    android:layout_toRightOf="@id/tv_detail_score"
+                    android:text="分"
+                    android:textColor="@color/colorGray"
+                    android:textSize="@dimen/x35" />
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/ping"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/x50"
+                    android:textColor="@color/DarkOrange"
+                    android:textSize="@dimen/x35"
+                    appTool:text="10000000000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/tv_phone"
+                    android:layout_marginRight="@dimen/x10"
+                    android:layout_toLeftOf="@id/tv_phone"
+                    android:text="电话:"
+                    android:textColor="@color/colorGray"
+                    android:textSize="@dimen/x35" />
+
+                <View
+                    android:id="@+id/v"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y2"
+                    android:layout_below="@id/tv_phone"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:layout_marginRight="@dimen/x50"
+                    android:layout_marginTop="@dimen/y30"
+                    android:background="@color/colorBackgroud" />
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/ll_evaluate"
@@ -134,12 +143,38 @@
                 android:layout_below="@id/v"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:id="@+id/ll_null"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_null"
+                        android:layout_width="@dimen/x300"
+                        android:layout_height="@dimen/x300"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/y50"
+                        android:background="@mipmap/img_null" />
+
+                    <TextView
+                        android:id="@+id/tv_null"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/y30"
+                        android:text="里面什么也没有"
+                        android:textColor="@color/colorGray"
+                        android:textSize="@dimen/x35" />
+
+                </LinearLayout>
+
                 <include layout="@layout/item_worker_evaluate_lv" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll"
+                android:id="@+id/ll_detail_more"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ll_evaluate"
@@ -159,26 +194,25 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_zuizong"
+                android:id="@+id/ll_detail_zuizong"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ll"
+                android:layout_below="@id/ll_evaluate"
                 android:layout_marginLeft="@dimen/x50"
                 android:layout_marginRight="@dimen/x50"
-                android:layout_marginTop="@dimen/y30"
+                android:layout_marginTop="@dimen/y50"
                 android:background="@drawable/bg_light_grey_corner"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_money"
+                    android:id="@+id/tv_detail_money"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/y30"
-                    android:text="最终报价: 100元"
                     android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/x35" />
-
+                    android:textSize="@dimen/x35"
+                    appTool:text="最终报价: 100元" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -196,12 +230,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ll_zuizong"
-                android:layout_margin="@dimen/x50"
+                android:layout_marginBottom="@dimen/x50"
+                android:layout_marginLeft="@dimen/x50"
+                android:layout_marginRight="@dimen/x50"
+                android:layout_marginTop="@dimen/y50"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_cancel"
+                    android:id="@+id/tv_detail_cancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -209,10 +245,11 @@
                     android:gravity="center"
                     android:paddingBottom="@dimen/x30"
                     android:paddingTop="@dimen/x30"
-                    android:text="取消"
+                    android:text="关闭"
                     android:textColor="@color/colorBlack" />
 
                 <TextView
+                    android:id="@+id/tv_detail_xuanze"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x50"
@@ -221,12 +258,12 @@
                     android:gravity="center"
                     android:paddingBottom="@dimen/x30"
                     android:paddingTop="@dimen/x30"
-                    android:text="选择TA"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorBlack"
+                    appTool:text="选择TA" />
 
             </LinearLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="@dimen/x180"
@@ -236,7 +273,7 @@
             android:background="@drawable/bg_white_big_corner">
 
             <ImageView
-                android:id="@+id/iv_avatar"
+                android:id="@+id/iv_detail_avatar"
                 android:layout_width="@dimen/x160"
                 android:layout_height="@dimen/x160"
                 android:layout_centerInParent="true"
@@ -244,9 +281,7 @@
 
                 />
 
-
         </RelativeLayout>
-
 
     </RelativeLayout>
 

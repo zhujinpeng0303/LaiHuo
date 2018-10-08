@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.jason_jukes.laihuo.App;
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.activity.mine.AddAddressActivity;
@@ -18,6 +19,7 @@ import com.example.jason_jukes.laihuo.adapter.AddressManagerLVAdapter;
 import com.example.jason_jukes.laihuo.bean.AddressBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
 import com.example.jason_jukes.laihuo.tool.IsNetWork;
+import com.example.jason_jukes.laihuo.tool.Singleton;
 import com.example.jason_jukes.laihuo.tool.XUtil;
 import com.google.gson.Gson;
 
@@ -74,7 +76,7 @@ public class WorkAddressActivity extends BaseActivity {
         iv2.setBackgroundResource(R.mipmap.img_dui);
         iv3.setBackgroundResource(R.mipmap.img_three_choose);
 
-        lv.addHeaderView(headerView);
+        lv.addHeaderView(headerView,null,false);
 
         been = new ArrayList<>();
         adapter = new AddressManagerLVAdapter(this, been);
@@ -84,11 +86,17 @@ public class WorkAddressActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                Singleton.instance.setAddress_id(been.get(i - 1).getId() + "");
+                Singleton.instance.setAddress(been.get(i - 1).getArea_name_top() + "-" + been.get(i - 1).getArea_name());
+                Singleton.instance.setDetailAddress(been.get(i - 1).getAddress() + "");
+                Singleton.instance.setName(been.get(i - 1).getUsername() + "");
+                Singleton.instance.setPhone(been.get(i - 1).getTel() + "");
+
                 startIntent(SurePostActivity.class);
+                App.addDestoryActivity(WorkAddressActivity.this,"address");
 
             }
         });
-
 
     }
 
@@ -101,8 +109,6 @@ public class WorkAddressActivity extends BaseActivity {
             showToast("请检查网络设置");
 
         }
-
-
     }
 
 

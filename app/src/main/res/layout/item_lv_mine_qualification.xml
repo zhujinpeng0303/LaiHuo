@@ -15,23 +15,35 @@
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/x40" />
 
-    <com.example.jason_jukes.laihuo.view.nineImage.NineGridlayout
-        android:id="@+id/iv_img_list"
+    <!--<com.example.jason_jukes.laihuo.view.nineImage.NineGridlayout-->
+    <!--android:id="@+id/iv_img_list"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/tv_content"-->
+    <!--android:layout_margin="@dimen/x50">-->
+
+    <!--</com.example.jason_jukes.laihuo.view.nineImage.NineGridlayout>-->
+
+    <com.example.jason_jukes.laihuo.view.MyGridView
+        android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_content"
-       android:layout_margin="@dimen/x50">
+        android:layout_marginLeft="@dimen/x25"
+        android:layout_marginTop="@dimen/x25"
+        android:numColumns="3">
 
-    </com.example.jason_jukes.laihuo.view.nineImage.NineGridlayout>
+    </com.example.jason_jukes.laihuo.view.MyGridView>
 
     <TextView
         android:id="@+id/tv_del"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/iv_img_list"
+        android:layout_below="@id/gridView"
         android:layout_marginBottom="@dimen/x30"
         android:layout_marginRight="@dimen/x50"
+        android:layout_marginTop="@dimen/x50"
         android:padding="@dimen/x20"
         android:text="删除"
         android:textColor="@color/colorBlack"

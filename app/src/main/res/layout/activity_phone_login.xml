@@ -34,6 +34,41 @@
         android:background="@drawable/bg_et_grey_corner">
 
         <EditText
+            android:id="@+id/et_img_code"
+            android:layout_width="@dimen/x500"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@null"
+            android:digits="0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
+            android:hint="请输入图形验证码"
+            android:maxLength="6"
+            android:paddingLeft="@dimen/x30"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x35" />
+
+        <ImageView
+            android:id="@+id/iv_img_code"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/x30"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y180"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginRight="@dimen/x50"
+        android:layout_marginTop="@dimen/y50"
+        android:background="@drawable/bg_et_grey_corner">
+
+        <EditText
             android:id="@+id/et_code"
             android:layout_width="@dimen/x500"
             android:layout_height="match_parent"

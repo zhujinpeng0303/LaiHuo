@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ref"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/colorBackgroud"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
-    <include layout="@layout/status_bar"/>
-
-    <ListView
-        android:id="@+id/lv"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    </ListView>
+
+        <include layout="@layout/status_bar" />
+
+        <include layout="@layout/include_null" />
+
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+    </LinearLayout>
 
 
-</LinearLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

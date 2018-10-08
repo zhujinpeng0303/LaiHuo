@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apptool="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:id="@+id/ll_service_address"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:layout_marginTop="@dimen/y30"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="@dimen/x3"
+            android:layout_height="@dimen/y40"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x50"
+            android:background="@color/DarkOrange" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x20"
+            android:text="服务地址"
+            android:textSize="@dimen/x35" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_work_address"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y450"
+        android:background="@mipmap/img_address_mohu"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_kejian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="接单后可见"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x50" />
+
+        <LinearLayout
+            android:id="@+id/ll_work_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y40"
+                        android:gravity="end"
+                        android:text="联系人姓名"
+                        android:textColor="@color/colorGray"
+                        android:textSize="@dimen/x30"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/y40"
+                        android:layout_marginTop="@dimen/y30"
+                        android:gravity="end"
+                        apptool:text="测试"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/x35" />
+
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_service_call"
+                    android:layout_width="@dimen/x153"
+                    android:layout_height="@dimen/x153"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:layout_marginRight="@dimen/x50"
+                    android:background="@mipmap/img_call"
+
+                    />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y40"
+                        android:gravity="left"
+                        android:text="联系人电话"
+                        android:textColor="@color/colorGray"
+                        android:textSize="@dimen/x30"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/y40"
+                        android:layout_marginTop="@dimen/y30"
+                        android:gravity="left"
+                        apptool:text="15464215621"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/x35" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y3"
+                android:layout_marginLeft="@dimen/x50"
+                android:layout_marginRight="@dimen/x50"
+                android:background="@color/colorBackgroud" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y40"
+                    android:gravity="center_horizontal"
+                    android:text="服务地址"
+                    android:textColor="@color/colorGray"
+                    android:textSize="@dimen/x30" />
+
+                <TextView
+                    android:id="@+id/tv_detail_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/y40"
+                    android:layout_marginTop="@dimen/y30"
+                    android:gravity="center_horizontal"
+                    apptool:text="哈尔滨道里区测试"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/x35" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y3"
+        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginRight="@dimen/x50"
+        android:background="@color/colorBackgroud" />
+
+
+</LinearLayout>

@@ -11,74 +11,68 @@
         android:background="@color/white"
         android:focusable="false">
 
-        <ImageView
-            android:id="@+id/iv_avatar"
-            android:layout_width="@dimen/x120"
-            android:layout_height="@dimen/x120"
-            android:layout_margin="@dimen/x50"
-            android:background="@mipmap/ic_launcher_round" />
-
-        <TextView
-            android:id="@+id/tv_name"
+        <RelativeLayout
+            android:id="@+id/rl_top"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/iv_avatar"
-            android:layout_marginTop="@dimen/y10"
-            android:layout_toRightOf="@id/iv_avatar"
-            android:text="姓名"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/x40" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_name"
-            android:layout_marginTop="@dimen/y20"
-            android:layout_toRightOf="@id/iv_avatar"
-            android:text="2018-09-23 18:11:45"
-            android:textSize="@dimen/x30" />
+            <ImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="@dimen/x120"
+                android:layout_height="@dimen/x120"
+                android:layout_margin="@dimen/x50" />
 
-        <TextView
-            android:id="@+id/tv_focus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/x50"
-            android:layout_marginTop="@dimen/y80"
-            android:background="@drawable/bg_blue_big_corner"
-            android:paddingBottom="@dimen/y20"
-            android:paddingLeft="@dimen/x30"
-            android:paddingRight="@dimen/x30"
-            android:paddingTop="@dimen/y20"
-            android:text="关注TA"
-            android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/iv_avatar"
+                android:layout_marginTop="@dimen/y10"
+                android:layout_toRightOf="@id/iv_avatar"
+                android:text="姓名"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/x40" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_name"
+                android:layout_marginTop="@dimen/y20"
+                android:layout_toRightOf="@id/iv_avatar"
+                android:text="2018-09-23 18:11:45"
+                android:textSize="@dimen/x30" />
+
+        </RelativeLayout>
 
 
         <TextView
             android:id="@+id/tv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/iv_avatar"
+            android:layout_below="@id/rl_top"
+            android:layout_marginBottom="@dimen/y20"
             android:layout_marginLeft="@dimen/x50"
             android:layout_marginRight="@dimen/x50"
             android:text="奥斯卡阶段阿苏卫南京路撒可抵扣了阿拉索护符埃里克森发货单拉斯客户端flash阿萨德阿萨德"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/x35" />
 
-        <com.example.jason_jukes.laihuo.view.nineImage.NineGridlayout
+        <com.example.jason_jukes.laihuo.view.MyGridView
             android:id="@+id/iv_img_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_content"
-            android:layout_margin="@dimen/x50">
+            android:layout_marginLeft="@dimen/x25"
+            android:layout_marginTop="@dimen/x25"
+            android:numColumns="3">
 
-        </com.example.jason_jukes.laihuo.view.nineImage.NineGridlayout>
+        </com.example.jason_jukes.laihuo.view.MyGridView>
 
         <LinearLayout
             android:id="@+id/ll_img"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/y80"
+            android:layout_height="@dimen/y60"
             android:layout_below="@id/iv_img_list"
             android:layout_marginBottom="@dimen/y50"
             android:layout_marginLeft="@dimen/x50"

@@ -2,9 +2,11 @@ package com.example.jason_jukes.laihuo.activity.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,7 +17,6 @@ import com.example.jason_jukes.laihuo.adapter.MessageMarketLVAdapter;
 import com.example.jason_jukes.laihuo.bean.MessageMarketBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
 import com.example.jason_jukes.laihuo.tool.IsNetWork;
-import com.example.jason_jukes.laihuo.tool.SPTool;
 import com.example.jason_jukes.laihuo.tool.XUtil;
 import com.google.gson.Gson;
 
@@ -39,8 +40,10 @@ public class MessageMarketActivity extends BaseActivity {
     TextView tvStatusBarName;
     @InjectView(R.id.lv)
     ListView lv;
+    @InjectView(R.id.ref)
+    SwipeRefreshLayout ref;
     private MessageMarketLVAdapter adapter;
-    private List<MessageMarketBean.DataObjBean.RtListBean> been;
+    private List<MessageMarketBean.DataObjBean.RtListBean> been = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +51,26 @@ public class MessageMarketActivity extends BaseActivity {
         setContentView(R.layout.activity_message_market);
         ButterKnife.inject(this);
         initView();
+//        initData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        been.clear();
         initData();
     }
 
     private void initView() {
 
         tvStatusBarName.setText("信息市场");
+
+        ref.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                onResume();
+            }
+        });
 
     }
 
@@ -76,8 +93,31 @@ public class MessageMarketActivity extends BaseActivity {
             }
         });
 
+
+        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+                boolean enable = false;
+                if (lv != null && lv.getChildCount() > 0) {
+                    // check if the first item of the list is visible
+                    boolean firstItemVisible = lv.getFirstVisiblePosition() == 0;
+                    // check if the top of the first item is visible
+                    boolean topOfFirstItemVisible = lv.getChildAt(0).getTop() == 0;
+                    // enabling or disabling the refresh layout
+                    enable = firstItemVisible && topOfFirstItemVisible;
+                }
+                ref.setEnabled(enable);
+            }
+        });
+
         if (IsNetWork.isNetWork(this)) {
             showProgressDialog();
+            ref.setRefreshing(true);
             getData();
         } else {
             showToast("请检查网络设置");
@@ -112,6 +152,7 @@ public class MessageMarketActivity extends BaseActivity {
                 }
 
                 hideProgressDialog();
+                ref.setRefreshing(false);
 
             }
 
