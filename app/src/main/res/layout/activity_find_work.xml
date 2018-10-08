@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ref"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackgroud"
@@ -87,15 +86,23 @@
 
         <include layout="@layout/include_null" />
 
-        <ListView
-            android:id="@+id/lv"
+        <com.example.jason_jukes.laihuo.view.RefreshLayout
+            android:id="@+id/ref"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/y3"
-            android:scrollbars="none">
+            android:layout_height="match_parent">
 
-        </ListView>
+            <ListView
+                android:id="@+id/lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/y3"
+                android:scrollbars="none">
+
+            </ListView>
+
+        </com.example.jason_jukes.laihuo.view.RefreshLayout>
+
     </LinearLayout>
 
 
-</android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

@@ -24,7 +24,7 @@ import com.google.gson.Gson;
 
 import org.xutils.common.Callback;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,22 +101,22 @@ public class SurePostActivity extends BaseActivity {
         tvWorkKind.setText(Singleton.instance.getClassify_name());
         tvWorkAddress.setText(Singleton.instance.getAddress());
 
-        if (Singleton.instance.getStatus().equals("0")){
+        if (Singleton.instance.getStatus().equals("0")) {
             tvJiageType.setText("心里预期价格");
             url = Contants.POST_HUANJIA;
-        }else {
+        } else {
             tvJiageType.setText("一口价价格");
             url = Contants.POST_YIKOU;
         }
-        if (TextUtils.isEmpty(Singleton.instance.getPrice())){
+        if (TextUtils.isEmpty(Singleton.instance.getPrice())) {
             tvJiage.setText("面议");
-        }else {
+        } else {
             tvJiage.setText(Singleton.instance.getPrice() + "元");
         }
 
-        if (TextUtils.isEmpty(Singleton.instance.getData())){
+        if (TextUtils.isEmpty(Singleton.instance.getData())) {
             tvWorkTime.setText("面议");
-        }else {
+        } else {
             tvWorkTime.setText(Singleton.instance.getData() + " " + Singleton.instance.getTime());
         }
 
@@ -129,22 +129,21 @@ public class SurePostActivity extends BaseActivity {
 
     private void initData() {
 
-        List<String> imgs = new ArrayList<>();
-        imgs.add("http://e.hiphotos.baidu.com/image/pic/item/b03533fa828ba61e8480853f4c34970a304e59b7.jpg");
-        imgs.add("http://f.hiphotos.baidu.com/image/pic/item/eaf81a4c510fd9f90a220479282dd42a2834a4ed.jpg");
-        imgs.add("http://e.hiphotos.baidu.com/image/pic/item/94cad1c8a786c91723e93522c43d70cf3ac757c6.jpg");
-
         int dimension = (int) getResources().getDimension(R.dimen.x50);
         int dimension1 = (int) getResources().getDimension(R.dimen.y20);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        for (int i = 0; i < imgs.size(); i++) {
+
+        String[] arr = Singleton.instance.getImgPath().split(",");//分割字符串得到数组
+        List<String> list = Arrays.asList(arr);//字符数组转list
+
+        for (int i = 0; i < list.size(); i++) {
 
             ImageView imageView = new ImageView(this);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             imageView.setPadding(dimension, 0, dimension, dimension);
             imageView.setLayoutParams(params);
-            Glide.with(context).load(imgs.get(i)).into(imageView);
+            Glide.with(context).load(Contants.URL_IMG_BASE + list.get(i)).into(imageView);
 
             llImg.addView(imageView);
 
@@ -159,7 +158,9 @@ public class SurePostActivity extends BaseActivity {
         map.put("base_user_certification_classify_id", Singleton.instance.getClassify_id());
         map.put("order_desc", Singleton.instance.getDesc_text());
 //        map.put("order_desc_sounds", "");
-//        map.put("order_desc_pics", "");
+        if (!TextUtils.isEmpty(Singleton.instance.getImgPath())) {
+            map.put("order_desc_pics", Singleton.instance.getImgPath());
+        }
         map.put("address_id", Singleton.instance.getAddress_id());
         map.put("must_arrive_date", Singleton.instance.getData());
         map.put("must_arrive_time", Singleton.instance.getTime());
@@ -168,7 +169,7 @@ public class SurePostActivity extends BaseActivity {
         map.put("city_value", "haerbin");
 //        map.put("order_price_range", Singleton.instance.getPrice());
 
-        Log.e("aaaaaaaaaa",map.toString());
+        Log.e("aaaaaaaaaa", map.toString());
 
         XUtil.Post(url, map, new Callback.CommonCallback<String>() {
             @Override

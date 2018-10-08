@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
@@ -94,6 +95,7 @@
         <activity android:name=".activity.home.SureOrderActivity" />
         <activity android:name=".activity.home.FinishWorkActivity" />
         <activity android:name=".activity.WebviewActivity" />
+        <activity android:name=".activity.home.PaySuccessActivity" />
 
     </application>
 

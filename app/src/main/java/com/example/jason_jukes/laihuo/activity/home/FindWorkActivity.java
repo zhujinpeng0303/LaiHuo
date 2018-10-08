@@ -35,6 +35,7 @@ import com.example.jason_jukes.laihuo.tool.SPTool;
 import com.example.jason_jukes.laihuo.tool.XUtil;
 import com.example.jason_jukes.laihuo.view.ClassifyPopupWindow;
 import com.example.jason_jukes.laihuo.view.CommonDialog;
+import com.example.jason_jukes.laihuo.view.RefreshLayout;
 import com.google.gson.Gson;
 
 import org.xutils.common.Callback;
@@ -69,9 +70,10 @@ public class FindWorkActivity extends BaseActivity {
     @InjectView(R.id.rootView)
     LinearLayout rootView;
     @InjectView(R.id.ref)
-    SwipeRefreshLayout ref;
+    RefreshLayout ref;
 
     private List<FindWorkBean.DataObjBean.RtListBean> been = new ArrayList<>();
+    private List<FindWorkBean.DataObjBean.RtListBean> been1 = new ArrayList<>();
     private FindWorkLVAdapter adapter;
     private String classifyId = "";
 
@@ -86,6 +88,8 @@ public class FindWorkActivity extends BaseActivity {
     private ExpandableListView expandableListView;
 
     private ClassifyExpLVAdapter.itemClick itemClick;
+
+    private int page = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,8 +134,8 @@ public class FindWorkActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 startActivity(new Intent(FindWorkActivity.this, WorkDetailActivity.class)
-                .putExtra("id",been.get(i).getId() + "")
-                .putExtra("type",been.get(i).getOrder_type()));
+                        .putExtra("id", been.get(i).getId() + "")
+                        .putExtra("type", been.get(i).getOrder_type()));
             }
         });
 
@@ -146,9 +150,20 @@ public class FindWorkActivity extends BaseActivity {
         ref.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                page = 1;
                 initData();
             }
         });
+
+//        ref.setOnLoadListener(new RefreshLayout.OnLoadListener() {
+//            @Override
+//            public void onLoad() {
+//                ref.setLoading(true);
+//                been1.clear();
+//                page++;
+//                loadData();
+//            }
+//        });
 
         lv.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -254,6 +269,8 @@ public class FindWorkActivity extends BaseActivity {
         Map<String, Object> map = new HashMap<>();
         map.put("token", "gggg");
         map.put("base_user_certification_classify_id", classifyId);
+        map.put("page", page + "");
+        map.put("rows", "10");
 
         Log.e("map", map.toString());
 
@@ -306,6 +323,69 @@ public class FindWorkActivity extends BaseActivity {
         });
 
     }
+
+
+    private void loadData() {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", "gggg");
+        map.put("base_user_certification_classify_id", classifyId);
+        map.put("page", page + "");
+        map.put("rows", "10");
+
+        Log.e("map", map.toString());
+
+        XUtil.Post(Contants.FIND_WORK, map, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                FindWorkBean bean = new Gson().fromJson(result, FindWorkBean.class);
+                if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
+
+                    if (bean.getDataObj().getRtList().size() > 0) {
+                        llNull.setVisibility(View.GONE);
+                        for (int i = 0; i < bean.getDataObj().getRtList().size(); i++) {
+
+                            been1.add(bean.getDataObj().getRtList().get(i));
+
+                        }
+
+                        adapter.addBeen1(been1);
+
+
+                    } else {
+                        showToast("没有数据了");
+                    }
+                } else {
+                    showToast(bean.getErrorMsg());
+                }
+
+                hideProgressDialog();
+//                ref.setLoading(false);
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                Log.e("fail", ex.getMessage());
+                hideProgressDialog();
+//                ref.setLoading(false);
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+    }
+
 
     @OnClick({R.id.rl_back, R.id.ll_fenlei, R.id.ll_work_status})
     public void onViewClicked(View view) {

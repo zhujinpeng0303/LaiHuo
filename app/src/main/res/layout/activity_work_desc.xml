@@ -47,6 +47,7 @@
                         android:layout_height="wrap_content">
 
                         <LinearLayout
+                            android:layout_centerVertical="true"
                             android:id="@+id/ll_yuyin"
                             android:layout_width="@dimen/x600"
                             android:layout_height="wrap_content"
@@ -62,6 +63,7 @@
                                 android:background="@mipmap/img_home" />
 
                             <TextView
+                                android:id="@+id/tv_lunyin_word"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -73,22 +75,23 @@
 
                         <ImageView
                             android:id="@+id/iv_del"
-                            android:layout_width="@dimen/x120"
-                            android:layout_height="@dimen/x120"
+                            android:layout_width="@dimen/x80"
+                            android:layout_height="@dimen/x80"
                             android:layout_alignBottom="@id/ll_yuyin"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="@dimen/x50"
-                            android:background="@mipmap/img_home"
-                            android:visibility="gone" />
+                            android:background="@mipmap/img_desc_luyin_del"
+                            android:visibility="visible" />
 
                         <ImageView
                             android:id="@+id/iv_play"
-                            android:layout_width="@dimen/x120"
-                            android:layout_height="@dimen/x120"
+                            android:layout_width="@dimen/x80"
+                            android:layout_height="@dimen/x80"
                             android:layout_marginRight="@dimen/x50"
                             android:layout_toLeftOf="@id/iv_del"
-                            android:background="@mipmap/img_home"
-                            android:visibility="gone" />
+                            android:layout_alignBottom="@id/ll_yuyin"
+                            android:background="@mipmap/img_desc_luyin_play"
+                            android:visibility="visible" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -236,17 +239,19 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:layout_marginTop="@dimen/y2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <ImageView
-                    android:layout_width="@dimen/x200"
-                    android:layout_height="@dimen/x200"
-                    android:background="@mipmap/img_home" />
+                <com.example.jason_jukes.laihuo.view.MyGridView
+                    android:id="@+id/gridView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y2"
+                    android:background="@color/white"
+                    android:numColumns="3"
+                    android:orientation="vertical">
 
+                </com.example.jason_jukes.laihuo.view.MyGridView>
             </LinearLayout>
 
             <LinearLayout

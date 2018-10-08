@@ -546,24 +546,10 @@ public class MineFragment extends BaseFragment {
 
 //                    File file = new File(selectList.get(0).getCompressPath());
 
-                    String path = "";
-
-                    List<String> paths = new ArrayList<>();
-
-                    for (int i = 0; i < selectList.size(); i++) {
-                        paths.add(selectList.get(i).getCompressPath());
-                    }
-
-                    List<KeyValue> list = new ArrayList<KeyValue>();
-
-                    for (int i = 0; i < selectList.size(); i++) {
-                        File file = new File(selectList.get(i).getCompressPath());
-
-                        list.add(new KeyValue("file", file));
-                    }
+                    String path = selectList.get(0).getCompressPath();
 
 
-                    testUP(list);
+                    testUP(path);
 
 
                     break;
@@ -572,16 +558,15 @@ public class MineFragment extends BaseFragment {
 
     }
 
-    private void testUP(List<KeyValue> list) {
+    private void testUP(String path) {
 
-        MultipartBody body = new MultipartBody(list, "UTF-8");
+//        MultipartBody body = new MultipartBody(list, "UTF-8");
         RequestParams params = new RequestParams(Contants.URL_BASE + "fileUploadOrderImage");
-        params.setRequestBody(body);
+//        RequestParams params = new RequestParams(Contants.POST_HUANJIA);
+//        params.setRequestBody(body);
         params.setMultipart(true);
 
-//        for (int i = 0; i < path.size(); i++) {
-//            params.addBodyParameter("file", new File(path.get(i)), "multipart/form-data");
-//        }
+        params.addBodyParameter("file", new File(path), "multipart/form-data");
 
 
         Callback.Cancelable cancelable = x.http().post(params, new Callback.ProgressCallback<String>() {
