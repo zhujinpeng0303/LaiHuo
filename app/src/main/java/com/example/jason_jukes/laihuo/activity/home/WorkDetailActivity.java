@@ -1,9 +1,17 @@
 package com.example.jason_jukes.laihuo.activity.home;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,8 +29,11 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.activity.mine.FeedbackActivity;
+import com.example.jason_jukes.laihuo.adapter.MineEvaluateLVAdapter;
 import com.example.jason_jukes.laihuo.adapter.WorkDetailGridViewAdapter;
 import com.example.jason_jukes.laihuo.bean.MessageBean;
+import com.example.jason_jukes.laihuo.bean.MineEvaluateBean;
+import com.example.jason_jukes.laihuo.bean.PersonHomeBean;
 import com.example.jason_jukes.laihuo.bean.WorkDetailBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
 import com.example.jason_jukes.laihuo.tool.IsNetWork;
@@ -39,6 +50,7 @@ import com.google.gson.Gson;
 
 import org.xutils.common.Callback;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -171,6 +183,7 @@ public class WorkDetailActivity extends BaseActivity {
     @InjectView(R.id.ll_content)
     LinearLayout llContent;
 
+
     private WorkDetailGridViewAdapter adapter;
     private List<WorkDetailBean.DataObjBean.GetWorkerBidListBean> been = new ArrayList<>();
     private List<WorkDetailBean.DataObjBean.OrderRecordListBean> recordBeen = new ArrayList<>();
@@ -185,8 +198,21 @@ public class WorkDetailActivity extends BaseActivity {
 
     private ImageView iv_avatar, avatar;
     private TextView tv_score, tv_phone, tv_cancel, tv_xuanze, tv_money, tv_name, name, score, content, date;
-    private LinearLayout ll_detail_more, ll_detail_zuizhong, ll_null, ll_evaluate;
+    private LinearLayout ll_detail_more, ll_detail_zuizhong, ll_null, ll_evaluate, ll_pingjia;
     private RelativeLayout rl_user;
+
+    private MineEvaluateLVAdapter evaAdapter;
+    private List<MineEvaluateBean.DataObjBean.RtListBean> evaBeen = new ArrayList<>();
+
+    private MediaPlayer mPlayer = new MediaPlayer();
+
+    private boolean isPlaying = false;
+
+    private String luyin = "";
+
+    private String zhidingUserId = "", zhidingPhone = "", servicePhone = "", listPhone = "", callType = "";    //callType  判断是制定电话  还是列表电话
+
+    private String quanxian;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -214,6 +240,7 @@ public class WorkDetailActivity extends BaseActivity {
 
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -234,18 +261,11 @@ public class WorkDetailActivity extends BaseActivity {
         tv_name = popView.findViewById(R.id.tv_detail_name);
 
 
-        avatar = popView.findViewById(R.id.iv_avatar);
-        name = popView.findViewById(R.id.tv_name);
-        score = popView.findViewById(R.id.tv_score);
-        content = popView.findViewById(R.id.tv_content);
-        date = popView.findViewById(R.id.tv_time);
-
-
         ll_detail_more = popView.findViewById(R.id.ll_detail_more);
         ll_detail_zuizhong = popView.findViewById(R.id.ll_detail_zuizong);
         ll_null = popView.findViewById(R.id.ll_null);
         ll_evaluate = popView.findViewById(R.id.ll_evaluate);
-
+        ll_pingjia = popView.findViewById(R.id.ll_pinglun);
         rl_user = popView.findViewById(R.id.rl_user);
 
 
@@ -262,7 +282,9 @@ public class WorkDetailActivity extends BaseActivity {
             @Override
             public void PhoneClick(int pos) {
 
-                showToast(been.get(pos).getPhoneno());
+                callType = "list";
+                listPhone = been.get(pos).getPhoneno();
+                callPhone(been.get(pos).getPhoneno());
 
             }
         };
@@ -283,6 +305,9 @@ public class WorkDetailActivity extends BaseActivity {
         Map<String, Object> map = new HashMap<>();
         map.put("order_id", getIntent().getStringExtra("id"));
         map.put("bid_id", bid);
+        map.put("token", "gggg");
+
+        Log.e("uuuuu", url);
 
         XUtil.Post(url, map, new Callback.CommonCallback<String>() {
             @Override
@@ -325,6 +350,12 @@ public class WorkDetailActivity extends BaseActivity {
     }
 
     private void showWorkerDetail(final int pos) {
+
+        showProgressDialog();
+        evaBeen.clear();
+        ll_pingjia.removeAllViews();
+
+        getUserPinglun(been.get(pos).getBid_user_id() + "");
 
         String url = "";
 
@@ -394,6 +425,90 @@ public class WorkDetailActivity extends BaseActivity {
 
     }
 
+    //获取弹出框用户的评价
+    private void getUserPinglun(String id) {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", "gggg");
+        map.put("work_user_id", id);
+
+        Log.e("map", map.toString());
+
+        XUtil.Post(Contants.SEE_OTHER_HOME, map, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                PersonHomeBean bean = new Gson().fromJson(result, PersonHomeBean.class);
+                if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
+
+                    if (bean.getDataObj().getRankingList().size() > 0) {
+                        ll_null.setVisibility(View.GONE);
+                        for (int i = 0; i < bean.getDataObj().getRankingList().size(); i++) {
+
+                            evaBeen.add(bean.getDataObj().getRankingList().get(i));
+
+                        }
+
+                        for (int i = 0; i < evaBeen.size(); i++) {
+
+                            if (i > 2) {
+
+                            } else {
+                                View v = LayoutInflater.from(context).inflate(R.layout.item_worker_evaluate_lv, null);
+                                avatar = v.findViewById(R.id.iv_avatar);
+                                name = v.findViewById(R.id.tv_name);
+                                score = v.findViewById(R.id.tv_score);
+                                content = v.findViewById(R.id.tv_content);
+                                date = v.findViewById(R.id.tv_time);
+
+                                Glide.with(context).load(evaBeen.get(i)
+                                        .getHead_url())
+                                        .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(context)))
+                                        .into(avatar);
+                                name.setText(evaBeen.get(i).getUsername());
+                                score.setText(evaBeen.get(i).getRanking_last() + "");
+                                content.setText(evaBeen.get(i).getRanking_text());
+                                date.setText(evaBeen.get(i).getCreate_time_text());
+
+                                ll_pingjia.addView(v);
+                            }
+                        }
+
+                    } else {
+                        ll_null.setVisibility(View.VISIBLE);
+                        ll_detail_more.setVisibility(View.GONE);
+                    }
+                } else {
+                    ll_detail_more.setVisibility(View.GONE);
+                    showToast(bean.getErrorMsg());
+                }
+
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                Log.e("fail", ex.getMessage());
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+
+    }
+
     private void getData() {
 
         Map<String, Object> map = new HashMap<>();
@@ -407,12 +522,18 @@ public class WorkDetailActivity extends BaseActivity {
                 final WorkDetailBean bean = new Gson().fromJson(result, WorkDetailBean.class);
                 if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
 
-
                     tvTitle.setText(bean.getDataObj().getOrderDetail().getOrder_title());
                     tvJiageStatus.setText(bean.getDataObj().getOrderDetail().getOrder_status_text());
                     tvPostTime.setText("发布时间: " + bean.getDataObj().getOrderDetail().getCreate_time_day() + " " + bean.getDataObj().getOrderDetail().getCreate_time_second());
                     tvWorkKind.setText(bean.getDataObj().getOrderBase().getBase_user_certification_classify_name());
                     tvWorkAddress.setText(bean.getDataObj().getOrderBase().getBase_area_name());
+
+                    if (TextUtils.isEmpty(bean.getDataObj().getOrderDetail().getOrder_desc_sounds())) {
+                        rlLuyin.setVisibility(View.GONE);
+                    } else {
+                        rlLuyin.setVisibility(View.VISIBLE);
+                        luyin = Contants.URL_BASE + bean.getDataObj().getOrderDetail().getOrder_desc_sounds();
+                    }
 
                     if (bean.getDataObj().getOrderType().equals("talk_price")) {
                         tvJiageType.setText("心理预期价格");
@@ -504,9 +625,11 @@ public class WorkDetailActivity extends BaseActivity {
                         llServiceAddress.setVisibility(View.VISIBLE);
                         llWorkAddress.setVisibility(View.VISIBLE);
 
+                        servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                         tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                         tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
                         tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
+
 
                     }
 
@@ -521,6 +644,8 @@ public class WorkDetailActivity extends BaseActivity {
                         llWorkAddress.setVisibility(View.VISIBLE);
                         llServiceAddress.setVisibility(View.VISIBLE);
 
+                        zhidingPhone = bean.getDataObj().getWorkUserDetail().getPhoneno();
+                        zhidingUserId = bean.getDataObj().getWorkUserDetail().getId() + "";
                         tvZhidingName.setText(bean.getDataObj().getWorkUserDetail().getUsername());
                         tvZhidingPhone.setText(bean.getDataObj().getWorkUserDetail().getPhoneno());
                         tvZhidingScore.setText(bean.getDataObj().getWorkUserDetail().getRanking_last());
@@ -530,6 +655,7 @@ public class WorkDetailActivity extends BaseActivity {
                                 .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(WorkDetailActivity.this)))
                                 .into(ivZhidingAvatar);
 
+                        servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                         tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                         tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
                         tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
@@ -594,7 +720,6 @@ public class WorkDetailActivity extends BaseActivity {
                                 idCount += bean.getDataObj().getGetWorkerBidList().get(i).getBid_status() + "";
                             }
 
-                            Log.e("rrrrrrrrrrr", idCount.indexOf("1") + "");
 
                             adapter = new WorkDetailGridViewAdapter(WorkDetailActivity.this, been, moreClick, phoneClick);
                             gridView.setAdapter(adapter);
@@ -605,6 +730,7 @@ public class WorkDetailActivity extends BaseActivity {
 
                             }
 
+                            servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                             tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                             tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
                             tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
@@ -638,6 +764,7 @@ public class WorkDetailActivity extends BaseActivity {
                             llWorkAddress.setVisibility(View.VISIBLE);
 
 
+                            servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                             tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                             tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
                             tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
@@ -670,11 +797,13 @@ public class WorkDetailActivity extends BaseActivity {
                             llKaimenMima.setVisibility(View.GONE);
                             llJingJiaList.setVisibility(View.GONE);
                             tvShenqing.setVisibility(View.VISIBLE);
-                            tvCancel.setVisibility(View.VISIBLE);
+                            tvCancel.setVisibility(View.GONE);
                             llYiZhiding.setVisibility(View.VISIBLE);
                             llServiceAddress.setVisibility(View.VISIBLE);
                             llWorkAddress.setVisibility(View.VISIBLE);
 
+                            zhidingPhone = bean.getDataObj().getOrderAddress().getCon_tel();
+                            zhidingUserId = bean.getDataObj().getWorkUserDetail().getId() + "";
                             tvZhidingName.setText(bean.getDataObj().getWorkUserDetail().getUsername());
                             tvZhidingPhone.setText(bean.getDataObj().getWorkUserDetail().getPhoneno());
                             tvZhidingScore.setText(bean.getDataObj().getWorkUserDetail().getRanking_last());
@@ -684,6 +813,7 @@ public class WorkDetailActivity extends BaseActivity {
                                     .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(WorkDetailActivity.this)))
                                     .into(ivZhidingAvatar);
 
+                            servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                             tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                             tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
                             tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
@@ -697,12 +827,12 @@ public class WorkDetailActivity extends BaseActivity {
                                 }
                             });
 
-                            tvCancel.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    showDia(Contants.ORDER_CANCEL_XUNJIA);
-                                }
-                            });
+//                            tvCancel.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View view) {
+//                                    showDia(Contants.ORDER_CANCEL_XUNJIA);
+//                                }
+//                            });
 
 
                             //一口价返回该值的判断
@@ -718,6 +848,8 @@ public class WorkDetailActivity extends BaseActivity {
                             llServiceAddress.setVisibility(View.VISIBLE);
                             llWorkAddress.setVisibility(View.VISIBLE);
 
+                            zhidingUserId = bean.getDataObj().getWorkUserDetail().getId() + "";
+                            zhidingPhone = bean.getDataObj().getWorkUserDetail().getPhoneno();
                             tvZhidingName.setText(bean.getDataObj().getWorkUserDetail().getUsername());
                             tvZhidingPhone.setText(bean.getDataObj().getWorkUserDetail().getPhoneno());
                             tvZhidingScore.setText(bean.getDataObj().getWorkUserDetail().getRanking_last());
@@ -727,6 +859,7 @@ public class WorkDetailActivity extends BaseActivity {
                                     .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(WorkDetailActivity.this)))
                                     .into(ivZhidingAvatar);
 
+                            servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                             tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                             tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
                             tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
@@ -760,6 +893,8 @@ public class WorkDetailActivity extends BaseActivity {
                         llServiceAddress.setVisibility(View.VISIBLE);
                         llWorkAddress.setVisibility(View.VISIBLE);
 
+                        zhidingUserId = bean.getDataObj().getWorkUserDetail().getId() + "";
+                        zhidingPhone = bean.getDataObj().getWorkUserDetail().getPhoneno();
                         tvZhidingName.setText(bean.getDataObj().getWorkUserDetail().getUsername());
                         tvZhidingPhone.setText(bean.getDataObj().getWorkUserDetail().getPhoneno());
                         tvZhidingScore.setText(bean.getDataObj().getWorkUserDetail().getRanking_last());
@@ -774,6 +909,7 @@ public class WorkDetailActivity extends BaseActivity {
                         tvMima3.setText(String.valueOf(bean.getDataObj().getCodeMap().getDoorCode().charAt(2)));
                         tvMima4.setText(String.valueOf(bean.getDataObj().getCodeMap().getDoorCode().charAt(3)));
 
+                        servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                         tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                         tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
                         tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
@@ -790,6 +926,8 @@ public class WorkDetailActivity extends BaseActivity {
                         llServiceAddress.setVisibility(View.VISIBLE);
                         llWorkAddress.setVisibility(View.VISIBLE);
 
+                        zhidingUserId = bean.getDataObj().getWorkUserDetail().getId() + "";
+                        zhidingPhone = bean.getDataObj().getWorkUserDetail().getPhoneno();
                         tvZhidingName.setText(bean.getDataObj().getWorkUserDetail().getUsername());
                         tvZhidingPhone.setText(bean.getDataObj().getWorkUserDetail().getPhoneno());
                         tvZhidingScore.setText(bean.getDataObj().getWorkUserDetail().getRanking_last());
@@ -799,11 +937,7 @@ public class WorkDetailActivity extends BaseActivity {
                                 .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(WorkDetailActivity.this)))
                                 .into(ivZhidingAvatar);
 
-                        tvMima1.setText(String.valueOf(bean.getDataObj().getCodeMap().getDoorCode().charAt(0)));
-                        tvMima2.setText(String.valueOf(bean.getDataObj().getCodeMap().getDoorCode().charAt(1)));
-                        tvMima3.setText(String.valueOf(bean.getDataObj().getCodeMap().getDoorCode().charAt(2)));
-                        tvMima4.setText(String.valueOf(bean.getDataObj().getCodeMap().getDoorCode().charAt(3)));
-
+                        servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                         tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                         tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
                         tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
@@ -823,6 +957,8 @@ public class WorkDetailActivity extends BaseActivity {
                         llWorkAddress.setVisibility(View.VISIBLE);
                         tvShenqing.setText("确认已完成");
 
+                        zhidingUserId = bean.getDataObj().getWorkUserDetail().getId() + "";
+                        zhidingPhone = bean.getDataObj().getWorkUserDetail().getPhoneno();
                         tvZhidingName.setText(bean.getDataObj().getWorkUserDetail().getUsername());
                         tvZhidingPhone.setText(bean.getDataObj().getWorkUserDetail().getPhoneno());
                         tvZhidingScore.setText(bean.getDataObj().getWorkUserDetail().getRanking_last());
@@ -832,6 +968,7 @@ public class WorkDetailActivity extends BaseActivity {
                                 .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(WorkDetailActivity.this)))
                                 .into(ivZhidingAvatar);
 
+                        servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                         tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                         tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
                         tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
@@ -856,6 +993,8 @@ public class WorkDetailActivity extends BaseActivity {
                         llWorkAddress.setVisibility(View.VISIBLE);
                         tvShenqing.setText("去评价");
 
+                        zhidingUserId = bean.getDataObj().getWorkUserDetail().getId() + "";
+                        zhidingPhone = bean.getDataObj().getWorkUserDetail().getPhoneno();
                         tvZhidingName.setText(bean.getDataObj().getWorkUserDetail().getUsername());
                         tvZhidingPhone.setText(bean.getDataObj().getWorkUserDetail().getPhoneno());
                         tvZhidingScore.setText(bean.getDataObj().getWorkUserDetail().getRanking_last());
@@ -865,6 +1004,7 @@ public class WorkDetailActivity extends BaseActivity {
                                 .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(WorkDetailActivity.this)))
                                 .into(ivZhidingAvatar);
 
+                        servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                         tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                         tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
                         tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
@@ -889,6 +1029,8 @@ public class WorkDetailActivity extends BaseActivity {
                         llServiceAddress.setVisibility(View.VISIBLE);
                         llWorkAddress.setVisibility(View.VISIBLE);
 
+                        zhidingUserId = bean.getDataObj().getWorkUserDetail().getId() + "";
+                        zhidingPhone = bean.getDataObj().getWorkUserDetail().getPhoneno();
                         tvZhidingName.setText(bean.getDataObj().getWorkUserDetail().getUsername());
                         tvZhidingPhone.setText(bean.getDataObj().getWorkUserDetail().getPhoneno());
                         tvZhidingScore.setText(bean.getDataObj().getWorkUserDetail().getRanking_last());
@@ -898,6 +1040,7 @@ public class WorkDetailActivity extends BaseActivity {
                                 .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(WorkDetailActivity.this)))
                                 .into(ivZhidingAvatar);
 
+                        servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                         tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                         tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
                         tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
@@ -915,7 +1058,7 @@ public class WorkDetailActivity extends BaseActivity {
                         tvEvaluate.setText(bean.getDataObj().getRankingInfo().getRanking_text());
 
                     }
-                    if (status.equals("bider.waitBid")) {   //投标者，待投标 （黑①） （申请报价）
+                    if (status.equals("bider.waitBid")) {                               //投标者，待投标 （黑①） （申请报价）
 
                         llJingJiaList.setVisibility(View.GONE);
                         llKaimenMima.setVisibility(View.GONE);
@@ -1014,6 +1157,8 @@ public class WorkDetailActivity extends BaseActivity {
                         llWorkAddress.setVisibility(View.GONE);
                         llServiceAddress.setVisibility(View.VISIBLE);
 
+                        zhidingUserId = bean.getDataObj().getWorkUserDetail().getId() + "";
+                        zhidingPhone = bean.getDataObj().getWorkUserDetail().getPhoneno();
                         tvZhidingName.setText(bean.getDataObj().getWorkUserDetail().getUsername());
                         tvZhidingPhone.setText(bean.getDataObj().getWorkUserDetail().getPhoneno());
                         tvZhidingScore.setText(bean.getDataObj().getWorkUserDetail().getRanking_last());
@@ -1023,6 +1168,7 @@ public class WorkDetailActivity extends BaseActivity {
                                 .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(WorkDetailActivity.this)))
                                 .into(ivZhidingAvatar);
 
+                        servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                         tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                         tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
                         tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
@@ -1041,6 +1187,8 @@ public class WorkDetailActivity extends BaseActivity {
                         llWorkAddress.setVisibility(View.VISIBLE);
                         tvShenqing.setText("确认到达");
 
+                        zhidingUserId = bean.getDataObj().getWorkUserDetail().getId() + "";
+                        zhidingPhone = bean.getDataObj().getWorkUserDetail().getPhoneno();
                         tvZhidingName.setText(bean.getDataObj().getWorkUserDetail().getUsername());
                         tvZhidingPhone.setText(bean.getDataObj().getWorkUserDetail().getPhoneno());
                         tvZhidingScore.setText(bean.getDataObj().getWorkUserDetail().getRanking_last());
@@ -1050,6 +1198,7 @@ public class WorkDetailActivity extends BaseActivity {
                                 .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(WorkDetailActivity.this)))
                                 .into(ivZhidingAvatar);
 
+                        servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                         tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                         tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
                         tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
@@ -1076,6 +1225,8 @@ public class WorkDetailActivity extends BaseActivity {
                         llWorkAddress.setVisibility(View.VISIBLE);
                         tvShenqing.setText("提交工作");
 
+                        zhidingUserId = bean.getDataObj().getWorkUserDetail().getId() + "";
+                        zhidingPhone = bean.getDataObj().getWorkUserDetail().getPhoneno();
                         tvZhidingName.setText(bean.getDataObj().getWorkUserDetail().getUsername());
                         tvZhidingPhone.setText(bean.getDataObj().getWorkUserDetail().getPhoneno());
                         tvZhidingScore.setText(bean.getDataObj().getWorkUserDetail().getRanking_last());
@@ -1085,6 +1236,7 @@ public class WorkDetailActivity extends BaseActivity {
                                 .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(WorkDetailActivity.this)))
                                 .into(ivZhidingAvatar);
 
+                        servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                         tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                         tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
                         tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
@@ -1110,6 +1262,8 @@ public class WorkDetailActivity extends BaseActivity {
                         llWorkAddress.setVisibility(View.VISIBLE);
                         llServiceAddress.setVisibility(View.VISIBLE);
 
+                        zhidingUserId = bean.getDataObj().getWorkUserDetail().getId() + "";
+                        zhidingPhone = bean.getDataObj().getWorkUserDetail().getPhoneno();
                         tvZhidingName.setText(bean.getDataObj().getWorkUserDetail().getUsername());
                         tvZhidingPhone.setText(bean.getDataObj().getWorkUserDetail().getPhoneno());
                         tvZhidingScore.setText(bean.getDataObj().getWorkUserDetail().getRanking_last());
@@ -1119,6 +1273,7 @@ public class WorkDetailActivity extends BaseActivity {
                                 .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(WorkDetailActivity.this)))
                                 .into(ivZhidingAvatar);
 
+                        servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                         tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                         tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
                         tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
@@ -1138,6 +1293,8 @@ public class WorkDetailActivity extends BaseActivity {
                         llWorkAddress.setVisibility(View.VISIBLE);
                         llServiceAddress.setVisibility(View.VISIBLE);
 
+                        zhidingUserId = bean.getDataObj().getWorkUserDetail().getId() + "";
+                        zhidingPhone = bean.getDataObj().getWorkUserDetail().getPhoneno();
                         tvZhidingName.setText(bean.getDataObj().getWorkUserDetail().getUsername());
                         tvZhidingPhone.setText(bean.getDataObj().getWorkUserDetail().getPhoneno());
                         tvZhidingScore.setText(bean.getDataObj().getWorkUserDetail().getRanking_last());
@@ -1147,6 +1304,7 @@ public class WorkDetailActivity extends BaseActivity {
                                 .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(WorkDetailActivity.this)))
                                 .into(ivZhidingAvatar);
 
+                        servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                         tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                         tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
                         tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
@@ -1166,6 +1324,8 @@ public class WorkDetailActivity extends BaseActivity {
                         llServiceAddress.setVisibility(View.VISIBLE);
                         llWorkAddress.setVisibility(View.VISIBLE);
 
+                        zhidingUserId = bean.getDataObj().getWorkUserDetail().getId() + "";
+                        zhidingPhone = bean.getDataObj().getWorkUserDetail().getPhoneno();
                         tvZhidingName.setText(bean.getDataObj().getWorkUserDetail().getUsername());
                         tvZhidingPhone.setText(bean.getDataObj().getWorkUserDetail().getPhoneno());
                         tvZhidingScore.setText(bean.getDataObj().getWorkUserDetail().getRanking_last());
@@ -1175,6 +1335,7 @@ public class WorkDetailActivity extends BaseActivity {
                                 .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(WorkDetailActivity.this)))
                                 .into(ivZhidingAvatar);
 
+                        servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                         tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
                         tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
                         tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
@@ -1506,17 +1667,94 @@ public class WorkDetailActivity extends BaseActivity {
                 }
                 break;
 
-            case R.id.tv_cancel:
-                break;
-            case R.id.rl_luyin:
-                break;
             case R.id.iv_play:
+
+                if (!isPlaying) {
+                    ivPlay.setBackgroundResource(R.mipmap.img_luyin_stop);
+                    try {
+                        isPlaying = true;
+                        mPlayer = new MediaPlayer();
+                        mPlayer.setDataSource(luyin);
+                        mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+                        // 通过异步的方式装载媒体资源
+                        mPlayer.prepareAsync();
+//                        mPlayer.prepare();
+                        mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                            @Override
+                            public void onPrepared(MediaPlayer mp) {
+                                // 装载完毕回调
+                                mPlayer.start();
+                            }
+                        });
+//                        mPlayer.prepare();
+//                        mPlayer.start();
+
+                        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mediaPlayer) {
+                                isPlaying = false;
+                                ivPlay.setBackgroundResource(R.mipmap.img_luyin_play);
+                            }
+                        });
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+//                    MediaPlayer player = new MediaPlayer();
+//                    try {
+////                        Log.d(TAG, recorder.getFileName());
+//                        player.setAudioStreamType(AudioManager.STREAM_RING);
+//                        FileInputStream fis = new FileInputStream(new File(luyin));
+//                        player.setDataSource(fis.getFD());
+//                        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//                            @Override
+//                            public void onCompletion(MediaPlayer mp) {
+//                                mp.stop();
+//                                mp.release();
+//                            }
+//                        });
+//                        player.setLooping(false);
+//                        player.prepare();
+//                        player.setVolume(1f, 1f);
+//                        player.start();
+//                    } catch (IllegalArgumentException e) {
+//                        e.printStackTrace();
+//                    } catch (SecurityException e) {
+//                        e.printStackTrace();
+//                    } catch (IllegalStateException e) {
+//                        e.printStackTrace();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+
+                } else {
+                    ivPlay.setBackgroundResource(R.mipmap.img_luyin_play);
+
+                    if (mPlayer != null) {
+                        isPlaying = false;
+                        mPlayer.pause();
+                    }
+
+                }
                 break;
             case R.id.rl_zhiding_avatar:
+
+                callType = "zhiding";
+                callPhone(zhidingPhone);
+
                 break;
             case R.id.iv_zhiding_more:
+                startActivity(new Intent(WorkDetailActivity.this, PersonalHomeActivity.class)
+                        .putExtra("id", zhidingUserId));
+
                 break;
             case R.id.iv_service_call:
+
+                callType = "service";
+                callPhone(servicePhone);
+
                 break;
             case R.id.tv_jubao:
                 startActivity(new Intent(WorkDetailActivity.this, FeedbackActivity.class)
@@ -1524,5 +1762,66 @@ public class WorkDetailActivity extends BaseActivity {
                 break;
         }
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mPlayer != null && mPlayer.isPlaying()) {
+            mPlayer.stop();
+            mPlayer.release();
+            mPlayer = null;
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // 原来的敏感操作代码：发短信或者收短信
+
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_CALL);    //url:统一资源定位符    //uri:统一资源标示符（更广）
+                    if (callType.equals("zhiding")) {
+                        intent.setData(Uri.parse("tel:" + zhidingPhone));
+                    } else if (callType.equals("service")) {
+                        intent.setData(Uri.parse("tel:" + servicePhone));
+                    } else {
+                        intent.setData(Uri.parse("tel:" + listPhone));
+                    }
+                    // 开启系统拨号器
+                    startActivity(intent);
+
+                } else {
+                    showToast("您拒绝了该权限");
+                }
+                break;
+        }
+
+    }
+
+
+    private void callPhone(String number) {
+
+        //判断用户是否已经授权
+        if (ContextCompat.checkSelfPermission(WorkDetailActivity.this, "Manifest.permission.CALL_PHONE") != PackageManager.PERMISSION_GRANTED) {
+            //注意第二个参数没有双引号
+            ActivityCompat.requestPermissions(WorkDetailActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
+
+        } else {
+            quanxian = "1";
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_CALL);    //url:统一资源定位符    //uri:统一资源标示符（更广）
+            intent.setData(Uri.parse("tel:" + number));
+            // 开启系统拨号器
+            startActivity(intent);
+
+        }
+
+    }
+
 
 }

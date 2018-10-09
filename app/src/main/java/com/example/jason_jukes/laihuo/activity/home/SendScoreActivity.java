@@ -124,7 +124,7 @@ public class SendScoreActivity extends BaseActivity {
         map.put("ranking_text", getText(etEvaluate));
 
 
-        XUtil.Post(Contants.MY_ADDRESS, map, new Callback.CommonCallback<String>() {
+        XUtil.Post(Contants.SEND_RANKING, map, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
 

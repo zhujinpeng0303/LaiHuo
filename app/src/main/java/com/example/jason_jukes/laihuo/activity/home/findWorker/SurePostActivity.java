@@ -1,5 +1,7 @@
 package com.example.jason_jukes.laihuo.activity.home.findWorker;
 
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -24,6 +26,7 @@ import com.google.gson.Gson;
 
 import org.xutils.common.Callback;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -78,8 +81,14 @@ public class SurePostActivity extends BaseActivity {
     ImageView iv3;
     @InjectView(R.id.iv4)
     ImageView iv4;
+    @InjectView(R.id.iv_play)
+    ImageView ivPlay;
 
     private String url = "";
+
+    private MediaPlayer mPlayer = new MediaPlayer();
+
+    private boolean isPlaying = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +129,12 @@ public class SurePostActivity extends BaseActivity {
             tvWorkTime.setText(Singleton.instance.getData() + " " + Singleton.instance.getTime());
         }
 
+        if (TextUtils.isEmpty(Singleton.instance.getLuyinPath())) {
+            rlLuyin.setVisibility(View.GONE);
+        } else {
+            rlLuyin.setVisibility(View.VISIBLE);
+        }
+
         tvName.setText(Singleton.instance.getName());
         tvPhone.setText(Singleton.instance.getPhone());
         tvDetailAddress.setText(Singleton.instance.getDetailAddress());
@@ -157,7 +172,7 @@ public class SurePostActivity extends BaseActivity {
         map.put("token", "gggg");
         map.put("base_user_certification_classify_id", Singleton.instance.getClassify_id());
         map.put("order_desc", Singleton.instance.getDesc_text());
-//        map.put("order_desc_sounds", "");
+        map.put("order_desc_sounds", Singleton.instance.getLuyinPath());
         if (!TextUtils.isEmpty(Singleton.instance.getImgPath())) {
             map.put("order_desc_pics", Singleton.instance.getImgPath());
         }
@@ -214,11 +229,55 @@ public class SurePostActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back, R.id.tv_sure})
+    @OnClick({R.id.rl_back, R.id.tv_sure, R.id.iv_play})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_back:
                 finish();
+                break;
+            case R.id.iv_play:
+
+                if (!isPlaying) {
+                    ivPlay.setBackgroundResource(R.mipmap.img_luyin_stop);
+                    try {
+                        isPlaying = true;
+                        mPlayer = new MediaPlayer();
+                        mPlayer.setDataSource(Singleton.instance.getLuyin());
+                        mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+                        // 通过异步的方式装载媒体资源
+                        mPlayer.prepareAsync();
+                        mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                            @Override
+                            public void onPrepared(MediaPlayer mp) {
+                                // 装载完毕回调
+                                mPlayer.start();
+                            }
+                        });
+//                        mPlayer.prepare();
+//                        mPlayer.start();
+
+                        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mediaPlayer) {
+                                isPlaying = false;
+                                ivPlay.setBackgroundResource(R.mipmap.img_luyin_play);
+                            }
+                        });
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    ivPlay.setBackgroundResource(R.mipmap.img_luyin_play);
+
+                    if (mPlayer != null) {
+                        isPlaying = false;
+                        mPlayer.pause();
+                    }
+
+                }
+
                 break;
             case R.id.tv_sure:
 
@@ -233,8 +292,18 @@ public class SurePostActivity extends BaseActivity {
 
                 }
 
-
                 break;
         }
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mPlayer != null && mPlayer.isPlaying()) {
+            mPlayer.stop();
+            mPlayer.release();
+            mPlayer = null;
+        }
+    }
+
 }

@@ -323,9 +323,8 @@ public class WorkDescActivity extends BaseActivity {
                 break;
             case R.id.iv_del:
                 mFileName = "";
-                mRecorder.stop();
-                mRecorder.reset();
-                mRecorder.release();
+//                mRecorder.reset();
+//                mRecorder.release();
                 rlLuyining.setVisibility(View.GONE);
                 ivDel.setVisibility(View.GONE);
                 ivPlay.setVisibility(View.GONE);
@@ -375,9 +374,7 @@ public class WorkDescActivity extends BaseActivity {
 
                 }
                 break;
-            case R.id.rl_lunyin:
 
-                break;
             case R.id.tv_end_luyin:
                 mRecorder.stop();
                 mRecorder.reset();
@@ -516,7 +513,7 @@ public class WorkDescActivity extends BaseActivity {
                 break;
             case R.id.tv_commit:
 
-                if (TextUtils.isEmpty(getText(etWorkDesc)) && TextUtils.isEmpty(luyin)) {
+                if (TextUtils.isEmpty(getText(etWorkDesc)) && TextUtils.isEmpty(mFileName)) {
                     showToast("写点或说点什么吧");
                     return;
                 }
@@ -550,7 +547,7 @@ public class WorkDescActivity extends BaseActivity {
 
                 Singleton.instance.setImgPath(str);
 
-                Singleton.instance.setLuyinPath(mFileName);
+//                Singleton.instance.setLuyinPath(mFileName);
 
                 if (StringUtil.isEmpty(mFileName)) {
 
@@ -562,7 +559,6 @@ public class WorkDescActivity extends BaseActivity {
                     uploadYuyin();
 
                 }
-
 
                 break;
         }
@@ -589,6 +585,7 @@ public class WorkDescActivity extends BaseActivity {
                 if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
 
                     Singleton.instance.setLuyinPath(bean.getDataObj().getFileName());
+                    Singleton.instance.setLuyin(mFileName);
 
                     startIntent(WorkAddressActivity.class);
                     App.addDestoryActivity(WorkDescActivity.this, "desc");
@@ -647,7 +644,7 @@ public class WorkDescActivity extends BaseActivity {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        mFileName = new File(dir, "ivr_" + System.currentTimeMillis() + ".3gp").getAbsolutePath();
+        mFileName = new File(dir, "ivr_" + System.currentTimeMillis() + ".mp3").getAbsolutePath();
         mRecorder.setOutputFile(mFileName);
         mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
         try {
@@ -678,7 +675,7 @@ public class WorkDescActivity extends BaseActivity {
                     startRecord();
 
                 } else {
-                    showToast("你拒绝了该权限");
+                    showToast("您拒绝了该权限");
                 }
                 break;
         }

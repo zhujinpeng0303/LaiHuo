@@ -9,10 +9,18 @@ public enum Singleton {
     //定义一个枚举的元素，它就是Singleton的一个实例
     instance;
 
-    private String address_id = "", classify_id = "", classify_name = "", desc_text = "", status = "", price = "", data = "", time = "", address = "", name = "", phone = "",detailAddress = "",imgPath = "",luyinPath = "";
+    private String address_id = "", classify_id = "", classify_name = "", desc_text = "", status = "", price = "", data = "", time = "", address = "", name = "", phone = "",detailAddress = "",imgPath = "",luyinPath = "",luyin = "";
 
     public void doSomething() {
         // do something ...
+    }
+
+    public String getLuyin() {
+        return luyin;
+    }
+
+    public void setLuyin(String luyin) {
+        this.luyin = luyin;
     }
 
     public String getLuyinPath() {

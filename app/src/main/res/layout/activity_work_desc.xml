@@ -81,7 +81,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="@dimen/x50"
                             android:background="@mipmap/img_desc_luyin_del"
-                            android:visibility="visible" />
+                            android:visibility="gone" />
 
                         <ImageView
                             android:id="@+id/iv_play"
@@ -91,7 +91,7 @@
                             android:layout_marginRight="@dimen/x50"
                             android:layout_toLeftOf="@id/iv_del"
                             android:background="@mipmap/img_desc_luyin_play"
-                            android:visibility="visible" />
+                            android:visibility="gone" />
                     </RelativeLayout>
 
                     <RelativeLayout

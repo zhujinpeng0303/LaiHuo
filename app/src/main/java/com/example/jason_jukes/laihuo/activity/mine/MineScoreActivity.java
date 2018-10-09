@@ -43,11 +43,10 @@ public class MineScoreActivity extends BaseActivity {
 
     @InjectView(R.id.lv)
     ListView lv;
-    private MineEvaluateLVAdapter adapter;
     private View headerView;
     @InjectView(R.id.ll_null)
     LinearLayout llNull;
-
+    private MineEvaluateLVAdapter adapter;
     private List<MineEvaluateBean.DataObjBean.RtListBean> been;
     private RatingBar ratingBarAll, ratingBarJishi, ratingBarZhiliang, ratingBarAttitude;
     private TextView tvScoreAll, tvScoreJishi, tvScoreZhiliang, tvScoreAttitude;

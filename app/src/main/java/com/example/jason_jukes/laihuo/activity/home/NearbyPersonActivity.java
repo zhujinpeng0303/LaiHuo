@@ -55,7 +55,7 @@ import butterknife.OnClick;
  * Now, only God knows
  */
 
-public class NearbyPersonActivity extends BaseActivity implements SensorEventListener {
+public class NearbyPersonActivity extends BaseActivity {
 
     @InjectView(R.id.tv_status_bar_name)
     TextView tvStatusBarName;
@@ -81,9 +81,10 @@ public class NearbyPersonActivity extends BaseActivity implements SensorEventLis
     boolean isFirstLoc = true; // 是否首次定位
     private MyLocationData locData;
 
+    private boolean flag = false;
 
     // 定位相关
-    LocationClient mLocClient;
+    LocationClient mLocClient = null;
     public MyLocationListenner myListener = new MyLocationListenner();
     private MyLocationConfiguration.LocationMode mCurrentMode;
     BitmapDescriptor mCurrentMarker;
@@ -114,26 +115,12 @@ public class NearbyPersonActivity extends BaseActivity implements SensorEventLis
         map.setVisibility(View.GONE);
         ref.setEnabled(true);
 
-        mBaiduMap = map.getMap();
-        mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
 
-
-        // 开启定位图层
-        mBaiduMap.setMyLocationEnabled(true);
-        mLocClient = new LocationClient(this);
-        mLocClient.registerLocationListener(myListener);
-        LocationClientOption option = new LocationClientOption();
-        option.setOpenGps(true); // 打开gps
-        option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(1000);
-        mLocClient.setLocOption(option);
-        mLocClient.start();
-
-        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
-                mCurrentMode, true, mCurrentMarker));
-        MapStatus.Builder builder1 = new MapStatus.Builder();
-        builder1.overlook(0);
-        mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder1.build()));
+//        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
+//                mCurrentMode, true, mCurrentMarker));
+//        MapStatus.Builder builder1 = new MapStatus.Builder();
+//        builder1.overlook(0);
+//        mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder1.build()));
 
         been = new ArrayList<>();
         adapter = new NearbyPersonLVAdapter(this, been);
@@ -249,28 +236,6 @@ public class NearbyPersonActivity extends BaseActivity implements SensorEventLis
 
     }
 
-    @Override
-    public void onSensorChanged(SensorEvent sensorEvent) {
-
-        double x = sensorEvent.values[SensorManager.DATA_X];
-        if (Math.abs(x - lastX) > 1.0) {
-            mCurrentDirection = (int) x;
-            locData = new MyLocationData.Builder()
-                    .accuracy(mCurrentAccracy)
-                    // 此处设置开发者获取到的方向信息，顺时针0-360
-                    .direction(mCurrentDirection).latitude(mCurrentLat)
-                    .longitude(mCurrentLon).build();
-            mBaiduMap.setMyLocationData(locData);
-        }
-        lastX = x;
-
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int i) {
-
-    }
-
 
     /**
      * 定位SDK监听函数
@@ -285,6 +250,9 @@ public class NearbyPersonActivity extends BaseActivity implements SensorEventLis
             }
             mCurrentLat = location.getLatitude();
             mCurrentLon = location.getLongitude();
+
+            Log.e("posion", mCurrentLat + " 和" + mCurrentLon + "");
+
             mCurrentAccracy = location.getRadius();
             locData = new MyLocationData.Builder()
                     .accuracy(location.getRadius())
@@ -292,17 +260,18 @@ public class NearbyPersonActivity extends BaseActivity implements SensorEventLis
                     .direction(mCurrentDirection).latitude(location.getLatitude())
                     .longitude(location.getLongitude()).build();
             mBaiduMap.setMyLocationData(locData);
-            if (isFirstLoc) {
-                isFirstLoc = false;
+//            if (isFirstLoc) {
+//                isFirstLoc = false;
                 LatLng ll = new LatLng(location.getLatitude(),
                         location.getLongitude());
                 MapStatus.Builder builder = new MapStatus.Builder();
                 builder.target(ll).zoom(18.0f);
                 mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-            }
+//            }
         }
 
         public void onReceivePoi(BDLocation poiLocation) {
+
         }
     }
 
@@ -315,27 +284,45 @@ public class NearbyPersonActivity extends BaseActivity implements SensorEventLis
                 break;
             case R.id.tv_loc:
 
-                map.setVisibility(View.VISIBLE);
-                llNull.setVisibility(View.GONE);
-                lv.setVisibility(View.GONE);
-                ref.setEnabled(false);
+                if (!flag) {
+                    map.setVisibility(View.VISIBLE);
+                    llNull.setVisibility(View.GONE);
+                    lv.setVisibility(View.GONE);
+                    ref.setEnabled(false);
+                    flag = !flag;
+
+
+                    mBaiduMap = map.getMap();
+                    mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
+
+
+                    // 开启定位图层
+                    mBaiduMap.setMyLocationEnabled(true);
+                    mLocClient = new LocationClient(getApplicationContext());
+                    mLocClient.registerLocationListener(myListener);
+                    LocationClientOption option = new LocationClientOption();
+                    option.setOpenGps(true); // 打开gps
+                    option.setCoorType("bd09ll"); // 设置坐标类型
+                    option.setScanSpan(1000);
+                    mLocClient.setLocOption(option);
+                    mLocClient.start();
+
+                } else {
+                    map.setVisibility(View.GONE);
+//                    llNull.setVisibility(View.GONE);
+                    lv.setVisibility(View.VISIBLE);
+                    ref.setEnabled(true);
+                    flag = !flag;
+                }
+
                 break;
             case R.id.rl_location:
+
+
                 break;
         }
     }
 
-
-    @Override
-    protected void onResume() {
-        map.onResume();
-        super.onResume();
-
-        //为系统的方向传感器注册监听器
-        mSensorManager.registerListener(NearbyPersonActivity.this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
-                SensorManager.SENSOR_DELAY_UI);
-
-    }
 
     @Override
     protected void onPause() {
@@ -346,7 +333,6 @@ public class NearbyPersonActivity extends BaseActivity implements SensorEventLis
     @Override
     protected void onStop() {
 //取消注册传感器监听
-        mSensorManager.unregisterListener(this);
         super.onStop();
     }
 

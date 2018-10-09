@@ -57,12 +57,12 @@ public class AddAddressActivity extends BaseActivity {
     @InjectView(R.id.tv_del)
     TextView tvDel;
 
-//    private List<AreaBean.DataArrBean> options1Items = new ArrayList<>();
+    //    private List<AreaBean.DataArrBean> options1Items = new ArrayList<>();
     private List<AreaBean.DataArrBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<String> areas = new ArrayList<>();
 
-    private String area_id = "",city_id = "";
+    private String area_id = "", city_id = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +111,7 @@ public class AddAddressActivity extends BaseActivity {
         map.put("city_id", "haerbin");
         map.put("id", "0");
 
+
         XUtil.Post(Contants.AREA_LIST, map, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -130,7 +131,6 @@ public class AddAddressActivity extends BaseActivity {
 
                         options2Items.add(areas);
                     }
-
 
 
                 } else {
@@ -316,6 +316,9 @@ public class AddAddressActivity extends BaseActivity {
         map.put("username", getText(etName));
         map.put("area_id", area_id);
         map.put("city_id", "1");
+
+        Log.e("map", map.toString());
+
 
         XUtil.Post(Contants.ADD_ADDRESS, map, new Callback.CommonCallback<String>() {
             @Override

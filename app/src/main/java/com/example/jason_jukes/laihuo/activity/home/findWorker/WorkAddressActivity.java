@@ -116,7 +116,7 @@ public class WorkAddressActivity extends BaseActivity {
 
         Map<String, Object> map = new HashMap<>();
         map.put("token", "gggg");
-        map.put("city_id", "236");
+        map.put("city_id", "1");
 
         XUtil.Post(Contants.MY_ADDRESS, map, new Callback.CommonCallback<String>() {
             @Override

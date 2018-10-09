@@ -395,8 +395,8 @@
 
                     <ImageView
                         android:id="@+id/iv_play"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/x100"
+                        android:layout_height="@dimen/x100"
                         android:layout_centerInParent="true"
                         android:background="@mipmap/img_luyin_play" />
 

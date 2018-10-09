@@ -77,6 +77,8 @@ public class Contants {
     public static String PLEASE_INPUT_PRICE = URL_BASE + "canBidAgree";
     //一口价接单
     public static String FIXED_PRICE_GET_ORDER = URL_BASE + "fixedOrder";
+    //评价
+    public static String SEND_RANKING = URL_BASE + "addRanking";
 
 
 

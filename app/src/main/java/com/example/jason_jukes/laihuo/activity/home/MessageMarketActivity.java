@@ -60,6 +60,7 @@ public class MessageMarketActivity extends BaseActivity implements XListView.IXL
     @Override
     protected void onResume() {
         super.onResume();
+        page = 1;
         been.clear();
         initData();
     }
@@ -67,11 +68,6 @@ public class MessageMarketActivity extends BaseActivity implements XListView.IXL
     private void initView() {
 
         tvStatusBarName.setText("信息市场");
-
-
-    }
-
-    private void initData() {
 
         lv.setPullRefreshEnable(true);
         lv.setPullLoadEnable(true);
@@ -86,41 +82,25 @@ public class MessageMarketActivity extends BaseActivity implements XListView.IXL
         lv.setVerticalScrollBarEnabled(false);
 
         View footerView = LayoutInflater.from(context).inflate(R.layout.footer_message_market_lv, null);
-        lv.addFooterView(footerView);
+        lv.addFooterView(footerView, null, false);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 startActivity(new Intent(MessageMarketActivity.this, MessageDetailActivity.class)
-                        .putExtra("id", been.get(i).getId() + ""));
+                        .putExtra("id", been.get(i - 1).getId() + ""));
             }
         });
 
+    }
 
-//        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(AbsListView absListView, int i) {
-//
-//            }
-//
-//            @Override
-//            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-//                boolean enable = false;
-//                if (lv != null && lv.getChildCount() > 0) {
-//                    // check if the first item of the list is visible
-//                    boolean firstItemVisible = lv.getFirstVisiblePosition() == 0;
-//                    // check if the top of the first item is visible
-//                    boolean topOfFirstItemVisible = lv.getChildAt(0).getTop() == 0;
-//                    // enabling or disabling the refresh layout
-//                    enable = firstItemVisible && topOfFirstItemVisible;
-//                }
-//                ref.setEnabled(enable);
-//            }
-//        });
+    private void initData() {
+
 
         if (IsNetWork.isNetWork(this)) {
             showProgressDialog();
 //            ref.setRefreshing(true);
+            lv.setPullRefreshEnable(true);
             getData();
         } else {
             showToast("请检查网络设置");
@@ -134,6 +114,7 @@ public class MessageMarketActivity extends BaseActivity implements XListView.IXL
 
         page = 1;
         lv.setPullRefreshEnable(true);
+        lv.setPullLoadEnable(true);
         onResume();
 
     }
@@ -169,7 +150,6 @@ public class MessageMarketActivity extends BaseActivity implements XListView.IXL
                             been1.add(bean.getDataObj().getRtList().get(i));
 
                         }
-
                         adapter.addBeen1(been1);
                     } else {
                         showToast("没有数据了");

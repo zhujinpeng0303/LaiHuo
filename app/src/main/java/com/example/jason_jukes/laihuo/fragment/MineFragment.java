@@ -128,7 +128,7 @@ public class MineFragment extends BaseFragment {
         ivBack.setVisibility(View.GONE);
         tvStatusBarName.setText("我的");
 
-        initData();
+//        initData();
 
         ref.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -149,7 +149,7 @@ public class MineFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-//        initData();
+        initData();
     }
 
     private void initData() {
@@ -160,7 +160,6 @@ public class MineFragment extends BaseFragment {
             getInfo();
         } else {
             showToast("请检查网络设置");
-
         }
 
     }

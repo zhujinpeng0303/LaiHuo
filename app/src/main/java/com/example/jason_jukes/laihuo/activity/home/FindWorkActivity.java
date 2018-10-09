@@ -138,8 +138,8 @@ public class FindWorkActivity extends BaseActivity implements XListView.IXListVi
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 startActivity(new Intent(FindWorkActivity.this, WorkDetailActivity.class)
-                        .putExtra("id", been.get(i).getId() + "")
-                        .putExtra("type", been.get(i).getOrder_type()));
+                        .putExtra("id", been.get(i - 1).getId() + "")
+                        .putExtra("type", been.get(i - 1).getOrder_type()));
             }
         });
 
@@ -172,6 +172,9 @@ public class FindWorkActivity extends BaseActivity implements XListView.IXListVi
 //            }
 //        });
 
+        getCalssify();
+
+
     }
 
 
@@ -180,10 +183,10 @@ public class FindWorkActivity extends BaseActivity implements XListView.IXListVi
             showProgressDialog();
 //            ref.setRefreshing(true);
             been.clear();
-            groups.clear();
-            items.clear();
+//            groups.clear();
+//            items.clear();
+            page = 1;
             getData();
-            getCalssify();
         } else {
             showToast("请检查网络设置");
 
@@ -195,6 +198,7 @@ public class FindWorkActivity extends BaseActivity implements XListView.IXListVi
     public void onRefresh() {
         page = 1;
         lv.setPullRefreshEnable(true);
+        lv.setPullLoadEnable(true);
         initData();
 
     }
