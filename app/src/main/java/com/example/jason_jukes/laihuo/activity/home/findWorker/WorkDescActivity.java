@@ -584,11 +584,17 @@ public class WorkDescActivity extends BaseActivity {
                 ImgPostBean bean = new Gson().fromJson(result, ImgPostBean.class);
                 if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
 
-                    Singleton.instance.setLuyinPath(bean.getDataObj().getFileName());
-                    Singleton.instance.setLuyin(mFileName);
+                    if (bean.getDataObj().getFileName() == null){
 
-                    startIntent(WorkAddressActivity.class);
-                    App.addDestoryActivity(WorkDescActivity.this, "desc");
+                        showToast("您的录音保存未成功,请重新录制");
+
+                    }else {
+                        Singleton.instance.setLuyinPath(bean.getDataObj().getFileName());
+                        Singleton.instance.setLuyin(mFileName);
+                        startIntent(WorkAddressActivity.class);
+                        App.addDestoryActivity(WorkDescActivity.this, "desc");
+                    }
+
 
                 } else {
                     showToast(bean.getErrorMsg());

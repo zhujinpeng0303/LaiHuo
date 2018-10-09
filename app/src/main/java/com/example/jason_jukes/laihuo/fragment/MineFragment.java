@@ -105,6 +105,10 @@ public class MineFragment extends BaseFragment {
     TextView tvTopPhoneStatus;
     @InjectView(R.id.ref)
     SwipeRefreshLayout ref;
+    @InjectView(R.id.rl_mine_card)
+    RelativeLayout rlMineCard;
+    @InjectView(R.id.rl_mine_phone)
+    RelativeLayout rlMinePhone;
     private View view;
 
     private String pathImg = "";
@@ -208,12 +212,14 @@ public class MineFragment extends BaseFragment {
                         tvTopCardStatus.setText("未开户");
                         tvTopCardStatus.setBackgroundResource(R.drawable.bg_dark_yellow_corner);
                         cardStatus = "0";
+                        rlMineCard.setClickable(true);
                         SPTool.getInstance().setShareData(Contants.CARD_STATUS, cardStatus);
                     } else {
                         tvCardStatus.setText("已开户");
                         tvTopCardStatus.setText("已开户");
                         tvTopCardStatus.setBackgroundResource(R.drawable.bg_grey_alpha_corner);
                         cardStatus = "1";
+                        rlMineCard.setClickable(false);
                         SPTool.getInstance().setShareData(Contants.CARD_STATUS, cardStatus);
                     }
 
@@ -222,12 +228,14 @@ public class MineFragment extends BaseFragment {
                         tvTopPhoneStatus.setText("未认证");
                         tvTopPhoneStatus.setBackgroundResource(R.drawable.bg_dark_yellow_corner);
                         phoneStatus = "0";
+                        rlMinePhone.setClickable(true);
                         SPTool.getInstance().setShareData(Contants.PHONE_STATUS, phoneStatus);
                     } else {
                         tvPhoneStatus.setText("已认证");
                         tvTopPhoneStatus.setText("已认证");
                         tvTopPhoneStatus.setBackgroundResource(R.drawable.bg_grey_alpha_corner);
                         phoneStatus = "1";
+                        rlMinePhone.setClickable(true);
                         SPTool.getInstance().setShareData(Contants.PHONE_STATUS, phoneStatus);
                     }
 

@@ -95,6 +95,8 @@ public class PersonalHomeActivity extends BaseActivity {
     SwipeRefreshLayout ref;
     @InjectView(R.id.rootView)
     RelativeLayout rootView;
+    @InjectView(R.id.tv_invist)
+    TextView tvInvist;
 
     private RatingBar ratingBarAll, ratingBarJishi, ratingBarZhiliang, ratingBarAttitude;
 
@@ -459,6 +461,9 @@ public class PersonalHomeActivity extends BaseActivity {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         showToast(been.get(i).getId() + "");
+
+                        invist(popupWindow, been.get(i).getId() + "");
+
                     }
                 });
 
@@ -475,6 +480,52 @@ public class PersonalHomeActivity extends BaseActivity {
                         .putExtra("type", "user"));
                 break;
         }
+    }
+
+    private void invist(final PopupWindow popupWindow, String order_id) {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", "gggg");
+        map.put("order_id", order_id);
+        map.put("to_user_id", getIntent().getStringExtra("id"));
+
+        XUtil.Post(Contants.MY_ADDRESS, map, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                MessageBean bean = new Gson().fromJson(result, MessageBean.class);
+                if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
+
+                    showToast(bean.getErrorMsg());
+                    popupWindow.dismiss();
+
+                } else {
+                    showToast(bean.getErrorMsg());
+                }
+
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                Log.e("fail", ex.getMessage());
+                hideProgressDialog();
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
     }
 
 

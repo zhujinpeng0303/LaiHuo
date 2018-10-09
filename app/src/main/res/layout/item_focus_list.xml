@@ -29,7 +29,7 @@
         android:layout_alignLeft="@id/tv_name"
         android:layout_below="@id/tv_name"
         android:layout_marginTop="@dimen/x20"
-        android:background="@mipmap/img_home" />
+        android:background="@mipmap/img_id_renzheng" />
 
     <ImageView
         android:id="@+id/iv_phone"

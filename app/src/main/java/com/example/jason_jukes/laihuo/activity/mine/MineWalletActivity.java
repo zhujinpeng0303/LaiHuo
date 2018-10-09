@@ -70,6 +70,7 @@ public class MineWalletActivity extends BaseActivity {
         tvNull.setText("无金额变动记录");
         headerView = LayoutInflater.from(context).inflate(R.layout.header_lv_mine_wallet, null);
         tv_yue = headerView.findViewById(R.id.tv_yue);
+        Log.e("yue",getIntent().getStringExtra("yue"));
         tv_yue.setText("¥ " + getIntent().getStringExtra("yue"));
         headerView.findViewById(R.id.tv_withdraw).setOnClickListener(new View.OnClickListener() {
             @Override

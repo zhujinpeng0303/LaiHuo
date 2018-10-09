@@ -79,6 +79,8 @@ public class Contants {
     public static String FIXED_PRICE_GET_ORDER = URL_BASE + "fixedOrder";
     //评价
     public static String SEND_RANKING = URL_BASE + "addRanking";
+    //邀请他完成我的活
+    public static String INVIST_WORKER = URL_BASE + "inviteWorker";
 
 
 
