@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.activity.WebviewActivity;
+import com.example.jason_jukes.laihuo.activity.mine.PhoneLoginActivity;
 import com.example.jason_jukes.laihuo.bean.MessageBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
 import com.example.jason_jukes.laihuo.tool.XUtil;
@@ -97,7 +98,10 @@ public class SureOrderActivity extends BaseActivity {
 
                     showToast(bean.getErrorMsg());
                     finish();
-                } else {
+                }else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }  else {
                     showToast(bean.getErrorMsg());
                 }
 

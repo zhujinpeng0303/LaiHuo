@@ -47,6 +47,7 @@
         android:layout_marginRight="@dimen/x50"
         android:layout_marginTop="@dimen/y80"
         android:background="@drawable/bg_et_grey_corner"
+        android:digits="0123456789."
         android:gravity="center_vertical"
         android:hint="请输入提现金额"
         android:inputType="number"

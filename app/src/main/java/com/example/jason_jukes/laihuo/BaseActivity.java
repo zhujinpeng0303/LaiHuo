@@ -21,6 +21,7 @@ public class BaseActivity extends AppCompatActivity {
     private Toast toast;
     private Dialog dialogProgress;
 
+    private View view1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class BaseActivity extends AppCompatActivity {
         dialogProgress.setCanceledOnTouchOutside(false);
 
     }
+
 
     public void startIntent(Class clazz) {
         Intent intent = new Intent(BaseActivity.this, clazz);

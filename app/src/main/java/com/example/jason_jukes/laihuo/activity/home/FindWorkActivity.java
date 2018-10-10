@@ -21,6 +21,7 @@ import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.activity.mine.BindCardActivity;
 import com.example.jason_jukes.laihuo.activity.mine.PhoneCertificationActivity;
+import com.example.jason_jukes.laihuo.activity.mine.PhoneLoginActivity;
 import com.example.jason_jukes.laihuo.adapter.ClassifyExpLVAdapter;
 import com.example.jason_jukes.laihuo.adapter.FindWorkLVAdapter;
 import com.example.jason_jukes.laihuo.bean.ClassifyBean;
@@ -122,6 +123,7 @@ public class FindWorkActivity extends BaseActivity implements XListView.IXListVi
 
     private void initView() {
 
+
         tvStatusBarName.setText("找活干");
 
         lv.setPullRefreshEnable(true);
@@ -130,9 +132,6 @@ public class FindWorkActivity extends BaseActivity implements XListView.IXListVi
         lv.setXListViewListener(this);
         lv.setRefreshTime(getTime());
 
-        been = new ArrayList<>();
-        adapter = new FindWorkLVAdapter(this, been);
-        lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -151,27 +150,6 @@ public class FindWorkActivity extends BaseActivity implements XListView.IXListVi
 
         expandableListView.addHeaderView(headerView);
 
-//        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(AbsListView absListView, int i) {
-//
-//            }
-//
-//            @Override
-//            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-//                boolean enable = false;
-//                if (lv != null && lv.getChildCount() > 0) {
-//                    // check if the first item of the list is visible
-//                    boolean firstItemVisible = lv.getFirstVisiblePosition() == 0;
-//                    // check if the top of the first item is visible
-//                    boolean topOfFirstItemVisible = lv.getChildAt(0).getTop() == 0;
-//                    // enabling or disabling the refresh layout
-//                    enable = firstItemVisible && topOfFirstItemVisible;
-//                }
-////                ref.setEnabled(enable);
-//            }
-//        });
-
         getCalssify();
 
 
@@ -182,9 +160,13 @@ public class FindWorkActivity extends BaseActivity implements XListView.IXListVi
         if (IsNetWork.isNetWork(this)) {
             showProgressDialog();
 //            ref.setRefreshing(true);
-            been.clear();
+//            been.clear();
 //            groups.clear();
 //            items.clear();
+            been = new ArrayList<>();
+            adapter = new FindWorkLVAdapter(this, been);
+            lv.setAdapter(adapter);
+
             page = 1;
             getData();
         } else {
@@ -243,6 +225,9 @@ public class FindWorkActivity extends BaseActivity implements XListView.IXListVi
 
                     }
 
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     showToast(bean.getErrorMsg());
                 }
@@ -303,6 +288,9 @@ public class FindWorkActivity extends BaseActivity implements XListView.IXListVi
                     } else {
                         llNull.setVisibility(View.VISIBLE);
                     }
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     showToast(bean.getErrorMsg());
                 }
@@ -367,6 +355,9 @@ public class FindWorkActivity extends BaseActivity implements XListView.IXListVi
                         showToast("没有数据了");
                         lv.setPullLoadEnable(false);
                     }
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     showToast(bean.getErrorMsg());
                 }
@@ -541,6 +532,9 @@ public class FindWorkActivity extends BaseActivity implements XListView.IXListVi
                     initWorkStatus();
                     initData();
 
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     showToast(bean.getErrorMsg());
                 }
@@ -591,7 +585,7 @@ public class FindWorkActivity extends BaseActivity implements XListView.IXListVi
 
     private void bindPhone() {
 
-        CommonDialog commonDialog = new CommonDialog(context);
+        CommonDialog commonDialog = new CommonDialog(this);
         commonDialog.commonDialog("提示", "您还没有进行手机认证,还不能进行上下班操作!", new CommonDialog.TvClick() {
             @Override
             public void okClick(AlertDialog dialog) {
@@ -609,12 +603,6 @@ public class FindWorkActivity extends BaseActivity implements XListView.IXListVi
 
     }
 
-
-    public void start() {
-
-        initData();
-
-    }
 
     private void onLoad() {
         lv.stopRefresh();

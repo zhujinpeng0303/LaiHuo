@@ -300,6 +300,9 @@ public class MainActivity extends BaseActivity {
                     mFragmentTransaction.add(R.id.content, mFragments[1]);
                     mFragmentTransaction.show(mFragments[1]);
                 } else {
+                    mFragmentTransaction.remove(mFragments[1]);
+                    mFragments[1] = new MineFragment();
+                    mFragmentTransaction.add(R.id.content, mFragments[1]);
                     mFragmentTransaction.show(mFragments[1]);
                 }
                 break;

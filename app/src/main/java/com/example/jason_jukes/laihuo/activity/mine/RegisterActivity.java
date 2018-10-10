@@ -175,7 +175,10 @@ public class RegisterActivity extends BaseActivity {
                     SPTool.getInstance().setShareData(Contants.USER_ID, bean.getDataObj().getToken());
                     finish();
 
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 
@@ -222,7 +225,10 @@ public class RegisterActivity extends BaseActivity {
                     showToast(bean.getErrorMsg());
                     codeState();
 
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 

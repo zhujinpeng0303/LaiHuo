@@ -29,6 +29,7 @@ import com.bigkoo.pickerview.view.TimePickerView;
 import com.example.jason_jukes.laihuo.App;
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.activity.WebviewActivity;
 import com.example.jason_jukes.laihuo.adapter.WorkDescGridAdapter;
 import com.example.jason_jukes.laihuo.bean.ImgPostBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
@@ -399,15 +400,12 @@ public class WorkDescActivity extends BaseActivity {
                 tvLunyinWord.setText("打字说不清楚?试试语音吧");
 
                 break;
-            case R.id.rl_luyining:
-                //录音中的框
 
-                break;
             case R.id.rl_kehuanjia:
 
                 rlKehuanjia.setBackgroundResource(R.drawable.bg_blue_corner);
                 tvKehuanjia.setTextColor(getResources().getColor(R.color.white));
-                Drawable drawable = getResources().getDrawable(R.mipmap.img_home);
+                Drawable drawable = getResources().getDrawable(R.mipmap.img_duihao);
                 drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
                 tvKehuanjia.setCompoundDrawables(drawable, null, null, null);
 
@@ -424,7 +422,7 @@ public class WorkDescActivity extends BaseActivity {
 
                 rlYikoujia.setBackgroundResource(R.drawable.bg_blue_corner);
                 tvYikoujia.setTextColor(getResources().getColor(R.color.white));
-                Drawable drawable1 = getResources().getDrawable(R.mipmap.img_home);
+                Drawable drawable1 = getResources().getDrawable(R.mipmap.img_duihao);
                 drawable1.setBounds(0, 0, drawable1.getMinimumWidth(), drawable1.getMinimumHeight());
                 tvYikoujia.setCompoundDrawables(drawable1, null, null, null);
 
@@ -436,7 +434,12 @@ public class WorkDescActivity extends BaseActivity {
                 etJiage.setHint("一口价价格(必填)");
                 status = "1";
                 break;
+
             case R.id.iv_detail:
+
+                startActivity(new Intent(WorkDescActivity.this, WebviewActivity.class)
+                        .putExtra("url", Contants.XINZI_BIAOZHUN));
+
                 break;
             case R.id.rl_rb:
 
@@ -468,25 +471,24 @@ public class WorkDescActivity extends BaseActivity {
                     @Override
                     public void onTimeSelect(Date date, View v) {
 
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                         SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
-                        SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
+                        SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm");
 
-                        if (Integer.valueOf(StringUtil.getTimestamp(dateFormat.format(date), "yyyy-MM-dd HH:mm:ss"))
-                                < Integer.valueOf(StringUtil.getTimestamp(StringUtil.getCurrentTime("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss"))) {
+                        if (Integer.valueOf(StringUtil.getTimestamp(dateFormat.format(date), "yyyy-MM-dd HH:mm"))
+                                <= Integer.valueOf(StringUtil.getTimestamp(StringUtil.getCurrentTime("yyyy-MM-dd HH:mm"), "yyyy-MM-dd HH:mm"))) {
 
                             showToast("开工时间太早了哦~");
-                            tvTime.setText(StringUtil.getCurrentTime("yyyy-MM-dd HH:mm:ss"));
+                            tvTime.setText(StringUtil.getCurrentTime("yyyy-MM-dd HH:mm"));
                             data = StringUtil.getCurrentTime("yyyy-MM-dd");
-                            time = StringUtil.getCurrentTime("HH:mm:ss");
+                            time = StringUtil.getCurrentTime("HH:mm");
                         } else {
                             tvTime.setText(dateFormat.format(date));
                             data = dateFormat1.format(date);
                             time = dateFormat2.format(date);
                         }
-
                     }
-                }).setType(new boolean[]{true, true, true, true, true, true})
+                }).setType(new boolean[]{true, true, true, true, true, false})
                         .setLabel("年", "月", "日", "时", "分", "秒")
                         .setRangDate(calendarStart, calendarEnd)
                         .build();
@@ -503,9 +505,9 @@ public class WorkDescActivity extends BaseActivity {
                     rlRb.setClickable(true);
 
                     tvWord.setText("要求开工时间:");
-                    tvTime.setText(StringUtil.getCurrentTime("yyyy-MM-dd HH:mm:ss"));
+                    tvTime.setText(StringUtil.getCurrentTime("yyyy-MM-dd HH:mm"));
                     data = StringUtil.getCurrentTime("yyyy-MM-dd");
-                    time = StringUtil.getCurrentTime("HH:mm:ss");
+                    time = StringUtil.getCurrentTime("HH:mm");
 
                     flag = !flag;
                 }
@@ -521,10 +523,18 @@ public class WorkDescActivity extends BaseActivity {
                 if (status.equals("1")) {
 
                     if (TextUtils.isEmpty(getText(etJiage))) {
-                        showToast("请不忘记输入一口价价格!");
+                        showToast("请不要忘记输入一口价价格!");
                         return;
                     }
 
+                }
+
+                if (flag) {
+                    if (Integer.valueOf(StringUtil.getTimestamp(getText(tvTime), "yyyy-MM-dd HH:mm"))
+                            <= Integer.valueOf(StringUtil.getTimestamp(StringUtil.getCurrentTime("yyyy-MM-dd HH:mm"), "yyyy-MM-dd HH:mm"))) {
+                        showToast("开工时间太早了哦~");
+                        return;
+                    }
                 }
 
                 Singleton.instance.setDesc_text(getText(etWorkDesc));
@@ -584,11 +594,11 @@ public class WorkDescActivity extends BaseActivity {
                 ImgPostBean bean = new Gson().fromJson(result, ImgPostBean.class);
                 if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
 
-                    if (bean.getDataObj().getFileName() == null){
+                    if (bean.getDataObj().getFileName() == null) {
 
                         showToast("您的录音保存未成功,请重新录制");
 
-                    }else {
+                    } else {
                         Singleton.instance.setLuyinPath(bean.getDataObj().getFileName());
                         Singleton.instance.setLuyin(mFileName);
                         startIntent(WorkAddressActivity.class);

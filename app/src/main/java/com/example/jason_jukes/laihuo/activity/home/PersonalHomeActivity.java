@@ -22,6 +22,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.activity.mine.FeedbackActivity;
+import com.example.jason_jukes.laihuo.activity.mine.PhoneLoginActivity;
 import com.example.jason_jukes.laihuo.adapter.MineEvaluateLVAdapter;
 import com.example.jason_jukes.laihuo.adapter.MineQualificationLVAdapter;
 import com.example.jason_jukes.laihuo.adapter.PostWorkLVAdapter;
@@ -263,7 +264,10 @@ public class PersonalHomeActivity extends BaseActivity {
                         llZizhiNull.setVisibility(View.VISIBLE);
                     }
 
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 
@@ -318,7 +322,10 @@ public class PersonalHomeActivity extends BaseActivity {
                     } else {
                         ll_null.setVisibility(View.VISIBLE);
                     }
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 
@@ -359,7 +366,10 @@ public class PersonalHomeActivity extends BaseActivity {
                     showToast(bean.getErrorMsg());
                     tvFocus.setText("取消关注");
                     tvFocus.setBackgroundResource(R.drawable.bg_grey_big_corner);
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
                 hideProgressDialog();
@@ -401,7 +411,10 @@ public class PersonalHomeActivity extends BaseActivity {
                     showToast(bean.getErrorMsg());
                     tvFocus.setText("关注TA");
                     tvFocus.setBackgroundResource(R.drawable.bg_blue_big_corner);
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
                 hideProgressDialog();
@@ -499,7 +512,10 @@ public class PersonalHomeActivity extends BaseActivity {
                     showToast(bean.getErrorMsg());
                     popupWindow.dismiss();
 
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 

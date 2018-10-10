@@ -66,19 +66,23 @@ public class PostWorkLVAdapter extends BaseAdapter {
         viewHolder.address.setText(been.get(i).getCreate_time_day());
         viewHolder.date.setText(been.get(i).getCreate_time_second());
         if (been.get(i).getOrder_status_text().equals("待支付") || been.get(i).getOrder_status_text().equals("询价中") || been.get(i).getOrder_status_text().equals("未抢单")){
-            viewHolder.work_status.setBackgroundResource(R.drawable.bg_red_big_corner);
+            viewHolder.work_status.setBackgroundResource(R.drawable.bg_dark_orange_big_conner);
         }else if (been.get(i).getOrder_status_text().equals("已抢单") || been.get(i).getOrder_status_text().equals("已完成")){
             viewHolder.work_status.setBackgroundResource(R.drawable.bg_green_big_corner);
         }else if (been.get(i).getOrder_status_text().equals("进行中")) {
             viewHolder.work_status.setBackgroundResource(R.drawable.bg_orange_big_corner);
         } else{
-            viewHolder.work_status.setBackgroundResource(R.drawable.bg_grey_big_corner);
+            viewHolder.work_status.setBackgroundResource(R.drawable.bg_light_grey_big_corner);
         }
 
         if (been.get(i).getOrder_type().equals("fixed_price") || been.get(i).getOrder_type().equals("unlock_company")){
             viewHolder.jiage_status.setText("一口价: " + been.get(i).getOrder_price() + "元");
+            viewHolder.jiage_status.setTextColor(context.getResources().getColor(R.color.colorGreenBottle));
+            viewHolder.jiage_status.setBackgroundResource(R.drawable.bg_green_stroke_big_corner);
         }else if (been.get(i).getOrder_type().equals("talk_price")){
             viewHolder.jiage_status.setText("竞价: " + been.get(i).getBid_count() + "人");
+            viewHolder.jiage_status.setTextColor(context.getResources().getColor(R.color.DarkOrange));
+            viewHolder.jiage_status.setBackgroundResource(R.drawable.bg_dark_orange_stroke_big_corner);
         }
 
         return view;

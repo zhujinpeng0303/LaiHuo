@@ -14,7 +14,7 @@
         android:layout_marginTop="@dimen/y50"
         android:text="第一步·请选择服务项目"
         android:textColor="@color/colorBlack"
-        android:textSize="@dimen/x40" />
+        android:textSize="@dimen/x45" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,9 +22,9 @@
         android:orientation="horizontal">
 
         <RelativeLayout
-            android:layout_marginBottom="@dimen/y50"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y50"
             android:layout_marginLeft="@dimen/x50"
             android:layout_weight="1">
 
@@ -48,11 +48,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/iv1"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/y20"
-                android:paddingTop="@dimen/x20"
+                android:layout_marginTop="@dimen/y50"
+                android:paddingTop="@dimen/x30"
                 android:text="服务项目"
                 android:textColor="@color/colorGray"
-                android:textSize="@dimen/x30" />
+                android:textSize="@dimen/x35" />
 
         </RelativeLayout>
 
@@ -90,11 +90,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/iv2"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/y20"
-                android:paddingTop="@dimen/x20"
+                android:layout_marginTop="@dimen/y50"
+                android:paddingTop="@dimen/x30"
                 android:text="服务描述"
                 android:textColor="@color/colorGray"
-                android:textSize="@dimen/x30" />
+                android:textSize="@dimen/x35" />
 
 
         </RelativeLayout>
@@ -132,11 +132,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/iv3"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/y20"
-                android:paddingTop="@dimen/x20"
+                android:layout_marginTop="@dimen/y50"
+                android:paddingTop="@dimen/x30"
                 android:text="服务地址"
                 android:textColor="@color/colorGray"
-                android:textSize="@dimen/x30" />
+                android:textSize="@dimen/x35" />
 
 
         </RelativeLayout>
@@ -166,11 +166,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/iv4"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/y20"
-                android:paddingTop="@dimen/x20"
-                android:text="服务描述"
+                android:layout_marginTop="@dimen/y50"
+                android:paddingTop="@dimen/x30"
+                android:text="发布"
                 android:textColor="@color/colorGray"
-                android:textSize="@dimen/x30" />
+                android:textSize="@dimen/x35" />
 
 
         </RelativeLayout>

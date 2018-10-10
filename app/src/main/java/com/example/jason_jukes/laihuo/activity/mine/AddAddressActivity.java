@@ -133,7 +133,10 @@ public class AddAddressActivity extends BaseActivity {
                     }
 
 
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 
@@ -278,7 +281,10 @@ public class AddAddressActivity extends BaseActivity {
 
                     finish();
 
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 
@@ -330,7 +336,10 @@ public class AddAddressActivity extends BaseActivity {
                     showToast("添加成功");
                     finish();
 
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 
@@ -380,7 +389,10 @@ public class AddAddressActivity extends BaseActivity {
                     showToast("修改成功");
                     finish();
 
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 

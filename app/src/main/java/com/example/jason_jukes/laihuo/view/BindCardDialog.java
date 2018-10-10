@@ -2,6 +2,7 @@ package com.example.jason_jukes.laihuo.view;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.activity.mine.PhoneLoginActivity;
 import com.example.jason_jukes.laihuo.bean.AddressBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
 import com.example.jason_jukes.laihuo.tool.IdCardUtil;
@@ -155,7 +157,7 @@ public class BindCardDialog {
                     Toast.makeText(context, bean.getErrorMsg(), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                     SPTool.getInstance().setShareData(Contants.CARD_STATUS,"1");
-                } else {
+                }  else {
                     Toast.makeText(context, bean.getErrorMsg(), Toast.LENGTH_SHORT).show();
                 }
 

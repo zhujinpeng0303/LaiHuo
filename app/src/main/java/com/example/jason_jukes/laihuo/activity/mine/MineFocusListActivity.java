@@ -165,7 +165,10 @@ public class MineFocusListActivity extends BaseActivity {
                     } else {
                         llNull.setVisibility(View.VISIBLE);
                     }
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 

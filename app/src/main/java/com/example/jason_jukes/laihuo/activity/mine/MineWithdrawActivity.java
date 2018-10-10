@@ -52,6 +52,7 @@ public class MineWithdrawActivity extends BaseActivity {
     private List<WithdrawBean.DataArrBean> been;
     private MineWithdrawLVAdapter adapter;
     private EditText et_money;
+    private TextView tv_yue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +70,42 @@ public class MineWithdrawActivity extends BaseActivity {
 
         headerView = LayoutInflater.from(context).inflate(R.layout.header_withdraw_lv, null);
         et_money = headerView.findViewById(R.id.et_withdraw_count);
+        tv_yue = headerView.findViewById(R.id.tv_yue);
+
+        tv_yue.setText("当前余额:" + getIntent().getStringExtra("yue") + "元");
+
         headerView.findViewById(R.id.tv_sure).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if (TextUtils.isEmpty(getText(et_money))) {
                     showToast("请输入提现金额");
+                    return;
+                }
+
+                if (getText(et_money).indexOf(".") == 0) {
+
+                    showToast("提现金额1元起");
+                    return;
+
+                }
+
+
+                if (getText(et_money).indexOf("0") == 0 && getText(et_money).indexOf(".") != 1) {
+
+                    showToast("提现金额1元起");
+                    return;
+
+                }
+
+
+                if (Double.parseDouble(et_money.getText().toString()) < Double.parseDouble("1")){
+                    showToast("提现金额1元起");
+                    return;
+                }
+
+                if (Double.parseDouble(et_money.getText().toString()) > Double.parseDouble(getIntent().getStringExtra("money"))) {
+                    showToast("对不起，您的余额不足");
                     return;
                 }
 
@@ -87,7 +118,7 @@ public class MineWithdrawActivity extends BaseActivity {
         headerView.findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showToast("取消");
+                finish();
             }
         });
 
@@ -169,6 +200,9 @@ public class MineWithdrawActivity extends BaseActivity {
                         llNull.setVisibility(View.VISIBLE);
 
                     }
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     showToast(bean.getErrorMsg());
                 }
@@ -213,7 +247,10 @@ public class MineWithdrawActivity extends BaseActivity {
 
                     showToast(bean.getErrorMsg());
 
-                } else {
+                }else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }  else {
                     showToast(bean.getErrorMsg());
                 }
 

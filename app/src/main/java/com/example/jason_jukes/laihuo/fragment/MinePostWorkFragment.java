@@ -17,6 +17,7 @@ import android.widget.ListView;
 import com.example.jason_jukes.laihuo.BaseFragment;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.activity.home.WorkDetailActivity;
+import com.example.jason_jukes.laihuo.activity.mine.PhoneLoginActivity;
 import com.example.jason_jukes.laihuo.adapter.PostWorkLVAdapter;
 import com.example.jason_jukes.laihuo.bean.PostWorkBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
@@ -168,7 +169,10 @@ public class MinePostWorkFragment extends BaseFragment {
                     } else {
                         llNull.setVisibility(View.VISIBLE);
                     }
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 

@@ -10,9 +10,7 @@ import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
-import com.example.jason_jukes.laihuo.adapter.MessageCommentLVAdapter;
 import com.example.jason_jukes.laihuo.adapter.MineEvaluateLVAdapter;
-import com.example.jason_jukes.laihuo.bean.AddressBean;
 import com.example.jason_jukes.laihuo.bean.MineEvaluateBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
 import com.example.jason_jukes.laihuo.tool.IsNetWork;
@@ -23,6 +21,8 @@ import com.google.gson.Gson;
 
 import org.xutils.common.Callback;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,15 +80,16 @@ public class MineScoreActivity extends BaseActivity {
         tvScoreZhiliang = headerView.findViewById(R.id.tv_score_zhiliang);
         tvScoreAttitude = headerView.findViewById(R.id.tv_score_attitude);
 
-        ratingBarAll.setStar(Float.valueOf(StringUtil.splitStr(score).get(0)));
-        ratingBarJishi.setStar(Float.valueOf(StringUtil.splitStr(score).get(1)));
-        ratingBarZhiliang.setStar(Float.valueOf(StringUtil.splitStr(score).get(2)));
-        ratingBarAttitude.setStar(Float.valueOf(StringUtil.splitStr(score).get(3)));
+        ratingBarAll.setStar(Float.parseFloat(String.valueOf(Math.floor(Float.valueOf(StringUtil.splitStr(score).get(0))))));
+        ratingBarJishi.setStar(Float.parseFloat(String.valueOf(Math.floor(Float.valueOf(StringUtil.splitStr(score).get(1))))));
+        ratingBarZhiliang.setStar(Float.parseFloat(String.valueOf(Math.floor(Float.valueOf(StringUtil.splitStr(score).get(2))))));
+        ratingBarAttitude.setStar(Float.parseFloat(String.valueOf(Math.floor(Float.valueOf(StringUtil.splitStr(score).get(3))))));
 
-        tvScoreAll.setText(Float.valueOf(StringUtil.splitStr(score).get(0)) + "分");
-        tvScoreJishi.setText(Float.valueOf(StringUtil.splitStr(score).get(1)) + "分");
-        tvScoreZhiliang.setText(Float.valueOf(StringUtil.splitStr(score).get(2)) + "分");
-        tvScoreAttitude.setText(Float.valueOf(StringUtil.splitStr(score).get(3)) + "分");
+
+        tvScoreAll.setText(new BigDecimal(StringUtil.splitStr(score).get(0)).setScale(1,BigDecimal.ROUND_HALF_UP).doubleValue() + "分");
+        tvScoreJishi.setText(new BigDecimal(StringUtil.splitStr(score).get(1)).setScale(1,BigDecimal.ROUND_HALF_UP).doubleValue() + "分");
+        tvScoreZhiliang.setText(new BigDecimal(StringUtil.splitStr(score).get(2)).setScale(1,BigDecimal.ROUND_HALF_UP).doubleValue() + "分");
+        tvScoreAttitude.setText(new BigDecimal(StringUtil.splitStr(score).get(3)).setScale(1,BigDecimal.ROUND_HALF_UP).doubleValue() + "分");
 
 //        lv.addHeaderView(headerView,"",false);
         lv.addHeaderView(headerView);
@@ -136,6 +137,9 @@ public class MineScoreActivity extends BaseActivity {
                     } else {
                         llNull.setVisibility(View.VISIBLE);
                     }
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     showToast(bean.getErrorMsg());
                 }

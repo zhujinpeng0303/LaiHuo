@@ -9,7 +9,9 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.BaseActivity;
+import com.example.jason_jukes.laihuo.MainActivity;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.activity.mine.PhoneLoginActivity;
 import com.example.jason_jukes.laihuo.adapter.MessageMarketLVAdapter;
 import com.example.jason_jukes.laihuo.bean.MessageMarketBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
@@ -156,6 +158,9 @@ public class MessageMarketActivity extends BaseActivity implements XListView.IXL
                         lv.setPullLoadEnable(false);
                     }
 
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     showToast(bean.getErrorMsg());
                 }
@@ -210,6 +215,9 @@ public class MessageMarketActivity extends BaseActivity implements XListView.IXL
 
                     adapter.notifyDataSetChanged();
 
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     showToast(bean.getErrorMsg());
                 }
@@ -269,4 +277,11 @@ public class MessageMarketActivity extends BaseActivity implements XListView.IXL
     }
 
 
+    @OnClick(R.id.rl_button)
+    public void onViewClicked() {
+
+        finish();
+        startIntent(MainActivity.class);
+
+    }
 }

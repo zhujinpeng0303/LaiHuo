@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.activity.mine.PhoneLoginActivity;
 import com.example.jason_jukes.laihuo.adapter.WorkDescGridAdapter;
 import com.example.jason_jukes.laihuo.bean.ImgPostBean;
 import com.example.jason_jukes.laihuo.bean.MessageBean;
@@ -129,14 +130,14 @@ public class FinishWorkActivity extends BaseActivity {
                     // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true  注意：音视频除外
                     // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
 
-                    int len = imgs.size();
+                        int len = imgs.size();
 
-                    for (int i = 0; i < selectList.size(); i++) {
+                        for (int i = 0; i < selectList.size(); i++) {
 
-                        showProgressDialog();
-                        postImg(selectList.get(i).getCompressPath(), selectList.size(), len);
+                            showProgressDialog();
+                            postImg(selectList.get(i).getCompressPath(), selectList.size(), len);
 
-                    }
+                        }
 
                     break;
             }
@@ -250,6 +251,9 @@ public class FinishWorkActivity extends BaseActivity {
 
                     showToast(bean.getErrorMsg());
                     finish();
+                }else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     showToast(bean.getErrorMsg());
                 }

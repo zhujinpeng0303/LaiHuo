@@ -113,7 +113,10 @@ public class PhoneCertificationActivity extends BaseActivity {
                     SPTool.getInstance().setShareData(Contants.PHONE_STATUS, "1");
                     finish();
 
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 
@@ -160,7 +163,10 @@ public class PhoneCertificationActivity extends BaseActivity {
 
                     codeState();
 
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 

@@ -199,8 +199,6 @@
                         android:layout_marginBottom="@dimen/y30"
                         android:layout_marginTop="@dimen/y30"
                         android:layout_weight="1"
-                        android:background="@drawable/bg_white_corner"
-                        android:drawableLeft="@mipmap/img_duihao"
                         android:drawablePadding="@dimen/x20"
                         android:gravity="center"
                         android:text="一口价"
@@ -217,13 +215,18 @@
                 android:layout_marginTop="@dimen/y30"
                 android:background="@color/white">
 
-                <ImageView
+                <TextView
                     android:id="@+id/iv_detail"
                     android:layout_width="@dimen/x80"
                     android:layout_height="@dimen/x80"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/x50" />
+                    android:layout_marginRight="@dimen/x50"
+                    android:background="@drawable/bg_blue_circle"
+                    android:gravity="center"
+                    android:text="？"
+                    android:paddingLeft="@dimen/x10"
+                    android:textColor="@color/Blue" />
 
                 <EditText
                     android:id="@+id/et_jiage"

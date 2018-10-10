@@ -20,6 +20,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.activity.ViewPagerActivity;
+import com.example.jason_jukes.laihuo.activity.mine.PhoneLoginActivity;
 import com.example.jason_jukes.laihuo.adapter.GridAdapter;
 import com.example.jason_jukes.laihuo.adapter.MessageCommentLVAdapter;
 import com.example.jason_jukes.laihuo.bean.MessageBean;
@@ -248,7 +249,10 @@ public class MessageDetailActivity extends BaseActivity {
                     }
 
 
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 

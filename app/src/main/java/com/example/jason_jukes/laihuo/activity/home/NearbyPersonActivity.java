@@ -38,6 +38,7 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.activity.mine.PhoneLoginActivity;
 import com.example.jason_jukes.laihuo.adapter.NearbyPersonLVAdapter;
 import com.example.jason_jukes.laihuo.bean.NearbyPersonBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
@@ -121,6 +122,7 @@ public class NearbyPersonActivity extends BaseActivity {
 
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
+
         mLocClient = new LocationClient(getApplicationContext());
         mLocClient.registerLocationListener(myListener);
         LocationClientOption option = new LocationClientOption();
@@ -227,7 +229,10 @@ public class NearbyPersonActivity extends BaseActivity {
 
                         tvCount.setText(bean.getDataArr().size() + "");
 
-                    } else {
+                    }else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                        showToast(bean.getErrorMsg());
+                        startIntent(PhoneLoginActivity.class);
+                    }  else {
                         llNull.setVisibility(View.VISIBLE);
                     }
                 } else {
@@ -304,7 +309,6 @@ public class NearbyPersonActivity extends BaseActivity {
     //定位
     private void loc() {
 
-
         mLocClient.start();
 
     }
@@ -371,11 +375,11 @@ public class NearbyPersonActivity extends BaseActivity {
 
         }
 
-        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.img_luyin_play);
-        BitmapDescriptor bitmap1 = BitmapDescriptorFactory.fromResource(R.mipmap.img_luyin_stop);
-        BitmapDescriptor bitmap2 = BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher);
-        BitmapDescriptor bitmap4 = BitmapDescriptorFactory.fromResource(R.mipmap.img_home);
-        BitmapDescriptor bitmap5 = BitmapDescriptorFactory.fromResource(R.mipmap.img_xueli_renzheng);
+        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.img_worker1);
+        BitmapDescriptor bitmap1 = BitmapDescriptorFactory.fromResource(R.mipmap.img_worker2);
+        BitmapDescriptor bitmap2 = BitmapDescriptorFactory.fromResource(R.mipmap.img_worker3);
+        BitmapDescriptor bitmap4 = BitmapDescriptorFactory.fromResource(R.mipmap.img_worker4);
+        BitmapDescriptor bitmap5 = BitmapDescriptorFactory.fromResource(R.mipmap.img_worker5);
 
         List<BitmapDescriptor> bitmaps = new ArrayList<>();
         bitmaps.add(bitmap);

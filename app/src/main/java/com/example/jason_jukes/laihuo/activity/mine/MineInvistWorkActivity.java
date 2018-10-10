@@ -1,11 +1,13 @@
 package com.example.jason_jukes.laihuo.activity.mine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
+import com.example.jason_jukes.laihuo.activity.home.WorkDetailActivity;
 import com.example.jason_jukes.laihuo.adapter.MinePartWorkAdapter;
 import com.example.jason_jukes.laihuo.bean.PartWorkBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
@@ -73,10 +76,18 @@ public class MineInvistWorkActivity extends BaseActivity {
         textView.setText("本页面显示的是您收到的邀请信息,用户在发起订单并支付押金后可以发起邀请,如果您为''下班状态'',用户将无法主动邀请您,可在个人中心页面切换为上班状态!");
 
         been = new ArrayList<>();
-        adapter = new MinePartWorkAdapter(context, been,"1");
+        adapter = new MinePartWorkAdapter(context, been, "0");
         lv.setAdapter(adapter);
 
         lv.addHeaderView(headerView, null, false);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(new Intent(MineInvistWorkActivity.this, WorkDetailActivity.class)
+                        .putExtra("id", been.get(i - 1).getOrder_id() + ""));
+            }
+        });
 
         ref.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -146,6 +157,9 @@ public class MineInvistWorkActivity extends BaseActivity {
                     } else {
                         llNull.setVisibility(View.VISIBLE);
                     }
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     showToast(bean.getErrorMsg());
                 }

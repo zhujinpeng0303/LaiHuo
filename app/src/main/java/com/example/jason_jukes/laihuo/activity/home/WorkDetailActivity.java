@@ -29,6 +29,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.activity.mine.FeedbackActivity;
+import com.example.jason_jukes.laihuo.activity.mine.PhoneLoginActivity;
 import com.example.jason_jukes.laihuo.adapter.MineEvaluateLVAdapter;
 import com.example.jason_jukes.laihuo.adapter.WorkDetailGridViewAdapter;
 import com.example.jason_jukes.laihuo.bean.MessageBean;
@@ -319,7 +320,10 @@ public class WorkDetailActivity extends BaseActivity {
                     showToast(bean.getErrorMsg());
                     popupWindow.dismiss();
                     onResume();
-                } else {
+                }else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }  else {
                     showToast(bean.getErrorMsg());
                 }
 
@@ -478,7 +482,10 @@ public class WorkDetailActivity extends BaseActivity {
                         ll_null.setVisibility(View.VISIBLE);
                         ll_detail_more.setVisibility(View.GONE);
                     }
-                } else {
+                }else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }  else {
                     ll_detail_more.setVisibility(View.GONE);
                     showToast(bean.getErrorMsg());
                 }
@@ -670,7 +677,7 @@ public class WorkDetailActivity extends BaseActivity {
                         llKaimenMima.setVisibility(View.GONE);
                         llYiZhiding.setVisibility(View.GONE);
                         llJingJiaList.setVisibility(View.GONE);
-                        llServiceAddress.setVisibility(View.GONE);
+                        llServiceAddress.setVisibility(View.VISIBLE);
                         llRenwuZhuizong.setVisibility(View.GONE);
                         tvShenqing.setVisibility(View.VISIBLE);
                         tvCancel.setVisibility(View.VISIBLE);
@@ -678,6 +685,11 @@ public class WorkDetailActivity extends BaseActivity {
                         llWorkAddress.setVisibility(View.VISIBLE);
 
                         tvShenqing.setText("去支付押金");
+
+                        servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
+                        tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
+                        tvPhone.setText(bean.getDataObj().getOrderAddress().getCon_tel());
+                        tvDetailAddress.setText(bean.getDataObj().getOrderAddress().getCon_address());
 
                         tvShenqing.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -844,20 +856,11 @@ public class WorkDetailActivity extends BaseActivity {
                             llJingJiaList.setVisibility(View.GONE);
                             tvShenqing.setVisibility(View.VISIBLE);
                             tvCancel.setVisibility(View.VISIBLE);
-                            llYiZhiding.setVisibility(View.VISIBLE);
+                            llYiZhiding.setVisibility(View.GONE);
                             llServiceAddress.setVisibility(View.VISIBLE);
                             llWorkAddress.setVisibility(View.VISIBLE);
+                            tvZhuyi.setVisibility(View.VISIBLE);
 
-                            zhidingUserId = bean.getDataObj().getWorkUserDetail().getId() + "";
-                            zhidingPhone = bean.getDataObj().getWorkUserDetail().getPhoneno();
-                            tvZhidingName.setText(bean.getDataObj().getWorkUserDetail().getUsername());
-                            tvZhidingPhone.setText(bean.getDataObj().getWorkUserDetail().getPhoneno());
-                            tvZhidingScore.setText(bean.getDataObj().getWorkUserDetail().getRanking_last());
-                            tvZhidingMoney.setText(bean.getDataObj().getWorkUserDetail().getOrder_price() + "元");
-                            Glide.with(WorkDetailActivity.this)
-                                    .load(bean.getDataObj().getWorkUserDetail().getHead_url())
-                                    .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(WorkDetailActivity.this)))
-                                    .into(ivZhidingAvatar);
 
                             servicePhone = bean.getDataObj().getOrderAddress().getCon_tel();
                             tvName.setText(bean.getDataObj().getOrderAddress().getCon_username());
@@ -1385,6 +1388,9 @@ public class WorkDetailActivity extends BaseActivity {
 
                     }
 
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     llNull.setVisibility(View.VISIBLE);
                     llContent.setVisibility(View.GONE);
@@ -1459,6 +1465,9 @@ public class WorkDetailActivity extends BaseActivity {
                     onResume();
                     showSucessDialog();
 
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     showToast(bean.getErrorMsg());
                 }
@@ -1547,7 +1556,10 @@ public class WorkDetailActivity extends BaseActivity {
                     dialog.dismiss();
                     onResume();
 
-                } else {
+                }else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }  else {
                     showToast(bean.getErrorMsg());
                 }
 
@@ -1621,7 +1633,10 @@ public class WorkDetailActivity extends BaseActivity {
                     showToast(bean.getErrorMsg());
                     finish();
 
-                } else {
+                }else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }  else {
                     showToast(bean.getErrorMsg());
                 }
 

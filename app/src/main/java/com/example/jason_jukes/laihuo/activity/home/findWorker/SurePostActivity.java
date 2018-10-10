@@ -1,5 +1,6 @@
 package com.example.jason_jukes.laihuo.activity.home.findWorker;
 
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -16,7 +17,9 @@ import com.bumptech.glide.Glide;
 import com.example.jason_jukes.laihuo.App;
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
-import com.example.jason_jukes.laihuo.bean.AddressBean;
+import com.example.jason_jukes.laihuo.activity.home.WorkDetailActivity;
+import com.example.jason_jukes.laihuo.activity.mine.PhoneLoginActivity;
+import com.example.jason_jukes.laihuo.bean.ImgPostBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
 import com.example.jason_jukes.laihuo.tool.SPTool;
 import com.example.jason_jukes.laihuo.tool.Singleton;
@@ -182,23 +185,36 @@ public class SurePostActivity extends BaseActivity {
         map.put("use_contract", "1");
         map.put("use_insurance", "1");
         map.put("city_value", "haerbin");
-//        map.put("order_price_range", Singleton.instance.getPrice());
+        if (Singleton.instance.getStatus().equals("0")) {
+            map.put("order_price_range", Singleton.instance.getPrice());
+        } else {
+            map.put("order_price", Singleton.instance.getPrice());
+        }
 
         Log.e("aaaaaaaaaa", map.toString());
+        Log.e("url", url);
 
         XUtil.Post(url, map, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
 
-                AddressBean bean = new Gson().fromJson(result, AddressBean.class);
+                Log.e("result", result);
+
+                ImgPostBean bean = new Gson().fromJson(result, ImgPostBean.class);
                 if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
 
                     showToast(bean.getErrorMsg());
+
                     App.destoryActivity("classify");
                     App.destoryActivity("desc");
                     App.destoryActivity("address");
                     finish();
+                    startActivity(new Intent(SurePostActivity.this, WorkDetailActivity.class)
+                            .putExtra("id", bean.getDataObj().getOrder_id()));
 
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     showToast(bean.getErrorMsg());
                 }
@@ -225,7 +241,6 @@ public class SurePostActivity extends BaseActivity {
 
             }
         });
-
 
     }
 

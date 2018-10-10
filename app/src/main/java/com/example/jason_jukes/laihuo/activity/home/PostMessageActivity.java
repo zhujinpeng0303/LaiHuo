@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.activity.home.findWorker.WorkDescActivity;
+import com.example.jason_jukes.laihuo.activity.mine.PhoneLoginActivity;
 import com.example.jason_jukes.laihuo.adapter.WorkDescGridAdapter;
 import com.example.jason_jukes.laihuo.bean.ImgPostBean;
 import com.example.jason_jukes.laihuo.bean.MessageBean;
@@ -263,7 +264,10 @@ public class PostMessageActivity extends BaseActivity {
                 if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
                     showToast(bean.getErrorMsg());
                     finish();
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 

@@ -19,7 +19,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 
-
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -33,7 +32,7 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="dLNocYvgU2NdkpIzGkkGPlGAKjDG4TxV" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,6 +47,9 @@
 
         </service>
 
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.home.MessageMarketActivity"
             android:screenOrientation="portrait" />
@@ -78,35 +80,93 @@
         <activity
             android:name=".activity.mine.MineScoreActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.mine.MinePostWorkActivity" />
-        <activity android:name=".activity.mine.MinePartWorkActivity" />
-        <activity android:name=".activity.mine.MineInvistWorkActivity" />
-        <activity android:name=".activity.mine.MineWalletActivity" />
-        <activity android:name=".activity.mine.MineQualificationActivity" />
-        <activity android:name=".activity.mine.FeedbackActivity" />
-        <activity android:name=".activity.home.FindWorkActivity" />
-        <activity android:name=".activity.home.findWorker.ChooseClassifyActivity" />
-        <activity android:name=".activity.home.findWorker.WorkDescActivity" />
-        <activity android:name=".activity.home.findWorker.WorkAddressActivity" />
-        <activity android:name=".activity.home.findWorker.SurePostActivity" />
-        <activity android:name=".activity.home.WorkDetailActivity" />
-        <activity android:name=".activity.home.PostMessageActivity" />
-        <activity android:name=".activity.home.MyPartakeMessageActivity" />
-        <activity android:name=".activity.home.SureArriveActivity" />
-        <activity android:name=".activity.home.SendScoreActivity" />
-        <activity android:name=".activity.mine.MineWithdrawActivity" />
-        <activity android:name=".activity.home.NearbyPersonActivity" />
-        <activity android:name=".activity.mine.PhoneLoginActivity" />
-        <activity android:name=".activity.mine.RegisterActivity" />
-        <activity android:name=".activity.home.PersonalHomeActivity" />
-        <activity android:name=".activity.mine.ChangeUserNameActivity" />
-        <activity android:name=".activity.mine.AddQualificationActivity" />
-        <activity android:name=".activity.home.PayDepositActivity" />
-        <activity android:name=".activity.home.ApplyPriceActivity" />
-        <activity android:name=".activity.home.SureOrderActivity" />
-        <activity android:name=".activity.home.FinishWorkActivity" />
-        <activity android:name=".activity.WebviewActivity" />
-        <activity android:name=".activity.home.PaySuccessActivity" />
+        <activity
+            android:name=".activity.mine.MinePostWorkActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.mine.MinePartWorkActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.mine.MineInvistWorkActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.mine.MineWalletActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.mine.MineQualificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.mine.FeedbackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.FindWorkActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.findWorker.ChooseClassifyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.findWorker.WorkDescActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.findWorker.WorkAddressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.findWorker.SurePostActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.WorkDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.PostMessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.MyPartakeMessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.SureArriveActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.SendScoreActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.mine.MineWithdrawActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.NearbyPersonActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.mine.PhoneLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.mine.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.PersonalHomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.mine.ChangeUserNameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.mine.AddQualificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.PayDepositActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.ApplyPriceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.SureOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.FinishWorkActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.WebviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.home.PaySuccessActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

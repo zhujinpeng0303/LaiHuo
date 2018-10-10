@@ -1,5 +1,6 @@
 package com.example.jason_jukes.laihuo.activity.mine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -75,7 +76,8 @@ public class MineWalletActivity extends BaseActivity {
         headerView.findViewById(R.id.tv_withdraw).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startIntent(MineWithdrawActivity.class);
+                startActivity(new Intent(MineWalletActivity.this,MineWithdrawActivity.class)
+                .putExtra("yue",getIntent().getStringExtra("yue")));
             }
         });
 
@@ -154,7 +156,10 @@ public class MineWalletActivity extends BaseActivity {
 
                         }
                         adapter.notifyDataSetChanged();
-                    } else {
+                    } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                        showToast(bean.getErrorMsg());
+                        startIntent(PhoneLoginActivity.class);
+                    }else {
                         llNull.setVisibility(View.VISIBLE);
                     }
                 } else {

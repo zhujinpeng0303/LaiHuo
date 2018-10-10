@@ -18,8 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/y250"
             android:background="@null"
-            android:hint="请输入资历描述"
             android:gravity="top"
+            android:hint="请输入资历描述"
             android:maxLength="140"
             android:padding="@dimen/x30"
             android:textColor="@color/black"
@@ -33,14 +33,23 @@
         <!--</android.support.v7.widget.RecyclerView>-->
         <!---->
 
-        <ImageView
-            android:id="@+id/iv"
-            android:background="@mipmap/ic_launcher"
-            android:layout_width="@dimen/x150"
-            android:layout_height="@dimen/x150"
-            android:layout_marginLeft="@dimen/x50"
-            android:layout_marginBottom="@dimen/y30"
-            android:layout_marginTop="@dimen/y50" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y20">
+
+            <com.example.jason_jukes.laihuo.view.MyGridView
+                android:id="@+id/gridView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y2"
+                android:background="@color/white"
+                android:numColumns="3"
+                android:orientation="vertical">
+
+            </com.example.jason_jukes.laihuo.view.MyGridView>
+        </LinearLayout>
+
 
     </LinearLayout>
 
@@ -60,5 +69,6 @@
         android:text="提交"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/x40" />
+
 
 </LinearLayout>

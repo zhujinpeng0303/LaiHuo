@@ -1,25 +1,36 @@
 package com.example.jason_jukes.laihuo.adapter;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.activity.ViewPagerActivity;
+import com.example.jason_jukes.laihuo.bean.MessageBean;
 import com.example.jason_jukes.laihuo.bean.MineQuaBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
+import com.example.jason_jukes.laihuo.tool.XUtil;
 import com.example.jason_jukes.laihuo.view.CommonDialog;
 import com.example.jason_jukes.laihuo.view.MyGridView;
+import com.google.gson.Gson;
+
+import org.xutils.common.Callback;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 作者：Jason_Jukes on 2018/9/25 0025 14:11
@@ -93,23 +104,27 @@ public class MineQualificationLVAdapter extends BaseAdapter {
             imgs.add(Contants.URL_IMG_BASE + list.get(i1));
         }
 
-        GridAdapter adapter = new GridAdapter(context,imgs);
-        viewHolder.gridView.setAdapter(adapter);
+        if (!TextUtils.isEmpty(been.get(i).getCert_imgs())) {
+            viewHolder.gridView.setVisibility(View.VISIBLE);
+            GridAdapter adapter = new GridAdapter(context, imgs);
+            viewHolder.gridView.setAdapter(adapter);
 
-        viewHolder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            viewHolder.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                context.startActivity(new Intent(context,ViewPagerActivity.class)
-                .putExtra("list", (Serializable) imgs)
-                .putExtra("pos",i));
+                    context.startActivity(new Intent(context, ViewPagerActivity.class)
+                            .putExtra("list", (Serializable) imgs)
+                            .putExtra("pos", i));
 
-            }
-        });
-
-        if (type.equals("yes")){
+                }
+            });
+        } else {
+            viewHolder.gridView.setVisibility(View.GONE);
+        }
+        if (type.equals("yes")) {
             viewHolder.del.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             viewHolder.del.setVisibility(View.GONE);
         }
 
@@ -120,8 +135,9 @@ public class MineQualificationLVAdapter extends BaseAdapter {
                 commonDialog.commonDialog("提示！", "确认删除此资历吗?", new CommonDialog.TvClick() {
                     @Override
                     public void okClick(AlertDialog dialog) {
-                        remove(i);
-                        dialog.dismiss();
+
+                        del(i, dialog);
+
                     }
 
                     @Override
@@ -133,6 +149,52 @@ public class MineQualificationLVAdapter extends BaseAdapter {
         });
 
         return view;
+    }
+
+    private void del(final int pos, final Dialog dialog) {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", "gggg");
+        map.put("custom_cert_id", been.get(pos).getId() + "");
+
+        XUtil.Post(Contants.DEL_QUALIFICATION, map, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                MessageBean bean = new Gson().fromJson(result, MessageBean.class);
+                if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
+
+                    remove(pos);
+                    dialog.dismiss();
+
+                } else {
+                    dialog.dismiss();
+                    Toast.makeText(context, bean.getErrorMsg(), Toast.LENGTH_SHORT).show();
+
+                }
+
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+                Log.e("fail", ex.getMessage());
+
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
     }
 
     class MyViewHolder {

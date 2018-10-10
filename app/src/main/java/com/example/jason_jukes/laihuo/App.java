@@ -1,11 +1,20 @@
 package com.example.jason_jukes.laihuo;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Application;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
+import com.example.jason_jukes.laihuo.activity.home.NearbyPersonActivity;
 import com.example.jason_jukes.laihuo.tool.SPTool;
+import com.example.jason_jukes.laihuo.tool.Singleton;
 
 import org.xutils.x;
 
@@ -35,7 +44,11 @@ public class App extends Application {
         SDKInitializer.initialize(this);
         SDKInitializer.setCoordType(CoordType.BD09LL);
 
+
+
     }
+
+
 
     /**
      * 添加待销毁Activity

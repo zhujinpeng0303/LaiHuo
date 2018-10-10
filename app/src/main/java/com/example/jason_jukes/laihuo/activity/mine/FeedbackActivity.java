@@ -212,7 +212,10 @@ public class FeedbackActivity extends BaseActivity {
 
                     adapter.notifyDataSetChanged();
 
-                } else {
+                }else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }  else {
                     showToast(bean.getErrorMsg());
                 }
 
@@ -257,7 +260,10 @@ public class FeedbackActivity extends BaseActivity {
                 if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
                     showToast(bean.getErrorMsg());
                     finish();
-                } else {
+                }else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }  else {
                     showToast(bean.getErrorMsg());
                 }
 

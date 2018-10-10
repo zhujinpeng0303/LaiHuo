@@ -113,11 +113,15 @@
                     <RelativeLayout
                         android:id="@+id/rl_post_yikoujia"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/x294"
+                        android:layout_height="@dimen/x340"
                         android:layout_gravity="bottom"
-                        android:layout_marginLeft="@dimen/x100"
-                        android:layout_weight="1"
-                        android:background="@mipmap/img_box_find_worker">
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@mipmap/img_box_find_worker" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -136,7 +140,7 @@
                     <RelativeLayout
                         android:id="@+id/rl_jie_yikoujia"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/x294"
+                        android:layout_height="@dimen/x340"
                         android:layout_gravity="bottom"
                         android:layout_weight="1"
                         android:background="@mipmap/img_box_find_work">
@@ -157,9 +161,9 @@
                     <RelativeLayout
                         android:id="@+id/rl_shangban"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/x294"
+                        android:layout_height="@dimen/x340"
                         android:layout_gravity="bottom"
-                        android:layout_marginRight="@dimen/x100"
+                        android:layout_marginRight="@dimen/x30"
                         android:layout_weight="1"
                         android:background="@mipmap/img_box_no_working">
 
@@ -186,18 +190,18 @@
                     <RelativeLayout
                         android:id="@+id/rl_mine_post"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/x294"
+                        android:layout_height="@dimen/x340"
                         android:layout_gravity="top"
                         android:layout_marginBottom="@dimen/y100"
-                        android:layout_marginLeft="@dimen/x100"
+                        android:layout_marginLeft="@dimen/x30"
                         android:layout_weight="1"
                         android:background="@mipmap/img_box_mine_post">
 
                         <ImageView
                             android:layout_width="@dimen/x25"
                             android:layout_height="@dimen/x25"
-                            android:layout_marginLeft="@dimen/x170"
-                            android:layout_marginTop="@dimen/y100"
+                            android:layout_marginLeft="@dimen/x200"
+                            android:layout_marginTop="@dimen/y110"
                             android:background="@drawable/bg_light_red_big_corner" />
 
                         <TextView
@@ -216,7 +220,7 @@
                     <RelativeLayout
                         android:id="@+id/rl_mine_jiehou"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/x294"
+                        android:layout_height="@dimen/x340"
                         android:layout_gravity="top"
                         android:layout_weight="1"
                         android:background="@mipmap/img_box_mine_jie">
@@ -224,8 +228,8 @@
                         <ImageView
                             android:layout_width="@dimen/x25"
                             android:layout_height="@dimen/x25"
-                            android:layout_marginLeft="@dimen/x170"
-                            android:layout_marginTop="@dimen/y100"
+                            android:layout_marginLeft="@dimen/x200"
+                            android:layout_marginTop="@dimen/y110"
                             android:background="@drawable/bg_light_red_big_corner" />
 
                         <TextView
@@ -243,17 +247,17 @@
                     <RelativeLayout
                         android:id="@+id/rl_mine_invist"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/x294"
+                        android:layout_height="@dimen/x340"
                         android:layout_gravity="top"
-                        android:layout_marginRight="@dimen/x100"
+                        android:layout_marginRight="@dimen/x30"
                         android:layout_weight="1"
                         android:background="@mipmap/img_box_mine_invist">
 
                         <ImageView
                             android:layout_width="@dimen/x25"
                             android:layout_height="@dimen/x25"
-                            android:layout_marginLeft="@dimen/x170"
-                            android:layout_marginTop="@dimen/y100"
+                            android:layout_marginLeft="@dimen/x200"
+                            android:layout_marginTop="@dimen/y110"
                             android:background="@drawable/bg_light_red_big_corner" />
 
                         <TextView

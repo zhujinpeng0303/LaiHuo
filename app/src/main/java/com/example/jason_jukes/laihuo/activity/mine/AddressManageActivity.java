@@ -157,7 +157,10 @@ public class AddressManageActivity extends BaseActivity {
 
                     adapter.notifyDataSetChanged();
 
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 

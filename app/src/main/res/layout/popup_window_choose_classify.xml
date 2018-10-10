@@ -2,26 +2,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/y150"
     android:background="#F2212121"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/y300"
+        android:layout_marginLeft="@dimen/x80"
+        android:layout_marginTop="@dimen/y150"
         android:background="@drawable/bg_white_corner"
-        android:orientation="vertical"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:orientation="vertical">
 
 
         <!--<include layout="@layout/header_classify_explv" />-->
 
 
         <ExpandableListView
+            android:layout_margin="@dimen/x30"
             android:id="@+id/exp_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:groupIndicator="@null">
+            android:groupIndicator="@null"
+            android:scrollbars="none"
+            android:dividerHeight="0dp"
+            >
 
         </ExpandableListView>
 

@@ -1,7 +1,11 @@
 package com.example.jason_jukes.laihuo.fragment;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.jason_jukes.laihuo.BaseFragment;
@@ -19,9 +25,11 @@ import com.example.jason_jukes.laihuo.activity.home.FindWorkActivity;
 import com.example.jason_jukes.laihuo.activity.home.MessageMarketActivity;
 import com.example.jason_jukes.laihuo.activity.home.NearbyPersonActivity;
 import com.example.jason_jukes.laihuo.activity.home.findWorker.ChooseClassifyActivity;
+import com.example.jason_jukes.laihuo.activity.mine.PhoneLoginActivity;
 import com.example.jason_jukes.laihuo.bean.HomeBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
 import com.example.jason_jukes.laihuo.tool.IsNetWork;
+import com.example.jason_jukes.laihuo.tool.Singleton;
 import com.example.jason_jukes.laihuo.tool.XUtil;
 import com.example.jason_jukes.laihuo.view.RandomTextView;
 import com.example.jason_jukes.laihuo.view.glide.GlideRoundTransform;
@@ -108,17 +116,37 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
+
+        //判断用户是否已经授权
+        if (ContextCompat.checkSelfPermission(context, "Manifest.permission.ACCESS_FINE_LOCATION") != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(context, "Manifest.permission.ACCESS_COARSE_LOCATION") != PackageManager.PERMISSION_GRANTED) {
+            //注意第二个参数没有双引号
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+
+        } else {
+
+            loc();
+
+        }
+
+
+    }
+
+
+    //定位
+    private void loc() {
+
+
     }
 
     private void initData() {
 
         if (IsNetWork.isNetWork(context)) {
-            showPro();
             ref.setRefreshing(true);
+            showPro();
             getPic();
         } else {
             showToast("请检查网络设置");
-            ref.setRefreshing(false);
         }
 
     }
@@ -196,10 +224,13 @@ public class HomeFragment extends BaseFragment {
 
                     }
 
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     showToast(bean.getErrorMsg());
-                }
 
+                }
                 ref.setRefreshing(false);
                 hidePro();
 
@@ -226,6 +257,33 @@ public class HomeFragment extends BaseFragment {
         });
 
     }
+
+
+    /**
+     * 定位SDK监听函数
+     */
+    public class MyLocationListenner implements BDLocationListener {
+
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            // map view 销毁后不在处理新接收的位置
+            if (location == null) {
+                return;
+            }
+
+            Singleton.instance.setPx(location.getLongitude() + "");
+            Singleton.instance.setPy(location.getLatitude() + "");
+
+            Log.e("posion", location.getLatitude() + " 和" + location.getLongitude());
+
+
+        }
+
+        public void onReceivePoi(BDLocation poiLocation) {
+
+        }
+    }
+
 
     @Override
     public void onDestroyView() {

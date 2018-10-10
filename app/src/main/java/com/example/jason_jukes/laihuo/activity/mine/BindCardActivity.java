@@ -144,7 +144,10 @@ public class BindCardActivity extends BaseActivity {
                     showToast(bean.getErrorMsg());
                     SPTool.getInstance().setShareData(Contants.CARD_STATUS,"1");
 
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 
@@ -191,7 +194,10 @@ public class BindCardActivity extends BaseActivity {
 
                     codeState();
 
-                } else {
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }else {
                     showToast(bean.getErrorMsg());
                 }
 

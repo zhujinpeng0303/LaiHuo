@@ -10,7 +10,7 @@ package com.example.jason_jukes.laihuo.tool;
 public class Contants {
 
     public static String HTTP_OK = "0000";
-    public static String HTTP_ERROR = "0004";
+    public static String HTTP_NO_LOGIN = "0004";
 
 
     public static String USER_ID = "user_id";

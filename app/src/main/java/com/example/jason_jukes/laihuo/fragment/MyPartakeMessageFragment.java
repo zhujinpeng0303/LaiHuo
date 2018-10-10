@@ -16,6 +16,7 @@ import android.widget.ListView;
 import com.example.jason_jukes.laihuo.BaseFragment;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.activity.home.MessageDetailActivity;
+import com.example.jason_jukes.laihuo.activity.mine.PhoneLoginActivity;
 import com.example.jason_jukes.laihuo.adapter.MessageMarketLVAdapter;
 import com.example.jason_jukes.laihuo.bean.MessageMarketBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
@@ -162,6 +163,9 @@ public class MyPartakeMessageFragment extends BaseFragment {
 
                     adapter.notifyDataSetChanged();
 
+                }else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     showToast(bean.getErrorMsg());
                 }

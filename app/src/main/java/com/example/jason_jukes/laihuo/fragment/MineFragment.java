@@ -159,8 +159,8 @@ public class MineFragment extends BaseFragment {
     private void initData() {
 
         if (IsNetWork.isNetWork(context)) {
-            showPro();
             ref.setRefreshing(true);
+            showPro();
             getInfo();
         } else {
             showToast("请检查网络设置");
@@ -241,6 +241,9 @@ public class MineFragment extends BaseFragment {
 
                     score = bean.getDataObj().getRanking_text();
 
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     showToast(bean.getErrorMsg());
                 }
@@ -460,6 +463,9 @@ public class MineFragment extends BaseFragment {
                 if (bean.getErrorCode().equals(Contants.HTTP_OK)) {
                     showToast(bean.getErrorMsg());
                     onResume();
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     showToast(bean.getErrorMsg());
                 }

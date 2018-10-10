@@ -15,6 +15,7 @@ import com.example.jason_jukes.laihuo.BaseActivity;
 import com.example.jason_jukes.laihuo.R;
 import com.example.jason_jukes.laihuo.activity.mine.AddAddressActivity;
 import com.example.jason_jukes.laihuo.activity.mine.AddressManageActivity;
+import com.example.jason_jukes.laihuo.activity.mine.PhoneLoginActivity;
 import com.example.jason_jukes.laihuo.adapter.AddressManagerLVAdapter;
 import com.example.jason_jukes.laihuo.bean.AddressBean;
 import com.example.jason_jukes.laihuo.tool.Contants;
@@ -133,7 +134,10 @@ public class WorkAddressActivity extends BaseActivity {
 
                     adapter.notifyDataSetChanged();
 
-                } else {
+                }else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
+                }  else {
                     showToast(bean.getErrorMsg());
                 }
 

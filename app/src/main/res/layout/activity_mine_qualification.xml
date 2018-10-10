@@ -1,85 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ref"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/bar"
-        layout="@layout/status_bar" />
-
-    <TextView
-        android:id="@+id/tv_add_qualification"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/y30"
-        android:layout_marginLeft="@dimen/x50"
-        android:layout_marginRight="@dimen/x50"
-        android:layout_marginTop="@dimen/y30"
-        android:background="@drawable/bg_yellow_corner"
-        android:gravity="center"
-        android:paddingBottom="@dimen/y40"
-        android:paddingTop="@dimen/y40"
-        android:text="新增资历"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/x40" />
-
-    <View
-        android:id="@+id/v"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y2"
-        android:layout_above="@id/tv_add_qualification"
-        android:background="@color/colorGrey" />
+        android:layout_height="match_parent">
 
 
-    <ListView
-        android:id="@+id/lv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/v"
-        android:layout_below="@id/bar">
-
-    </ListView>
-
-    <LinearLayout
-        android:id="@+id/ll_null"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="visible">
-
-        <ImageView
-            android:id="@+id/iv_null"
-            android:layout_width="@dimen/x300"
-            android:layout_height="@dimen/x300"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/y600"
-            android:background="@mipmap/img_null" />
+        <include
+            android:id="@+id/bar"
+            layout="@layout/status_bar" />
 
         <TextView
-            android:id="@+id/tv_null"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_add_qualification"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/y30"
+            android:layout_marginLeft="@dimen/x50"
+            android:layout_marginRight="@dimen/x50"
             android:layout_marginTop="@dimen/y30"
-            android:text="未设置资历信息"
-            android:textColor="@color/colorGray"
-            android:textSize="@dimen/x35" />
+            android:background="@drawable/bg_yellow_corner"
+            android:gravity="center"
+            android:paddingBottom="@dimen/y40"
+            android:paddingTop="@dimen/y40"
+            android:text="新增资历"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/x40" />
 
-        <TextView
-            android:padding="@dimen/x30"
-            android:id="@+id/tv_add"
-            android:layout_width="wrap_content"
+        <View
+            android:id="@+id/v"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y2"
+            android:layout_above="@id/tv_add_qualification"
+            android:background="@color/colorGrey" />
+
+
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/v"
+            android:layout_below="@id/bar">
+
+        </ListView>
+
+        <LinearLayout
+            android:id="@+id/ll_null"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/y30"
-            android:text="点击添加资历"
-            android:textColor="@color/colorBlue"
-            android:textSize="@dimen/x35"
-            android:layout_marginBottom="@dimen/y100"
-            />
+            android:orientation="vertical"
+            android:visibility="visible">
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/iv_null"
+                android:layout_width="@dimen/x300"
+                android:layout_height="@dimen/x300"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y600"
+                android:background="@mipmap/img_null" />
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/tv_null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/y30"
+                android:text="未设置资历信息"
+                android:textColor="@color/colorGray"
+                android:textSize="@dimen/x35" />
+
+            <TextView
+                android:id="@+id/tv_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/y100"
+                android:layout_marginTop="@dimen/y30"
+                android:padding="@dimen/x30"
+                android:text="点击添加资历"
+                android:textColor="@color/colorBlue"
+                android:textSize="@dimen/x35" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>

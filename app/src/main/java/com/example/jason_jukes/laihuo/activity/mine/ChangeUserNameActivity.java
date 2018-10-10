@@ -86,6 +86,9 @@ public class ChangeUserNameActivity extends BaseActivity {
                     showToast(bean.getErrorMsg());
                     finish();
 
+                } else if (bean.getErrorCode().equals(Contants.HTTP_NO_LOGIN)) {
+                    showToast(bean.getErrorMsg());
+                    startIntent(PhoneLoginActivity.class);
                 } else {
                     showToast(bean.getErrorMsg());
                 }
